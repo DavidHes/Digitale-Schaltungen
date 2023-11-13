@@ -1,30 +1,37 @@
 import java.awt.*;
 import java.util.List;
 import javax.swing.*;
+import java.awt.Graphics;
+
 
 public class Panel extends JPanel {
 
     private JPanel panel;
     private JButton gernerateButton;
-    private JButton difficutlyButton;
+    private JComboBox difficutlyButton;
+    private JButton exitButton;
     private Model model = new Model();
+    String[] difficulties = {"easy", "Mid", "Hard"};
+    public Image background = new ImageIcon("Background.png").getImage();
 
     public Panel() {
 
         panel = new JPanel();
-        panel.setLayout(new FlowLayout());
+       // panel.setLayout(new FlowLayout());
+        panel.setLayout(null);
 
         gernerateButton = new JButton("Generate");
-        difficutlyButton = new JButton("Difficulty");
+        difficutlyButton = new JComboBox(difficulties);
+        exitButton = new JButton("Exit");
 
-        gernerateButton.setBounds(144, 650, 150, 50);
-        difficutlyButton.setBounds(288, 450, 150, 50);
+        gernerateButton.setBounds(260, 30, 150, 50);
+        difficutlyButton.setBounds(472, 30, 150, 50);
+        exitButton.setBounds(820, 5, 75, 25);
 
         panel.add(gernerateButton);
         panel.add(difficutlyButton);
-
+        panel.add(exitButton);
     }
-
     public JPanel getPanel() {
         return panel;
     }
@@ -33,8 +40,15 @@ public class Panel extends JPanel {
         return gernerateButton;
     }
 
-    public JButton getDifficutlyButton() {
-        return difficutlyButton;
+    public JComboBox getDifficutlyButton() {
+       return difficutlyButton;
+    }
+    @Override
+    protected void paintComponent(Graphics g) {
+        // TODO Auto-generated method stub
+        super.paintComponent(g);
+        g.drawImage(background, 0, 0, 900, 600, this);
+        repaint();
     }
 
     public void paintSchaltung(List<ImageIcon> gateIcons) {
