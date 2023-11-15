@@ -10,26 +10,22 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
     public Controller(Model model, Panel view) {
         this.model = model;
         this.view = view;
+        view.generateButton.addActionListener(this);
 
-        view.gernerateButton.addActionListener(this);
-      //  view.gernerateButton.addMouseListener(this);
-
-        view.difficutlyButton.addActionListener(this);
-      //  view.difficutlyButton.addMouseListener(this);
+        view.difficultyButton.addActionListener(this);
 
         view.exitButton.addActionListener(this);
-       // view.getDifficutlyButton().addMouseListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == view.gernerateButton) {
+        if (e.getSource() == view.generateButton) {
             System.out.println("Generate");
             List<ImageIcon> gateIcons = model.generateRandomSchaltung(3);
             view.paintSchaltung(gateIcons);
 
         }
-            if (e.getSource() == view.difficutlyButton) {
+            if (e.getSource() == view.difficultyButton) {
                 System.out.println("Difficulty");
             }
         else {

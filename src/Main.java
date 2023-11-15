@@ -4,6 +4,8 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
 
+        TruthTableGenerator truthTableGenerator = new TruthTableGenerator(3, 1);
+
         Model model = new Model();
         Panel view = new Panel();
         Controller controller = new Controller(model, view);
@@ -12,7 +14,7 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(900, 600);
         frame.setResizable(false);
-        frame.add(view.getPanel());
+        frame.add(view);
 
         frame.setVisible(true);
 
