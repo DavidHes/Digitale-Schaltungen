@@ -10,11 +10,11 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
     public Controller(Model model, Panel view) {
         this.model = model;
         this.view = view;
+
         view.generateButton.addActionListener(this);
-
         view.difficultyButton.addActionListener(this);
-
         view.exitButton.addActionListener(this);
+        view.difficultyButton.addActionListener(this);
     }
 
     @Override
@@ -26,11 +26,19 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
 
         }
             if (e.getSource() == view.difficultyButton) {
-                System.out.println("Difficulty");
+                if(view.difficultyButton.getSelectedItem() == "Easy"){
+                    System.out.println("easy");
+                }
+                if(view.difficultyButton.getSelectedItem() == "Average"){
+                    System.out.println("average");
+                }
+                if(view.difficultyButton.getSelectedItem() == "Herr Schaal"){
+                    System.out.println("schaal");
+                }
             }
         else {
             if (e.getSource() == view.exitButton) {
-                view.exitButton.setBorderPainted(false);
+                System.exit(0);
                 System.out.println("Exit Funktioniert");
 
             }
