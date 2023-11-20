@@ -6,10 +6,15 @@ import javax.swing.*;
 public class Panel extends JPanel {
 
     protected JButton generateButton;
-    protected JComboBox<String> difficultyButton;
+    protected JComboBox<String> difficultymenu;
+    protected JComboBox<String> questionsmenu;
     protected JButton exitButton;
+    protected JLabel difficultylabel;
+    protected JLabel questionlabel;
+    protected JButton solutionButton;
     private Model model = new Model();
     String[] difficulties = {"Easy", "Average", "Herr Schaal"};
+    String[] questions = {"Wahrheitstabelle", "Digitale Schaltung"};
     public Image background = new ImageIcon("Background.png").getImage();
     Image exitBild = new ImageIcon("ExitBild.png").getImage();
     private List<JLabel> gateLabels = new ArrayList<>();
@@ -25,16 +30,36 @@ public class Panel extends JPanel {
 
         setLayout(null);
 
-        generateButton = new JButton("Generate");
-        difficultyButton = new JComboBox<>(difficulties);
+        questionlabel = new JLabel("Choose your Question");
+        difficultylabel = new JLabel("Choose your Difficulty");
 
-        generateButton.setBounds(260, 30, 150, 50);
-        difficultyButton.setBounds(472, 30, 150, 50);
+        questionlabel.setFont(new Font("SansSerif", Font.BOLD, 13));
+        difficultylabel.setFont(new Font("SansSerif", Font.BOLD, 13));
+        questionlabel.setForeground(Color.BLACK);
+        difficultylabel.setForeground(Color.BLACK);
+
+        generateButton = new JButton("Generate");
+        solutionButton = new JButton("Solution");
+        difficultymenu = new JComboBox<>(difficulties);
+        questionsmenu = new JComboBox<>(questions);
+
+        questionlabel.setBounds(110, 13, 150, 30);
+        difficultylabel.setBounds(360, 13, 150, 30);
+        generateButton.setBounds(600, 30, 150, 50);
+        difficultymenu.setBounds(360, 32, 150, 50);
+        questionsmenu.setBounds(110, 32, 160, 50);
+        solutionButton.setBounds(700, 300, 80, 50);
         exitButton.setBounds(820, 5, 50, 50);
 
         add(generateButton);
-        add(difficultyButton);
+        add(difficultymenu);
+        add(questionsmenu);
         add(exitButton);
+        add(solutionButton);
+        add(questionlabel);
+        add(difficultylabel);
+
+      solutionButton.setVisible(false);
     }
 
     @Override
@@ -42,10 +67,14 @@ public class Panel extends JPanel {
         super.paintComponent(g);
         g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
         g.setColor(Color.BLACK);
-        g.drawRoundRect(100, 150, 700, 350, 30, 30);
+        g.drawRoundRect(100, 150, 700, 350, 20, 20);
         g.setColor(Color.WHITE);
-        g.fillRoundRect(100, 150, 700, 350, 30, 30);
+        g.fillRoundRect(100, 150, 700, 350, 20, 20);
 
+        g.setColor(Color.BLACK);
+        g.drawRoundRect(100, 15, 700, 75, 20, 20);
+        g.setColor(Color.WHITE);
+        g.fillRoundRect(100, 15, 700, 75, 20, 20);
 
     }
 

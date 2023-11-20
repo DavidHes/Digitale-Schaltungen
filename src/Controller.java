@@ -12,9 +12,10 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
         this.view = view;
 
         view.generateButton.addActionListener(this);
-        view.difficultyButton.addActionListener(this);
         view.exitButton.addActionListener(this);
-        view.difficultyButton.addActionListener(this);
+        view.difficultymenu.addActionListener(this);
+        view.solutionButton.addActionListener(this);
+        view.questionsmenu.addActionListener(this);
     }
 
     @Override
@@ -23,19 +24,29 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
             System.out.println("Generate");
             List<ImageIcon> gateIcons = model.generateRandomSchaltung(3);
             view.paintSchaltung(gateIcons);
-
+            view.solutionButton.setVisible(true);
         }
-            if (e.getSource() == view.difficultyButton) {
-                if(view.difficultyButton.getSelectedItem() == "Easy"){
+            if (e.getSource() == view.difficultymenu) {
+                if(view.difficultymenu.getSelectedItem() == "Easy"){
                     System.out.println("easy");
                 }
-                if(view.difficultyButton.getSelectedItem() == "Average"){
+                if(view.difficultymenu.getSelectedItem() == "Average"){
                     System.out.println("average");
                 }
-                if(view.difficultyButton.getSelectedItem() == "Herr Schaal"){
+                if(view.difficultymenu.getSelectedItem() == "Herr Schaal"){
                     System.out.println("schaal");
                 }
             }
+
+        if (e.getSource() == view.questionsmenu) {
+            if(view.questionsmenu.getSelectedItem() == "Digitale Schaltung"){
+                System.out.println("Digitale Schaltung");
+            }
+            if(view.questionsmenu.getSelectedItem() == "Wahrheitstabelle"){
+                System.out.println("Wahrheitstabelle");
+            }
+        }
+
         else {
             if (e.getSource() == view.exitButton) {
                 System.exit(0);
