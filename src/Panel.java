@@ -2,6 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
+import java.util.Random;
 
 public class Panel extends JPanel {
 
@@ -11,6 +12,7 @@ public class Panel extends JPanel {
     protected JButton exitButton;
     protected JLabel difficultylabel;
     protected JLabel questionlabel;
+    protected JLabel question;
     protected JButton solutionButton;
     private Model model = new Model();
     String[] difficulties = {"Easy", "Average", "Herr Schaal"};
@@ -18,6 +20,12 @@ public class Panel extends JPanel {
     public Image background = new ImageIcon("Background.png").getImage();
     Image exitBild = new ImageIcon("ExitBild.png").getImage();
     private List<JLabel> gateLabels = new ArrayList<>();
+    JTable table;
+    Random numbers;
+    int min = 0;
+    int max = 1;
+    int zeilenanzahl;
+    int newanzahl;
 
     public Panel() {
 
@@ -32,9 +40,12 @@ public class Panel extends JPanel {
 
         questionlabel = new JLabel("Choose your Question");
         difficultylabel = new JLabel("Choose your Difficulty");
+        question = new JLabel("Erstelle aus dieser Wahrheitstabelle eine digitale Schaltungen!");
 
         questionlabel.setFont(new Font("SansSerif", Font.BOLD, 13));
         difficultylabel.setFont(new Font("SansSerif", Font.BOLD, 13));
+        question.setFont(new Font("SansSerif", Font.BOLD, 15));
+        question.setForeground(Color.BLACK);
         questionlabel.setForeground(Color.BLACK);
         difficultylabel.setForeground(Color.BLACK);
 
@@ -44,6 +55,7 @@ public class Panel extends JPanel {
         questionsmenu = new JComboBox<>(questions);
 
         questionlabel.setBounds(110, 13, 150, 30);
+        question.setBounds(200, 160, 600, 30);
         difficultylabel.setBounds(360, 13, 150, 30);
         generateButton.setBounds(600, 30, 150, 50);
         difficultymenu.setBounds(360, 32, 150, 50);
@@ -57,9 +69,33 @@ public class Panel extends JPanel {
         add(exitButton);
         add(solutionButton);
         add(questionlabel);
+        add(question);
         add(difficultylabel);
 
-      solutionButton.setVisible(false);
+        questionlabel.setVisible(false);
+        questionsmenu.setVisible(false);
+        solutionButton.setVisible(false);
+
+        numbers = new Random();
+
+        String[] columnNames = {"A", "B", "C", "M"};
+
+        Object[][] data = {
+                {(int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1)),
+                        (int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1))},
+                {(int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1)),
+                        (int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1))},
+                {(int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1)),
+                        (int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1))},
+                {(int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1)),
+                        (int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1))},
+        } ;
+
+        table = new JTable(data, columnNames);
+        table.setBounds(200, 300, 150, 200);
+       // table.setVisible(false);
+        add(table);
+
     }
 
     @Override
