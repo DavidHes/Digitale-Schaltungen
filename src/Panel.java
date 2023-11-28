@@ -79,7 +79,7 @@ public class Panel extends JPanel {
         questionsmenu.setVisible(false);
         solutionButton.setVisible(false);
 
-        /*numbers = new Random();
+        numbers = new Random();
 
         columnNames = new String[]{"A", "B", "C", "M"};
 
@@ -112,9 +112,9 @@ public class Panel extends JPanel {
         table.setBackground(Color.LIGHT_GRAY);
 
 
-*/
-    }
 
+    }
+/*
     public void generateTruthTable(int eingaenge) {
         DefaultTableModel model = new DefaultTableModel();
         table = new JTable(model);
@@ -147,7 +147,7 @@ public class Panel extends JPanel {
         table.setBounds(200, 300, 150, 200);
         add(table);
     }
-
+*/
 
     public static ArrayList aufteilenUndAusgeben(int zahl) {
         // Zahl in einen String umwandeln
@@ -279,7 +279,6 @@ public class Panel extends JPanel {
                 default:
                     System.out.println("Keine der erwarteten Kombinationen");
             }
-
             System.out.println("Neue Zeile");
         }
     }
@@ -305,13 +304,13 @@ public class Panel extends JPanel {
         if(mode == "Easy"){
        // for(int i = 0; i < 1; i++) {
             int gatter = numbers.nextInt(3);
-            createEasygatter(gatter);
+            createEasyGatter(gatter);
         }  // }
 
         if(mode == "Herr Schaal"){
             for(int i = 0; i < 3; i++) {
                 int gatter = numbers.nextInt(3);
-                createHardgatter(gatter);
+                createDifficultGatter(gatter);
             }
         }
     }

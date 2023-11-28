@@ -24,7 +24,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
             System.out.println("Generate");
             List<ImageIcon> gateIcons = model.generateRandomSchaltung(3);
             view.paintSchaltung(gateIcons);
-            view.generateTruthTable(3);
+            //view.generateTruthTable(3);
           //  view.solutionButton.setVisible(true); --> NOCH NICHT LÖSCHEN
 
 
