@@ -17,6 +17,7 @@ public class Panel extends JPanel {
     protected JButton solutionButton;
     private Model model = new Model();
     String[] difficulties = {"Easy", "Average", "Herr Schaal"};
+    String[] gatterarten = {"AND", "OR", "NOT"};
     String[] questions = {"Wahrheitstabelle", "Digitale Schaltung"};
     public Image background = new ImageIcon("Background.png").getImage();
     Image exitBild = new ImageIcon("ExitBild.png").getImage();
@@ -27,6 +28,7 @@ public class Panel extends JPanel {
     int max = 1;
     int zeilenanzahl;
     int newanzahl;
+    String[] columnNames;
 
     public Panel() {
 
@@ -79,7 +81,7 @@ public class Panel extends JPanel {
 
         /*numbers = new Random();
 
-        String[] columnNames = {"A", "B", "C", "M"};
+        columnNames = new String[]{"A", "B", "C", "M"};
 
         Object[][] data = {
                 {(int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1)),
@@ -93,9 +95,21 @@ public class Panel extends JPanel {
         } ;
 
         table = new JTable(data, columnNames);
-        table.setBounds(200, 300, 150, 200);
-       // table.setVisible(false);
-        add(table);
+        //table.setBounds(200, 300, 150, 200);
+        table.setVisible(true);
+        this.add(table);
+        table.setShowGrid(true);
+        table.setGridColor(Color.BLACK);
+        table.setRowHeight(20);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(200, 250, table.getColumnCount() * 45, table.getRowCount()* table.getRowHeight() + 20);
+        add(scrollPane);
+
+        table.getTableHeader().setReorderingAllowed(false); // not allow re-ordering of columns
+        table.getTableHeader().setResizingAllowed(false);
+        table.setEnabled(false);
+        table.setBackground(Color.LIGHT_GRAY);
 
 
 */
@@ -285,6 +299,21 @@ public class Panel extends JPanel {
         g.setColor(Color.WHITE);
         g.fillRoundRect(100, 15, 700, 75, 20, 20);
 
+    }
+
+    public void generateTable(String mode){
+        if(mode == "Easy"){
+       // for(int i = 0; i < 1; i++) {
+            int gatter = numbers.nextInt(3);
+            createEasygatter(gatter);
+        }  // }
+
+        if(mode == "Herr Schaal"){
+            for(int i = 0; i < 3; i++) {
+                int gatter = numbers.nextInt(3);
+                createHardgatter(gatter);
+            }
+        }
     }
 
     public void paintSchaltung(List<ImageIcon> gateIcons) {
