@@ -227,7 +227,7 @@ public class Panel extends JPanel {
 
             switch (randomGatterZahl) {
                 case 0:   //AND
-                    if(x.equals("1") && y.equals("1")) {
+                    if(x.equals(1) && y.equals(1)) {
                         System.out.println("A und B sind gleich");
                         //print Spalte AuB
                     } else {
@@ -244,7 +244,7 @@ public class Panel extends JPanel {
                 break;
 
                 case 2:   //NAND
-                    if(!(x.equals("1") && y.equals("1"))) {
+                    if(!(x.equals(1) && y.equals(1))) {
                         System.out.println("NAND-Ergebnis: 1");
                         //print Spalte AuB
                     } else {
@@ -254,7 +254,7 @@ public class Panel extends JPanel {
                     break;
 
                 case 4:   //NOR
-                    if(!(x.equals("1") && y.equals("1"))) {
+                    if(!(x.equals(1) && y.equals(1))) {
                         System.out.println("NAND-Ergebnis: 1");
                         //print Spalte AuB
                     } else {
