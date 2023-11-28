@@ -2,6 +2,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.util.Random;
 
 public class Panel extends JPanel {
@@ -76,7 +77,7 @@ public class Panel extends JPanel {
         questionsmenu.setVisible(false);
         solutionButton.setVisible(false);
 
-        numbers = new Random();
+        /*numbers = new Random();
 
         String[] columnNames = {"A", "B", "C", "M"};
 
@@ -96,7 +97,179 @@ public class Panel extends JPanel {
        // table.setVisible(false);
         add(table);
 
+
+*/
     }
+
+    public void generateTruthTable(int eingaenge) {
+        DefaultTableModel model = new DefaultTableModel();
+        table = new JTable(model);
+
+        // Hinzufügen der Spaltenüberschriften A, B C
+        for (int i = 0; i < eingaenge; i++) {
+            model.addColumn("A");
+        }
+
+        // Iteration über alle möglichen Binärkombinationen
+        for (int i = 0; i < Math.pow(2, eingaenge); i++) {
+            String binaryRepresentation = Integer.toBinaryString(i);
+
+            Object[] rowData = new Object[eingaenge];
+
+            // Binärziffern mit Nullen
+            for (int j = 0; j < eingaenge - binaryRepresentation.length(); j++) {
+                rowData[j] = 0;
+            }
+
+            // Füllen der restlichen Binärziffern
+            for (int j = 0; j < binaryRepresentation.length(); j++) {
+                rowData[eingaenge - binaryRepresentation.length() + j] = Character.getNumericValue(binaryRepresentation.charAt(j));
+            }
+
+            model.addRow(rowData);
+
+        }
+
+        table.setBounds(200, 300, 150, 200);
+        add(table);
+    }
+
+
+    public static ArrayList aufteilenUndAusgeben(int zahl) {
+        // Zahl in einen String umwandeln
+        String zahlString = Integer.toString(zahl);
+        ArrayList zifferlist = new ArrayList();
+
+        // Jeden Charakter des Strings in eine separate Ziffer konvertieren
+        for (int i = 0; i < zahlString.length(); i++) {
+            char zifferChar = zahlString.charAt(i);
+            int ziffer = Character.getNumericValue(zifferChar);
+            zifferlist.add(ziffer);
+
+            System.out.println("Ziffer " + (i + 1) + ": " + ziffer);
+        }
+        return zifferlist;
+    }
+
+    public void createEasyGatter(int randomGatterZahl) {
+        Random random = new Random();
+        int randomX = random.nextInt(3);
+        int randomY;
+        do {
+            randomY = random.nextInt(3);
+        } while (randomY == randomX);
+
+        for(int i = 0; i < table.getRowCount(); i++) {
+
+            Object x = table.getValueAt(i, randomX);
+            Object y = table.getValueAt(i, randomY);
+
+            String eingang1 = randomX == 0 ? "A" : randomX == 1 ? "B" : "C";
+            String eingang2 = randomY == 0 ? "A" : randomY == 1 ? "B" : "C";
+
+            System.out.println(eingang1 + " = " + x + " " + eingang2 +  " = " +y);
+                // 0 & 0 = 0, 1 & 1 = 1, 0 & 1 = 0
+                //Neue Spalte
+
+            switch (randomGatterZahl) {
+                case 0:   //AND
+                    if(x.equals(y)) {
+                        System.out.println("A und B sind gleich");
+                        //print Spalte AuB
+                    }
+                    if(!x.equals(y)) {
+                        System.out.println("A und B sind NICHT gleich");
+                        //print Spalte AuB
+
+                    }
+                    break;
+                case 1:
+                    if(x.equals(y)) {
+                        System.out.println("Ergebnis: 1");
+                        //print Spalte AuB
+                    }
+                    if(!x.equals(y)) {
+                        System.out.println("A und B sind NICHT gleich");
+                        //print Spalte AuB
+
+                    }
+                    break;
+                case 2:  //NOT
+                    System.out.println("Kombination 3");
+                    break;
+                default:
+                    System.out.println("Keine der erwarteten Kombinationen");
+            }
+
+            System.out.println("Neue Zeile");
+        }
+    }
+
+    public void createDifficultGatter(int randomGatterZahl) { //nur ein gatter aber dafür alle drei Eingänge drin, einziger unterschied sind, dass es drei kombis sind (not, and, or)
+        Random random = new Random();
+        int randomX = random.nextInt(3);
+        int randomY;
+        do {
+            randomY = random.nextInt(3);
+        } while (randomY == randomX);
+
+        for(int i = 0; i < table.getRowCount(); i++) {
+
+            Object x = table.getValueAt(i, randomX);
+            Object y = table.getValueAt(i, randomY);
+
+            String eingang1 = randomX == 0 ? "A" : randomX == 1 ? "B" : "C";
+            String eingang2 = randomY == 0 ? "A" : randomY == 1 ? "B" : "C";
+
+            System.out.println(eingang1 + " = " + x + " " + eingang2 +  " = " +y);
+            // 0 & 0 = 0, 1 & 1 = 1, 0 & 1 = 0
+            //Neue Spalte
+
+            switch (randomGatterZahl) {
+                case 0:   //AND
+                    if(x.equals("1") && y.equals("1")) {
+                        System.out.println("A und B sind gleich");
+                        //print Spalte AuB
+                    } else {
+                        System.out.println("A und B sind NICHT gleich");
+                        //print Spalte AuB
+                    }
+                    break;
+                case 1: //OR
+                    if(!(x.equals(0) && y.equals(0))) {
+                        System.out.println("OR-Ergebnis: 1");
+                    } else {
+                        System.out.println("OR-Ergebnis: 0");
+                    }
+                break;
+
+                case 2:   //NAND
+                    if(!(x.equals("1") && y.equals("1"))) {
+                        System.out.println("NAND-Ergebnis: 1");
+                        //print Spalte AuB
+                    } else {
+                        System.out.println("NAND-Ergebnis: 0");
+                        //print Spalte AuB
+                    }
+                    break;
+
+                case 4:   //NOR
+                    if(!(x.equals("1") && y.equals("1"))) {
+                        System.out.println("NAND-Ergebnis: 1");
+                        //print Spalte AuB
+                    } else {
+                        System.out.println("NAND-Ergebnis: 0");
+                        //print Spalte AuB
+                    }
+                    break;
+                default:
+                    System.out.println("Keine der erwarteten Kombinationen");
+            }
+
+            System.out.println("Neue Zeile");
+        }
+    }
+
 
     @Override
     protected void paintComponent(Graphics g) {

@@ -24,7 +24,11 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
             System.out.println("Generate");
             List<ImageIcon> gateIcons = model.generateRandomSchaltung(3);
             view.paintSchaltung(gateIcons);
+            view.generateTruthTable(3);
           //  view.solutionButton.setVisible(true); --> NOCH NICHT LÖSCHEN
+
+
+            view.createDifficultGatter(1);
         }
             if (e.getSource() == view.difficultymenu) {
                 if(view.difficultymenu.getSelectedItem() == "Easy"){
