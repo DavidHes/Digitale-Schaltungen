@@ -20,6 +20,7 @@ public class Panel extends JPanel {
     private List<JLabel> gateLabels = new ArrayList<>();
     JTable table;
     DefaultTableModel tableModel;
+    JScrollPane scrollPane;
     Random numbers;
     int min = 0;
     int max = 1;
@@ -86,6 +87,15 @@ public class Panel extends JPanel {
     //einfach parameter übergeben, die die anzahl der eingänge vorgibt. Z.b int gatteranzahl = 2, oder int = 3
     //int ausgange
     public void createTruthTable(int eingange, int ausgaenge, int gatterAnzahl) { //nur ein gatter aber dafür alle drei Eingänge drin, einziger unterschied sind, dass es drei kombis sind (not, and, or)
+        // Entfernt scrollpane und dazugehörige tabelle, damit es zu beginn keine mehrfachen tabellen gibt
+        if (scrollPane != null) {
+            this.remove(scrollPane);
+        }
+        revalidate();
+        repaint();
+
+        //Ende der Entfernung
+
         //Erstellen der NormalTabelle
         tableModel = new DefaultTableModel();
 
@@ -107,13 +117,15 @@ public class Panel extends JPanel {
         for (int i = 0; i < eingange * eingange; i++) {
             for (int j = 0; j < eingange; j++) { //Füllen aller Zeilen/Spalten mit Nullen
                 rowData[i][j] = 0;
-
             }
             // Füllen der restlichen Binärziffern
             String binärZahl = Integer.toBinaryString(i); //Umwandlung aller Zahlen von 0-anzahleingange
             System.out.println("DIE ZAHL " + i + " = " + binärZahl);
             for (int j = 0; j < binärZahl.length(); j++) { //binärZahl.length ist wichtig, da die Binärzahlen teilweise nur einstellig nach der umwandlung sind
-                rowData[i][j] = Character.getNumericValue(binärZahl.charAt(j)); //auch hier wieder: eingange - binärZahl.length() + j ist notwenig, da eingeange nicht immer auch der binärZahl.länge entsprechen
+                if(eingange < 4)
+                    rowData[i][j] = Character.getNumericValue(binärZahl.charAt(j)); //auch hier wieder: eingange - binärZahl.length() + j ist notwenig, da eingeange nicht immer auch der binärZahl.länge entsprechen
+                else rowData[i][eingange - binärZahl.length() + j] = Character.getNumericValue(binärZahl.charAt(j)); //auch hier wieder: eingange - binärZahl.length() + j ist notwenig, da eingeange nicht immer auch der binärZahl.länge entsprechen
+
                 // TODO: wenn eingänge >= 5 ist, dann das:  rowData[i][eingange - binärZahl.length() + j] = Character.getNumericValue(binärZahl.charAt(j)); //auch hier wieder: eingange - binärZahl.length() + j ist notwenig, da eingeange nicht immer auch der binärZahl.länge entsprechen
 
             }
@@ -135,7 +147,7 @@ public class Panel extends JPanel {
         table.setGridColor(Color.BLACK);
         table.setRowHeight(30);
 
-        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane = new JScrollPane(table);
         scrollPane.setBounds(200, 250, table.getColumnCount() * 90, table.getRowCount() * table.getRowHeight() + 20);
 
 
@@ -170,7 +182,7 @@ public class Panel extends JPanel {
 
             String columnName = randomGatter == 0 ? eingang1 + " AND " + eingang2 : randomGatter == 1 ?
                     eingang1 + " OR " + eingang2 : randomGatter == 2 ? eingang1 + " NAND " + eingang2 : eingang1 + " NOR " + eingang2;
-            tableModel.addColumn(columnName);
+            tableModel.addColumn(columnName); //Setzt den richtigen Spaltennamen, je nach dem welcher Case zufällig generiert wurde
 
             for (int i = 0; i < table.getRowCount(); i++) { //Durchgang durch alle Zeilen
                 Object x = table.getValueAt(i, randomX);
@@ -214,7 +226,6 @@ public class Panel extends JPanel {
                             break;
                         }
 
-
                         //NOR
                     case 3:
                         System.out.println("CASE 3");
@@ -231,6 +242,10 @@ public class Panel extends JPanel {
                 }
             }
         } else {
+            String columnName = randomGatter == 0 ? "A AND B AND C" : randomGatter == 1 ?
+                    "A OR B OR C" : randomGatter == 2 ? "A NAND B NAND C" : "A NOR B NOR C";
+            tableModel.addColumn(columnName); //Setzt den richtigen Spaltennamen, je nach dem welcher Case zufällig generiert wurde
+
             for (int i = 0; i < table.getRowCount(); i++) { //Durchgang durch alle Zeilen
                 Object a = table.getValueAt(i, 0);
                 Object b = table.getValueAt(i, 1);
@@ -240,44 +255,40 @@ public class Panel extends JPanel {
                     //AND
                     case 0:
                         if (a.equals(1) && b.equals(1) && c.equals(1)) {
-                            // tableModel.addColumn("A AND B AND C ");
-                            //newData[i][table.getColumnCount()] = "1";
+                            tableModel.setValueAt("1", i, spaltenAnzahl);
                             break;
                         } else {
-                            //  newData[i][table.getColumnCount()] = "0";
+                            tableModel.setValueAt("0", i, spaltenAnzahl);
                             break;
                         }
 
                         //OR
                     case 1:
                         if (!(a.equals(0) && b.equals(0) && c.equals(0))) {
-                            //   tableModel.addColumn("A OR B OR C ");
-                            // newData[i][table.getColumnCount()] = "1";
+                            tableModel.setValueAt("1", i, spaltenAnzahl);
                             break;
                         } else {
-                            //    newData[i][table.getColumnCount()] = "0";
+                            tableModel.setValueAt("0", i, spaltenAnzahl);
                             break;
                         }
 
                         //NAND
                     case 2:
                         if (!(a.equals(1) && b.equals(1) && c.equals(1))) {
-                            //    tableModel.addColumn("NOT A B C ");
-                            //    newData[i][table.getColumnCount()] = "1";
+                            tableModel.setValueAt("1", i, spaltenAnzahl);
                             break;
                         } else {
-                            //   newData[i][table.getColumnCount()] = "0";
+                            tableModel.setValueAt("0", i, spaltenAnzahl);
                             break;
                         }
 
                         //NOR
                     case 3:
                         if (!(a.equals(1) && b.equals(1) && c.equals(1))) {
-                            //      tableModel.addColumn("A und B und C ");
-                            //   newData[i][table.getColumnCount()] = "1";
+                            tableModel.setValueAt("1", i, spaltenAnzahl);
                             break;
                         } else {
-                            //      newData[i][table.getColumnCount()] = "0";
+                            tableModel.setValueAt("0", i, spaltenAnzahl);
                             break;
                         }
                 }
