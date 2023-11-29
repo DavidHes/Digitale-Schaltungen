@@ -81,9 +81,9 @@ public class Panel extends JPanel {
 
         numbers = new Random();
 
-        columnNames = new String[]{"A", "B", "C", "M"};
+        columnNames = new String[]{"A", "B", "C"};
 
-        Object[][] data = {
+        /*Object[][] data = {
                 {(int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1)),
                         (int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1))},
                 {(int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1)),
@@ -93,76 +93,40 @@ public class Panel extends JPanel {
                 {(int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1)),
                         (int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1))},
         } ;
-
-        table = new JTable(data, columnNames);
-        //table.setBounds(200, 300, 150, 200);
-        table.setVisible(true);
-        this.add(table);
-        table.setShowGrid(true);
-        table.setGridColor(Color.BLACK);
-        table.setRowHeight(20);
-
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(200, 250, table.getColumnCount() * 45, table.getRowCount()* table.getRowHeight() + 20);
-        add(scrollPane);
-
-        table.getTableHeader().setReorderingAllowed(false); // not allow re-ordering of columns
-        table.getTableHeader().setResizingAllowed(false);
-        table.setEnabled(false);
-        table.setBackground(Color.LIGHT_GRAY);
-
-
-
-    }
-/*
-    public void generateTruthTable(int eingaenge) {
-        DefaultTableModel model = new DefaultTableModel();
-        table = new JTable(model);
-
-        // Hinzufügen der Spaltenüberschriften A, B C
-        for (int i = 0; i < eingaenge; i++) {
-            model.addColumn("A");
-        }
-
-        // Iteration über alle möglichen Binärkombinationen
-        for (int i = 0; i < Math.pow(2, eingaenge); i++) {
+*/
+        Object[][] rowData = new Object[8][3];
+        for (int i = 0; i < 8; i++) {
             String binaryRepresentation = Integer.toBinaryString(i);
 
-            Object[] rowData = new Object[eingaenge];
-
             // Binärziffern mit Nullen
-            for (int j = 0; j < eingaenge - binaryRepresentation.length(); j++) {
-                rowData[j] = 0;
+            for (int j = 0; j < 3; j++) {
+                rowData[i][j] = 0;
             }
 
             // Füllen der restlichen Binärziffern
             for (int j = 0; j < binaryRepresentation.length(); j++) {
-                rowData[eingaenge - binaryRepresentation.length() + j] = Character.getNumericValue(binaryRepresentation.charAt(j));
+                rowData[i][3 - binaryRepresentation.length() + j] = Character.getNumericValue(binaryRepresentation.charAt(j));
             }
 
-            model.addRow(rowData);
+            table = new JTable(rowData, columnNames);
+            //table.setBounds(200, 300, 150, 200);
+            table.setVisible(true);
+            this.add(table);
+            table.setShowGrid(true);
+            table.setGridColor(Color.BLACK);
+            table.setRowHeight(20);
+
+            JScrollPane scrollPane = new JScrollPane(table);
+            scrollPane.setBounds(200, 250, table.getColumnCount() * 45, table.getRowCount() * table.getRowHeight() + 20);
+            add(scrollPane);
+
+            table.getTableHeader().setReorderingAllowed(false); // not allow re-ordering of columns
+            table.getTableHeader().setResizingAllowed(false);
+            table.setEnabled(false);
+            table.setBackground(Color.LIGHT_GRAY);
 
         }
 
-        table.setBounds(200, 300, 150, 200);
-        add(table);
-    }
-*/
-
-    public static ArrayList aufteilenUndAusgeben(int zahl) {
-        // Zahl in einen String umwandeln
-        String zahlString = Integer.toString(zahl);
-        ArrayList zifferlist = new ArrayList();
-
-        // Jeden Charakter des Strings in eine separate Ziffer konvertieren
-        for (int i = 0; i < zahlString.length(); i++) {
-            char zifferChar = zahlString.charAt(i);
-            int ziffer = Character.getNumericValue(zifferChar);
-            zifferlist.add(ziffer);
-
-            System.out.println("Ziffer " + (i + 1) + ": " + ziffer);
-        }
-        return zifferlist;
     }
 
     public void createEasyGatter(int randomGatterZahl) {
