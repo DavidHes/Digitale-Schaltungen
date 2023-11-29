@@ -6,8 +6,6 @@ public class Main {
 
         TruthTableGenerator truthTableGenerator = new TruthTableGenerator(3, 1);
 
-
-
         Model model = new Model();
         Panel view = new Panel();
         Controller controller = new Controller(model, view);
@@ -17,13 +15,8 @@ public class Main {
         frame.setSize(900, 600);
         frame.setResizable(false);
         frame.add(view);
-
-
-      //  frame.add(tabelle.table);
-
         frame.setVisible(true);
 
-//Majd war hier
 
 
 
