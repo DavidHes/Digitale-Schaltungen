@@ -2,9 +2,6 @@ import javax.swing.*;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
-
-        TruthTableGenerator truthTableGenerator = new TruthTableGenerator(3, 1);
 
         Model model = new Model();
         Panel view = new Panel();
@@ -16,9 +13,6 @@ public class Main {
         frame.setResizable(false);
         frame.add(view);
         frame.setVisible(true);
-
-
-
 
     }
 }

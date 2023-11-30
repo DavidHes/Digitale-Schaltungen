@@ -27,8 +27,10 @@ public class Panel extends JPanel {
     int zeilenanzahl;
     int newanzahl;
 
-    boolean difficult = true;
-
+    public enum SchwierigkeitsAuswahl {EASY, DIFFICULT}
+    public enum TypAuswahl {WAHRHEITSTABELLE, SCHALTUNG}
+    public SchwierigkeitsAuswahl schwierigkeit = SchwierigkeitsAuswahl.EASY;
+    public TypAuswahl typ = TypAuswahl.WAHRHEITSTABELLE;
 
     public Panel() {
 
@@ -170,7 +172,7 @@ public class Panel extends JPanel {
         int spaltenAnzahl = table.getColumnCount();
         System.out.println("Spaltenanzahl " + spaltenAnzahl);
 
-        if (difficult == true) {
+        if (schwierigkeit == SchwierigkeitsAuswahl.DIFFICULT) {
             int randomX = random.nextInt(3);
             int randomY;
             do {
@@ -311,22 +313,7 @@ public class Panel extends JPanel {
         g.fillRoundRect(100, 15, 700, 75, 20, 20);
 
     }
-
-    public void generateTable(String mode){
-        if(mode == "Easy"){
-            // for(int i = 0; i < 1; i++) {
-            int gatter = numbers.nextInt(3);
-            //   createRandomGatter(3, 1, 3);
-        }  // }
-
-        if(mode == "Herr Schaal"){
-            for(int i = 0; i < 3; i++) {
-                int gatter = numbers.nextInt(3);
-                //    createRandomGatter(3, 1, 3);
-            }
-        }
-    }
-
+/*
     public void paintSchaltung(List<ImageIcon> gateIcons) {
         // Vor dem Zeichnen der neuen Schaltung entferne die vorherige
         gateLabels.forEach(this::remove);
@@ -346,5 +333,5 @@ public class Panel extends JPanel {
         revalidate();
         repaint();
     }
-
+*/
 }

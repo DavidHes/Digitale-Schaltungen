@@ -27,22 +27,22 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
             //view.generateTruthTable(3);
           //  view.solutionButton.setVisible(true); --> NOCH NICHT LÖSCHEN
 
-            int anzahlEingaenge = view.difficult == true ? 4 : 3;
+            int anzahlEingaenge = view.schwierigkeit == Panel.SchwierigkeitsAuswahl.EASY ? 3 : 4;
             view.createTruthTable(anzahlEingaenge, 2, 4);
             view.addRandomGatter();
         }
             if (e.getSource() == view.difficultymenu) {
                 if(view.difficultymenu.getSelectedItem() == "Easy"){
                     System.out.println("easy");
-                    view.difficult = false;
+                    view.schwierigkeit = Panel.SchwierigkeitsAuswahl.EASY;
                 }
                 if(view.difficultymenu.getSelectedItem() == "Average"){
                     System.out.println("average");
-                    view.difficult = true;
+                    view.schwierigkeit = Panel.SchwierigkeitsAuswahl.DIFFICULT;
                 }
                 if(view.difficultymenu.getSelectedItem() == "Herr Schaal"){
                     System.out.println("schaal");
-                    view.difficult = true;
+                    view.schwierigkeit = Panel.SchwierigkeitsAuswahl.DIFFICULT;
                 }
             }
 
