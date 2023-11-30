@@ -60,7 +60,7 @@ public class Panel extends JPanel {
         questionsmenu = new JComboBox<>(questions);
 
         questionlabel.setBounds(110, 13, 150, 30);
-        question.setBounds(200, 160, 600, 30);
+        question.setBounds(200, 120, 600, 30);
         difficultylabel.setBounds(360, 13, 150, 30);
         generateButton.setBounds(600, 30, 150, 50);
         difficultymenu.setBounds(360, 32, 150, 50);
@@ -115,11 +115,15 @@ public class Panel extends JPanel {
 
             }
         }
-        Object[][] rowData = new Object[eingange * eingange][eingange + gatterAnzahl]; //Tabellengröße = Zeilenanzahl + Spaltenanzahl
-        for (int i = 0; i < eingange * eingange; i++) {
+        // Hier alles erweiterbar --> man kann hier mit --> (int) Math.pow(2, eingange)
+        // --> anhand der Anzahl der Eingänge, die Anzahl der Zeilen erstellen. Formel = 2 ^ Eingänge
+        Object[][] rowData = new Object[(int) Math.pow(2, eingange)][eingange + gatterAnzahl]; //Tabellengröße = Zeilenanzahl + Spaltenanzahl
+        for (int i = 0; i < ((int) Math.pow(2, eingange)); i++) {
             for (int j = 0; j < eingange; j++) { //Füllen aller Zeilen/Spalten mit Nullen
                 rowData[i][j] = 0;
             }
+
+
             // Füllen der restlichen Binärziffern
             String binärZahl = Integer.toBinaryString(i); //Umwandlung aller Zahlen von 0-anzahleingange
             System.out.println("DIE ZAHL " + i + " = " + binärZahl);
@@ -147,10 +151,10 @@ public class Panel extends JPanel {
         this.add(table);
         table.setShowGrid(true);
         table.setGridColor(Color.BLACK);
-        table.setRowHeight(30);
+        table.setRowHeight(22);
 
         scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(200, 250, table.getColumnCount() * 90, table.getRowCount() * table.getRowHeight() + 20);
+        scrollPane.setBounds(200, 170, table.getColumnCount() * 130, table.getRowCount() * table.getRowHeight() + 20);
 
 
         add(scrollPane);
@@ -303,9 +307,9 @@ public class Panel extends JPanel {
         super.paintComponent(g);
         g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
         g.setColor(Color.BLACK);
-        g.drawRoundRect(100, 150, 700, 350, 20, 20);
+        g.drawRoundRect(100, 120, 700, 450, 20, 20);
         g.setColor(Color.WHITE);
-        g.fillRoundRect(100, 150, 700, 350, 20, 20);
+        g.fillRoundRect(100, 120, 700, 450, 20, 20);
 
         g.setColor(Color.BLACK);
         g.drawRoundRect(100, 15, 700, 75, 20, 20);
