@@ -1,0 +1,206 @@
+Index: src/Panel.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.awt.*;\nimport java.util.ArrayList;\nimport java.util.List;\nimport javax.swing.*;\nimport java.util.Random;\n\npublic class Panel extends JPanel {\n\n    protected JButton generateButton;\n    protected JComboBox<String> difficultymenu;\n    protected JComboBox<String> questionsmenu;\n    protected JButton exitButton;\n    protected JLabel difficultylabel;\n    protected JLabel questionlabel;\n    protected JLabel question;\n    protected JButton solutionButton;\n    private Model model = new Model();\n    String[] difficulties = {\"Easy\", \"Average\", \"Herr Schaal\"};\n    String[] questions = {\"Wahrheitstabelle\", \"Digitale Schaltung\"};\n    public Image background = new ImageIcon(\"Background.png\").getImage();\n    Image exitBild = new ImageIcon(\"ExitBild.png\").getImage();\n    private List<JLabel> gateLabels = new ArrayList<>();\n    JTable table;\n    Random numbers;\n    int min = 0;\n    int max = 1;\n    int zeilenanzahl;\n    int newanzahl;\n\n    public Panel() {\n\n        Image scaledExitImage = exitBild.getScaledInstance(50, 50, Image.SCALE_SMOOTH);\n        ImageIcon scaledExitIcon = new ImageIcon(scaledExitImage);\n        exitButton = new JButton(scaledExitIcon);\n        exitButton.setBorderPainted(false);\n        exitButton.setFocusPainted(false);\n        exitButton.setContentAreaFilled(false);\n\n        setLayout(null);\n\n        questionlabel = new JLabel(\"Choose your Question\");\n        difficultylabel = new JLabel(\"Choose your Difficulty\");\n        question = new JLabel(\"Erstelle aus dieser Wahrheitstabelle eine digitale Schaltungen!\");\n\n        questionlabel.setFont(new Font(\"SansSerif\", Font.BOLD, 13));\n        difficultylabel.setFont(new Font(\"SansSerif\", Font.BOLD, 13));\n        question.setFont(new Font(\"SansSerif\", Font.BOLD, 15));\n        question.setForeground(Color.BLACK);\n        questionlabel.setForeground(Color.BLACK);\n        difficultylabel.setForeground(Color.BLACK);\n\n        generateButton = new JButton(\"Generate\");\n        solutionButton = new JButton(\"Solution\");\n        difficultymenu = new JComboBox<>(difficulties);\n        questionsmenu = new JComboBox<>(questions);\n\n        questionlabel.setBounds(110, 13, 150, 30);\n        question.setBounds(200, 160, 600, 30);\n        difficultylabel.setBounds(360, 13, 150, 30);\n        generateButton.setBounds(600, 30, 150, 50);\n        difficultymenu.setBounds(360, 32, 150, 50);\n        questionsmenu.setBounds(110, 32, 160, 50);\n        solutionButton.setBounds(700, 300, 80, 50);\n        exitButton.setBounds(820, 5, 50, 50);\n\n        add(generateButton);\n        add(difficultymenu);\n        add(questionsmenu);\n        add(exitButton);\n        add(solutionButton);\n        add(questionlabel);\n        add(question);\n        add(difficultylabel);\n\n        questionlabel.setVisible(false);\n        questionsmenu.setVisible(false);\n        solutionButton.setVisible(false);\n\n        numbers = new Random();\n\n        String[] columnNames = {\"A\", \"B\", \"C\", \"M\"};\n\n        Object[][] data = {\n                {(int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1)),\n                        (int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1))},\n                {(int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1)),\n                        (int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1))},\n                {(int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1)),\n                        (int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1))},\n                {(int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1)),\n                        (int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1))},\n        } ;\n\n        table = new JTable(data, columnNames);\n        table.setBounds(200, 300, 150, 200);\n       // table.setVisible(false);\n        add(table);\n\n    }\n\n    @Override\n    protected void paintComponent(Graphics g) {\n        super.paintComponent(g);\n        g.drawImage(background, 0, 0, getWidth(), getHeight(), this);\n        g.setColor(Color.BLACK);\n        g.drawRoundRect(100, 150, 700, 350, 20, 20);\n        g.setColor(Color.WHITE);\n        g.fillRoundRect(100, 150, 700, 350, 20, 20);\n\n        g.setColor(Color.BLACK);\n        g.drawRoundRect(100, 15, 700, 75, 20, 20);\n        g.setColor(Color.WHITE);\n        g.fillRoundRect(100, 15, 700, 75, 20, 20);\n\n    }\n\n    public void paintSchaltung(List<ImageIcon> gateIcons) {\n        // Vor dem Zeichnen der neuen Schaltung entferne die vorherige\n        gateLabels.forEach(this::remove);\n        gateLabels.clear();\n\n        int x = 130;  //Startposition\n        int y = 230;\n        for (ImageIcon icon : gateIcons) {\n            JLabel label = new JLabel(icon);\n            label.setBounds(x, y, icon.getIconWidth(), icon.getIconHeight());\n            gateLabels.add(label);\n            add(label);\n\n            x += 100;  //Position horizontal verändert nach jedem durchgang\n        }\n\n        revalidate();\n        repaint();\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Panel.java b/src/Panel.java
+--- a/src/Panel.java	(revision 9765c8455726d1347a1ffa2d7fa6905ac4927712)
++++ b/src/Panel.java	(date 1701175581520)
+@@ -16,6 +16,7 @@
+     protected JButton solutionButton;
+     private Model model = new Model();
+     String[] difficulties = {"Easy", "Average", "Herr Schaal"};
++    String[] gatterarten = {"AND", "OR", "NOT"};
+     String[] questions = {"Wahrheitstabelle", "Digitale Schaltung"};
+     public Image background = new ImageIcon("Background.png").getImage();
+     Image exitBild = new ImageIcon("ExitBild.png").getImage();
+@@ -26,6 +27,7 @@
+     int max = 1;
+     int zeilenanzahl;
+     int newanzahl;
++    String[] columnNames;
+ 
+     public Panel() {
+ 
+@@ -78,7 +80,7 @@
+ 
+         numbers = new Random();
+ 
+-        String[] columnNames = {"A", "B", "C", "M"};
++        columnNames = new String[]{"A", "B", "C", "M"};
+ 
+         Object[][] data = {
+                 {(int)(Math.random() * ((max - min) + 1)), (int)(Math.random() * ((max - min) + 1)),
+@@ -92,9 +94,21 @@
+         } ;
+ 
+         table = new JTable(data, columnNames);
+-        table.setBounds(200, 300, 150, 200);
+-       // table.setVisible(false);
+-        add(table);
++        //table.setBounds(200, 300, 150, 200);
++        table.setVisible(true);
++        this.add(table);
++        table.setShowGrid(true);
++        table.setGridColor(Color.BLACK);
++        table.setRowHeight(20);
++
++        JScrollPane scrollPane = new JScrollPane(table);
++        scrollPane.setBounds(200, 250, table.getColumnCount() * 45, table.getRowCount()* table.getRowHeight() + 20);
++        add(scrollPane);
++
++        table.getTableHeader().setReorderingAllowed(false); // not allow re-ordering of columns
++        table.getTableHeader().setResizingAllowed(false);
++        table.setEnabled(false);
++        table.setBackground(Color.LIGHT_GRAY);
+ 
+     }
+ 
+@@ -114,6 +128,21 @@
+ 
+     }
+ 
++    public void generateTable(String mode){
++        if(mode == "Easy"){
++       // for(int i = 0; i < 1; i++) {
++            int gatter = numbers.nextInt(3);
++            createEasygatter(gatter);
++        }  // }
++
++        if(mode == "Herr Schaal"){
++            for(int i = 0; i < 3; i++) {
++                int gatter = numbers.nextInt(3);
++                createHardgatter(gatter);
++            }
++        }
++    }
++
+     public void paintSchaltung(List<ImageIcon> gateIcons) {
+         // Vor dem Zeichnen der neuen Schaltung entferne die vorherige
+         gateLabels.forEach(this::remove);
+Index: src/Controller.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import javax.swing.*;\nimport java.awt.event.*;\nimport java.util.List;\n\npublic class Controller implements ActionListener, MouseListener, KeyListener {\n\n    private Model model;\n    private Panel view;\n\n    public Controller(Model model, Panel view) {\n        this.model = model;\n        this.view = view;\n\n        view.generateButton.addActionListener(this);\n        view.exitButton.addActionListener(this);\n        view.difficultymenu.addActionListener(this);\n        view.solutionButton.addActionListener(this);\n        view.questionsmenu.addActionListener(this);\n    }\n\n    @Override\n    public void actionPerformed(ActionEvent e) {\n        if (e.getSource() == view.generateButton) {\n            System.out.println(\"Generate\");\n            List<ImageIcon> gateIcons = model.generateRandomSchaltung(3);\n            view.paintSchaltung(gateIcons);\n          //  view.solutionButton.setVisible(true); --> NOCH NICHT LÖSCHEN\n        }\n            if (e.getSource() == view.difficultymenu) {\n                if(view.difficultymenu.getSelectedItem() == \"Easy\"){\n                    System.out.println(\"easy\");\n                }\n                if(view.difficultymenu.getSelectedItem() == \"Average\"){\n                    System.out.println(\"average\");\n                }\n                if(view.difficultymenu.getSelectedItem() == \"Herr Schaal\"){\n                    System.out.println(\"schaal\");\n                }\n            }\n\n        if (e.getSource() == view.questionsmenu) {\n            if(view.questionsmenu.getSelectedItem() == \"Digitale Schaltung\"){\n                System.out.println(\"Digitale Schaltung\");\n            }\n            if(view.questionsmenu.getSelectedItem() == \"Wahrheitstabelle\"){\n                System.out.println(\"Wahrheitstabelle\");\n            }\n        }\n\n        else {\n            if (e.getSource() == view.exitButton) {\n                System.exit(0);\n                System.out.println(\"Exit Funktioniert\");\n\n            }\n        }\n    }\n\n    @Override\n    public void keyTyped(KeyEvent e) {\n\n    }\n\n    @Override\n    public void keyPressed(KeyEvent e) {\n\n    }\n\n    @Override\n    public void keyReleased(KeyEvent e) {\n\n    }\n\n    @Override\n    public void mouseClicked(MouseEvent e) {\n\n    }\n\n    @Override\n    public void mousePressed(MouseEvent e) {\n\n    }\n\n    @Override\n    public void mouseReleased(MouseEvent e) {\n\n    }\n\n    @Override\n    public void mouseEntered(MouseEvent e) {\n\n    }\n\n    @Override\n    public void mouseExited(MouseEvent e) {\n\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Controller.java b/src/Controller.java
+--- a/src/Controller.java	(revision 9765c8455726d1347a1ffa2d7fa6905ac4927712)
++++ b/src/Controller.java	(date 1701175581510)
+@@ -22,39 +22,40 @@
+     public void actionPerformed(ActionEvent e) {
+         if (e.getSource() == view.generateButton) {
+             System.out.println("Generate");
+-            List<ImageIcon> gateIcons = model.generateRandomSchaltung(3);
+-            view.paintSchaltung(gateIcons);
+-          //  view.solutionButton.setVisible(true); --> NOCH NICHT LÖSCHEN
+-        }
++         //   List<ImageIcon> gateIcons = model.generateRandomSchaltung(3);
++         //   view.paintSchaltung(gateIcons);
++            //  view.solutionButton.setVisible(true); --> NOCH NICHT LÖSCHEN
+             if (e.getSource() == view.difficultymenu) {
+-                if(view.difficultymenu.getSelectedItem() == "Easy"){
++                if (view.difficultymenu.getSelectedItem() == "Easy") {
+                     System.out.println("easy");
++                    view.generateTable("Easy");
++
+                 }
+-                if(view.difficultymenu.getSelectedItem() == "Average"){
+-                    System.out.println("average");
+-                }
+-                if(view.difficultymenu.getSelectedItem() == "Herr Schaal"){
++              //  if (view.difficultymenu.getSelectedItem() == "Average") {
++                //     System.out.println("average");
++             //   }
++                if (view.difficultymenu.getSelectedItem() == "Herr Schaal") {
+                     System.out.println("schaal");
++                    view.generateTable("Herr Schaal");
+                 }
+             }
++        }
+ 
+-        if (e.getSource() == view.questionsmenu) {
+-            if(view.questionsmenu.getSelectedItem() == "Digitale Schaltung"){
+-                System.out.println("Digitale Schaltung");
+-            }
+-            if(view.questionsmenu.getSelectedItem() == "Wahrheitstabelle"){
+-                System.out.println("Wahrheitstabelle");
+-            }
+-        }
+-
+-        else {
+-            if (e.getSource() == view.exitButton) {
+-                System.exit(0);
+-                System.out.println("Exit Funktioniert");
++            if (e.getSource() == view.questionsmenu) {
++                if (view.questionsmenu.getSelectedItem() == "Digitale Schaltung") {
++                    System.out.println("Digitale Schaltung");
++                }
++                if (view.questionsmenu.getSelectedItem() == "Wahrheitstabelle") {
++                    System.out.println("Wahrheitstabelle");
++                }
++            } else {
++                if (e.getSource() == view.exitButton) {
++                    System.exit(0);
++                    System.out.println("Exit Funktioniert");
+ 
+-            }
+-        }
+-    }
++                }
++            }
++        }
+ 
+     @Override
+     public void keyTyped(KeyEvent e) {
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"3ebf7c81-125f-4252-9dcd-060c33722004\" name=\"Changes\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/Controller.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Controller.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/Panel.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Panel.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2XuTyYwpIRnva81elaZXVwwXzmE\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/David/Documents/Studium/WiSe 23-24/RNBS/JUNG&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\n    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,\n    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,\n    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$\" />\n    </key>\n  </component>\n  <component name=\"RunManager\" selected=\"Application.Main\">\n    <configuration name=\"Main (1)\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"Main\" />\n      <module name=\"Digitale Schaltungen2\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.Main\" />\n        <item itemvalue=\"Application.Main (1)\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"3ebf7c81-125f-4252-9dcd-060c33722004\" name=\"Changes\" comment=\"\" />\n      <created>1699478222692</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1699478222692</updated>\n      <workItem from=\"1699478223679\" duration=\"11370000\" />\n      <workItem from=\"1699522331275\" duration=\"1261000\" />\n      <workItem from=\"1700504822801\" duration=\"6858000\" />\n      <workItem from=\"1700689480141\" duration=\"3674000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"majd war erneut hier\">\n      <created>1700375531598</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1700375531599</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"majd war erneut hier 20.11\">\n      <created>1700516008174</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1700516008174</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"3\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"majd war erneut hier\" />\n    <MESSAGE value=\"majd war erneut hier 20.11\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"majd war erneut hier 20.11\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 9765c8455726d1347a1ffa2d7fa6905ac4927712)
++++ b/.idea/workspace.xml	(date 1701186138378)
+@@ -84,7 +84,10 @@
+       <workItem from="1699478223679" duration="11370000" />
+       <workItem from="1699522331275" duration="1261000" />
+       <workItem from="1700504822801" duration="6858000" />
+-      <workItem from="1700689480141" duration="3674000" />
++      <workItem from="1700689480141" duration="3783000" />
++      <workItem from="1700727418906" duration="437000" />
++      <workItem from="1700955302544" duration="4350000" />
++      <workItem from="1701171175578" duration="4310000" />
+     </task>
+     <task id="LOCAL-00001" summary="majd war erneut hier">
+       <created>1700375531598</created>
+@@ -100,7 +103,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1700516008174</updated>
+     </task>
+-    <option name="localTasksCounter" value="3" />
++    <task id="LOCAL-00003" summary="majd war erneut hier 22.11">
++      <created>1700693499297</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1700693499297</updated>
++    </task>
++    <option name="localTasksCounter" value="4" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -109,6 +119,7 @@
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="majd war erneut hier" />
+     <MESSAGE value="majd war erneut hier 20.11" />
+-    <option name="LAST_COMMIT_MESSAGE" value="majd war erneut hier 20.11" />
++    <MESSAGE value="majd war erneut hier 22.11" />
++    <option name="LAST_COMMIT_MESSAGE" value="majd war erneut hier 22.11" />
+   </component>
+ </project>
+\ No newline at end of file
