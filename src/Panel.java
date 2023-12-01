@@ -123,14 +123,14 @@ public class Panel extends JPanel {
                 rowData[i][j] = 0;
             }
 
-
             // Füllen der restlichen Binärziffern
             String binärZahl = Integer.toBinaryString(i); //Umwandlung aller Zahlen von 0-anzahleingange
             System.out.println("DIE ZAHL " + i + " = " + binärZahl);
             for (int j = 0; j < binärZahl.length(); j++) { //binärZahl.length ist wichtig, da die Binärzahlen teilweise nur einstellig nach der umwandlung sind
-                if(eingange < 4)
-                    rowData[i][j] = Character.getNumericValue(binärZahl.charAt(j)); //auch hier wieder: eingange - binärZahl.length() + j ist notwenig, da eingeange nicht immer auch der binärZahl.länge entsprechen
-                else rowData[i][eingange - binärZahl.length() + j] = Character.getNumericValue(binärZahl.charAt(j)); //auch hier wieder: eingange - binärZahl.length() + j ist notwenig, da eingeange nicht immer auch der binärZahl.länge entsprechen
+             //  if(eingange < 4)
+                //    rowData[i][j] = Character.getNumericValue(binärZahl.charAt(j)); //auch hier wieder: eingange - binärZahl.length() + j ist notwenig, da eingeange nicht immer auch der binärZahl.länge entsprechen
+                //else
+                    rowData[i][eingange - binärZahl.length() + j] = Character.getNumericValue(binärZahl.charAt(j)); //auch hier wieder: eingange - binärZahl.length() + j ist notwenig, da eingeange nicht immer auch der binärZahl.länge entsprechen
 
                 // TODO: wenn eingänge >= 5 ist, dann das:  rowData[i][eingange - binärZahl.length() + j] = Character.getNumericValue(binärZahl.charAt(j)); //auch hier wieder: eingange - binärZahl.length() + j ist notwenig, da eingeange nicht immer auch der binärZahl.länge entsprechen
 
