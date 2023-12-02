@@ -24,6 +24,8 @@ public class Panel extends JPanel {
     Random numbers;
     int min = 0;
     int max = 1;
+    int randomX;
+    int randomY;
     int zeilenanzahl;
     int newanzahl;
 
@@ -177,77 +179,77 @@ public class Panel extends JPanel {
         System.out.println("Spaltenanzahl " + spaltenAnzahl);
 
         if (schwierigkeit == SchwierigkeitsAuswahl.DIFFICULT) {
-            int randomX = random.nextInt(3);
-            int randomY;
-            do {
-                randomY = random.nextInt(3);
-            } while (randomY == randomX);
+                randomX = random.nextInt(4);
+                do {
+                    randomY = random.nextInt(4);
+                } while (randomY == randomX);
 
-            String eingang1 = randomX == 0 ? "A" : randomX == 1 ? "B" : "C";
-            String eingang2 = randomY == 0 ? "A" : randomY == 1 ? "B" : "C";
+                String eingang1 = randomX == 0 ? "A" : randomX == 1 ? "B" : randomX == 2 ? "C" : "D";
+                String eingang2 = randomY == 0 ? "A" : randomY == 1 ? "B" : randomY == 2 ? "C" : "D";
 
-            String columnName = randomGatter == 0 ? eingang1 + " AND " + eingang2 : randomGatter == 1 ?
-                    eingang1 + " OR " + eingang2 : randomGatter == 2 ? eingang1 + " NAND " + eingang2 : eingang1 + " NOR " + eingang2;
-            tableModel.addColumn(columnName); //Setzt den richtigen Spaltennamen, je nach dem welcher Case zufällig generiert wurde
+                String columnName = randomGatter == 0 ? eingang1 + " AND " + eingang2 : randomGatter == 1 ?
+                        eingang1 + " OR " + eingang2 : randomGatter == 2 ? eingang1 + " NAND " + eingang2 : eingang1 + " NOR " + eingang2;
+                tableModel.addColumn(columnName); //Setzt den richtigen Spaltennamen, je nach dem welcher Case zufällig generiert wurde
 
-            for (int i = 0; i < table.getRowCount(); i++) { //Durchgang durch alle Zeilen
-                Object x = table.getValueAt(i, randomX);
-                Object y = table.getValueAt(i, randomY);
+                for (int i = 0; i < table.getRowCount(); i++) { //Durchgang durch alle Zeilen
+                    Object x = table.getValueAt(i, randomX);
+                    Object y = table.getValueAt(i, randomY);
 
-                switch(randomGatter) {
-                    //AND
-                    case 0:
-                        System.out.println("CASE 0");
-                        //
-                        if (x.equals(1) && y.equals(1)) {
-                            tableModel.setValueAt("1", i, spaltenAnzahl);
-                            break;
-                            //direkt hier zur Tabelle hinzufügen
-                        } else {
-                            tableModel.setValueAt("0", i, spaltenAnzahl);
-                            break;
-                        }
+                    switch (randomGatter) {
+                        //AND
+                        case 0:
+                            System.out.println("CASE 0");
+                            //
+                            if (x.equals(1) && y.equals(1)) {
+                                tableModel.setValueAt("1", i, spaltenAnzahl);
+                                break;
+                                //direkt hier zur Tabelle hinzufügen
+                            } else {
+                                tableModel.setValueAt("0", i, spaltenAnzahl);
+                                break;
+                            }
 
-                        //OR
-                    case 1:
-                        System.out.println("CASE 1");
-                        //   tableModel.addColumn(eingang1 + " OR " + eingang2);
-                        if (!(x.equals(0) && y.equals(0))) {
-                            tableModel.setValueAt("1", i, spaltenAnzahl);
-                            break;
-                        } else {
-                            tableModel.setValueAt("0", i, spaltenAnzahl);
-                            break;
-                        }
+                            //OR
+                        case 1:
+                            System.out.println("CASE 1");
+                            //   tableModel.addColumn(eingang1 + " OR " + eingang2);
+                            if (!(x.equals(0) && y.equals(0))) {
+                                tableModel.setValueAt("1", i, spaltenAnzahl);
+                                break;
+                            } else {
+                                tableModel.setValueAt("0", i, spaltenAnzahl);
+                                break;
+                            }
 
-                        //NAND
-                    case 2:
-                        System.out.println("CASE 2");
-                        //  tableModel.addColumn(eingang1 + " NAND " + eingang2);
-                        if (!(x.equals(1) && y.equals(1))) {
-                            tableModel.setValueAt("1", i, spaltenAnzahl);
-                            break;
-                        } else {
-                            tableModel.setValueAt("0", i, spaltenAnzahl);
-                            break;
-                        }
+                            //NAND
+                        case 2:
+                            System.out.println("CASE 2");
+                            //  tableModel.addColumn(eingang1 + " NAND " + eingang2);
+                            if (!(x.equals(1) && y.equals(1))) {
+                                tableModel.setValueAt("1", i, spaltenAnzahl);
+                                break;
+                            } else {
+                                tableModel.setValueAt("0", i, spaltenAnzahl);
+                                break;
+                            }
 
-                        //NOR
-                    case 3:
-                        System.out.println("CASE 3");
-                        //    tableModel.addColumn(eingang1 + " OR " + eingang2);
-                        if (!(x.equals(1) && y.equals(1))) {
-                            tableModel.setValueAt("1", i, spaltenAnzahl);
-                            break;
-                        } else {
-                            tableModel.setValueAt("0", i, spaltenAnzahl);
-                            break;
-                        }
-                    default:
-                        System.out.println("DEFAULT");
+                            //NOR
+                        case 3:
+                            System.out.println("CASE 3");
+                            //    tableModel.addColumn(eingang1 + " OR " + eingang2);
+                            if (!(x.equals(1) && y.equals(1))) {
+                                tableModel.setValueAt("1", i, spaltenAnzahl);
+                                break;
+                            } else {
+                                tableModel.setValueAt("0", i, spaltenAnzahl);
+                                break;
+                            }
+                        default:
+                            System.out.println("DEFAULT");
+                    }
                 }
             }
-        } else {
+        else {
             String columnName = randomGatter == 0 ? "A AND B AND C" : randomGatter == 1 ?
                     "A OR B OR C" : randomGatter == 2 ? "A NAND B NAND C" : "A NOR B NOR C";
             tableModel.addColumn(columnName); //Setzt den richtigen Spaltennamen, je nach dem welcher Case zufällig generiert wurde

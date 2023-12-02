@@ -28,9 +28,19 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
           //  view.solutionButton.setVisible(true); --> NOCH NICHT LÖSCHEN
 
             int anzahlEingaenge = view.schwierigkeit == Panel.SchwierigkeitsAuswahl.EASY ? 3 : 4;
-            view.createTruthTable(anzahlEingaenge, 2, 4);
-            view.addRandomGatter();
-        }
+
+            if(anzahlEingaenge == 3) {
+                view.createTruthTable(anzahlEingaenge, 2, 4);
+                view.addRandomGatter();
+            }
+
+            if(anzahlEingaenge == 4) {
+                view.createTruthTable(anzahlEingaenge, 2, 4);
+                for(int i = 0; i < 3; i++) {
+                    view.addRandomGatter();
+                    }
+                }
+            }
             if (e.getSource() == view.difficultymenu) {
                 if(view.difficultymenu.getSelectedItem() == "Easy"){
                     System.out.println("easy");
