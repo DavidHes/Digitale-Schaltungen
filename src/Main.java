@@ -10,7 +10,7 @@ public class Main {
         JFrame frame = new JFrame("RBN Klausur-Fragen Generator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(900, 600);
-        frame.setResizable(false);
+        frame.setResizable(true);
         frame.add(view);
         frame.setVisible(true);
 

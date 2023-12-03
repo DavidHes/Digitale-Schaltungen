@@ -124,16 +124,12 @@ public class Panel extends JPanel {
                 rowData[i][j] = 0;
             }
 
+
             // Füllen der restlichen Binärziffern
             String binärZahl = Integer.toBinaryString(i); //Umwandlung aller Zahlen von 0-anzahleingange
             System.out.println("DIE ZAHL " + i + " = " + binärZahl);
             for (int j = 0; j < binärZahl.length(); j++) { //binärZahl.length ist wichtig, da die Binärzahlen teilweise nur einstellig nach der umwandlung sind
-             //  if(eingange < 4)
-                //    rowData[i][j] = Character.getNumericValue(binärZahl.charAt(j)); //auch hier wieder: eingange - binärZahl.length() + j ist notwenig, da eingeange nicht immer auch der binärZahl.länge entsprechen
-                //else
-                    rowData[i][eingange - binärZahl.length() + j] = Character.getNumericValue(binärZahl.charAt(j)); //auch hier wieder: eingange - binärZahl.length() + j ist notwenig, da eingeange nicht immer auch der binärZahl.länge entsprechen
-
-                // TODO: wenn eingänge >= 5 ist, dann das:  rowData[i][eingange - binärZahl.length() + j] = Character.getNumericValue(binärZahl.charAt(j)); //auch hier wieder: eingange - binärZahl.length() + j ist notwenig, da eingeange nicht immer auch der binärZahl.länge entsprechen
+                rowData[i][eingange - binärZahl.length() + j] = Character.getNumericValue(binärZahl.charAt(j)); //auch hier wieder: eingange - binärZahl.length() + j ist notwenig, da eingeange nicht immer auch der binärZahl.länge entsprechen
 
             }
             //Hier wird durch alle Zeilen durchgegangen und der gatterinhalt erstellt
@@ -154,7 +150,7 @@ public class Panel extends JPanel {
         table.setRowHeight(22);
 
         scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(200, 170, table.getColumnCount() * 130, table.getRowCount() * table.getRowHeight() + 20);
+        scrollPane.setBounds(120, 170, table.getColumnCount() * 400, table.getRowCount() * table.getRowHeight() + 20);
 
         add(scrollPane);
 
@@ -179,9 +175,12 @@ public class Panel extends JPanel {
 
         //anhand der eingänge erstellen wir eine liste mit allen namen der spalten. alle die nach den Eingängen kamen
         //damit wir mit diesen Spalten den endgatter erstellen können.
-        for(int eingang = 3; eingang < spaltenAnzahl; eingang++){
+        //for(int eingang = 3; eingang < spaltenAnzahl; eingang++){
+        for(int eingang = 0; eingang < spaltenAnzahl; eingang++){
+            System.out.println("Ausgabetest1");
             spaltenNamen.add(tableModel.getColumnName(eingang));
             System.out.println(spaltenNamen.get(eingang));
+            System.out.println("Ausgabetest2");
         }
 
         String columnName ="";
@@ -191,23 +190,23 @@ public class Panel extends JPanel {
 //nach und nach alle spaltennamen in die letzte Spalte schreiben.
             switch (randomGatter){
                 case 0:
-                    System.out.println("CASE automatisiert funktioniert");
+                    System.out.println("CASE0 automatisiert funktioniert");
                     columnName += spaltenNamen.get(i) + "*";
                         break;
 
                 case 1:
-                    System.out.println("CASE automatisiert funktioniert");
+                    System.out.println("CASE1 automatisiert funktioniert");
                     columnName += spaltenNamen.get(i) + "+";
                     break;
 
 
                 case 2:
-                    System.out.println("CASE automatisiert funktioniert");
+                    System.out.println("CASE2 automatisiert funktioniert");
                     columnName += spaltenNamen.get(i) + "*_";
                     break;
 
                 case 3:
-                    System.out.println("CASE automatisiert funktioniert");
+                    System.out.println("CASE3 automatisiert funktioniert");
                     columnName += spaltenNamen.get(i) + "+_";
                     break;
             }
@@ -215,8 +214,8 @@ public class Panel extends JPanel {
           //  columnName += spaltenNamen.get(i) +
           //    columnName += randomGatter == 0 ? b + " * " + a : randomGatter == 1 ?  b + " + " + a : randomGatter == 2 ? a + " *_ " + b : a + " +_ " + b;
 
-        tableModel.addColumn(columnName);
-    }
+        }
+        tableModel.addColumn(columnName); //Hinter dir for-schleife geschoben, da sonst mit jedem schleifendurchgang neue spalten hinzugefügt werden
 
         for (int i = 0; i < table.getRowCount(); i++) { //Durchgang durch alle Zeilen
             //4 und 5 müssen auch weg.
