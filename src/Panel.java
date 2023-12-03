@@ -4,6 +4,7 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import java.util.Objects;
 import java.util.Random;
 
 public class Panel extends JPanel {
@@ -289,22 +290,53 @@ public class Panel extends JPanel {
         System.out.println("Spaltenanzahl " + spaltenAnzahl);
 
         if (schwierigkeit == SchwierigkeitsAuswahl.DIFFICULT) {
-              int randomX = random.nextInt(4);
-              int randomY;
-                do {
-                   randomY = random.nextInt(4);
-                } while (randomY == randomX);
+            int randomX = random.nextInt(4);
+            int randomY;
+            do {
+                randomY = random.nextInt(4);
+            } while (randomY == randomX);
 
-                String eingang1 = randomX == 0 ? "A" : randomX == 1 ? "B" : randomX == 2 ? "C" : "D";
-                String eingang2 = randomY == 0 ? "A" : randomY == 1 ? "B" : randomY == 2 ? "C" : "D";
+            String eingang1;
+            String eingang2;
+            if (tableModel.getColumnCount() - eingange == 0) { //Wenn Spalte 5 noch nicht existiert werden zwei Eingänge random ausgewählt
+                eingang1 = randomX == 0 ? "A" : randomX == 1 ? "B" : randomX == 2 ? "C" : "D";
+                eingang2 = randomY == 0 ? "A" : randomY == 1 ? "B" : randomY == 2 ? "C" : "D";
+            } else {
+                int randomBuchstabe1;
+                int randomBuchstabe2;
+                String[] Buchstaben = {"A", "B", "C", "D"};
+                do {
+                    randomBuchstabe1 = random.nextInt(4);
+                    randomBuchstabe2 = random.nextInt(4);
+                    eingang1 = Buchstaben[randomBuchstabe1];
+                    eingang2 = Buchstaben[randomBuchstabe2];
+                } while (tableModel.getColumnName(4).contains(eingang1) || tableModel.getColumnName(4).contains(eingang2) || eingang1.equals(eingang2));
+            }
+
 
                 String columnName = randomGatter == 0 ? eingang1 + " * " + eingang2 : randomGatter == 1 ?
                         eingang1 + " + " + eingang2 : randomGatter == 2 ? eingang1 + " *_ " + eingang2 : eingang1 + " +_ " + eingang2;
+
                 tableModel.addColumn(columnName); //Setzt den richtigen Spaltennamen, je nach dem welcher Case zufällig generiert wurde
 
                 for (int i = 0; i < table.getRowCount(); i++) { //Durchgang durch alle Zeilen
-                    Object x = table.getValueAt(i, randomX);
-                    Object y = table.getValueAt(i, randomY);
+                    //Wenn spaltenanzahl - eingänge = 0 ist, dann random. Wenn nicht, dann spalte 5 anschauen und die anderen nehmen
+                    Object x = "??";
+                    Object y = "??";
+                    System.out.println("HALLLLLL");
+                    if (tableModel.getColumnCount() - eingange+1 == 0) {
+                        x = table.getValueAt(i, randomX);
+                        y = table.getValueAt(i, randomY);
+                    } else {
+                        for (int l = 4; l < spaltenAnzahl; l++) {
+                            int spaltenNummer = tableModel.getColumnName(l).contains("A") ? 0 : tableModel.getColumnName(l).contains("B") ? 1 :
+                                    tableModel.getColumnName(l).equals("C") ? 2 : 3;
+                            if (l == 4)
+                                x = table.getValueAt(i, spaltenNummer);
+                            else y = table.getValueAt(i, spaltenNummer);
+                        }
+                    }
+
 
                     switch (randomGatter) {
                         //AND
@@ -358,6 +390,7 @@ public class Panel extends JPanel {
                         default:
                             System.out.println("DEFAULT");
                     }
+
                 }
             }
         else {
@@ -410,6 +443,7 @@ public class Panel extends JPanel {
                             tableModel.setValueAt("0", i, spaltenAnzahl);
                             break;
                         }
+
                 }
             }
         }

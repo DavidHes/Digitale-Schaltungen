@@ -37,7 +37,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
             if(anzahlEingaenge == 4) {
                 view.createTruthTable(anzahlEingaenge, 2, 4);
                 for(int i = 0; i < 2; i++) {
-                    view.addRandomGatter();
+                   view.addRandomGatter();
                     if(i == 1){
                         view.endgatter();
                     }
