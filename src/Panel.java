@@ -177,7 +177,8 @@ public class Panel extends JPanel {
         //damit wir mit diesen Spalten den endgatter erstellen können.
         //for(int eingang = 3; eingang < spaltenAnzahl; eingang++){
         for(int eingang = 0; eingang < spaltenAnzahl; eingang++){
-            System.out.println("Ausgabetest1");
+
+            System.out.println(spaltenAnzahl);
             spaltenNamen.add(tableModel.getColumnName(eingang));
             System.out.println(spaltenNamen.get(eingang));
             System.out.println("Ausgabetest2");
@@ -225,9 +226,9 @@ public class Panel extends JPanel {
         switch (randomGatter) {
             //AND
             case 0:
-                System.out.println("CASE 0");
+                System.out.println("E CASE 0");
                 //
-                if (x.equals(1) && y.equals(1)) {
+                if (x.equals("1") && y.equals("1")) {
                     tableModel.setValueAt("1", i, spaltenAnzahl);
                     break;
                     //direkt hier zur Tabelle hinzufügen
@@ -238,9 +239,9 @@ public class Panel extends JPanel {
 
                 //OR
             case 1:
-                System.out.println("CASE 1");
+                System.out.println("E CASE 1");
                 //   tableModel.addColumn(eingang1 + " OR " + eingang2);
-                if (!(x.equals(0) && y.equals(0))) {
+                if (!(x.equals("0") && y.equals("0"))) {
                     tableModel.setValueAt("1", i, spaltenAnzahl);
                     break;
                 } else {
@@ -250,9 +251,9 @@ public class Panel extends JPanel {
 
                 //NAND
             case 2:
-                System.out.println("CASE 2");
+                System.out.println("E CASE 2");
                 //  tableModel.addColumn(eingang1 + " NAND " + eingang2);
-                if (!(x.equals(1) && y.equals(1))) {
+                if (!(x.equals("1") && y.equals("1"))) {
                     tableModel.setValueAt("1", i, spaltenAnzahl);
                     break;
                 } else {
@@ -262,9 +263,9 @@ public class Panel extends JPanel {
 
                 //NOR
             case 3:
-                System.out.println("CASE 3");
+                System.out.println("E CASE 3");
                 //    tableModel.addColumn(eingang1 + " OR " + eingang2);
-                if (!(x.equals(1) && y.equals(1))) {
+                if (!(x.equals("1") && y.equals("1"))) {
                     tableModel.setValueAt("1", i, spaltenAnzahl);
                     break;
                 } else {
