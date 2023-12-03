@@ -185,7 +185,7 @@ public class Panel extends JPanel {
 
         String columnName ="";
 
-        for(int i = 0; i < spaltenNamen.size(); i++) {
+        for(int i = 4; i < spaltenNamen.size(); i++) {
 
 //nach und nach alle spaltennamen in die letzte Spalte schreiben.
             switch (randomGatter){
