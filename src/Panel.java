@@ -24,10 +24,8 @@ public class Panel extends JPanel {
     Random numbers;
     int min = 0;
     int max = 1;
-    int randomX;
-    int randomY;
     int zeilenanzahl;
-    int newanzahl;
+    int eingange;
 
     public enum SchwierigkeitsAuswahl {EASY, DIFFICULT}
     public enum TypAuswahl {WAHRHEITSTABELLE, SCHALTUNG}
@@ -92,6 +90,7 @@ public class Panel extends JPanel {
     //int ausgange
     public void createTruthTable(int eingange, int ausgaenge, int gatterAnzahl) { //nur ein gatter aber dafür alle drei Eingänge drin, einziger unterschied sind, dass es drei kombis sind (not, and, or)
         // Entfernt scrollpane und dazugehörige tabelle, damit es zu beginn keine mehrfachen tabellen gibt
+        this.eingange = eingange;
         if (scrollPane != null) {
             this.remove(scrollPane);
         }
@@ -144,7 +143,6 @@ public class Panel extends JPanel {
                 //eigentlich müsste hier lediglich addRandomGatter aufgerufen werden
             }
         }
-
         tableModel.setDataVector(rowData, columnNames);
         table = new JTable(tableModel);
 
@@ -158,15 +156,127 @@ public class Panel extends JPanel {
         scrollPane = new JScrollPane(table);
         scrollPane.setBounds(200, 170, table.getColumnCount() * 130, table.getRowCount() * table.getRowHeight() + 20);
 
-
         add(scrollPane);
 
         table.getTableHeader().setReorderingAllowed(false); // not allow re-ordering of columns
         table.getTableHeader().setResizingAllowed(false);
         table.setEnabled(false);
         table.setBackground(Color.LIGHT_GRAY);
-
         //Ende
+    }
+
+    //Damit nehmen wir alle Ausgänge alle Gatter und packen sie in eins.
+    public void endgatter(){
+
+        Random random = new Random();
+        int randomGatter = random.nextInt(4);
+        int spaltenAnzahl = table.getColumnCount();
+       // String[] spaltenNamen = new String[tableModel.getColumnCount()];
+
+        ArrayList<String> spaltenNamen = new ArrayList<>();
+
+        //FEHLER
+
+        //anhand der eingänge erstellen wir eine liste mit allen namen der spalten. alle die nach den Eingängen kamen
+        //damit wir mit diesen Spalten den endgatter erstellen können.
+        for(int eingang = 3; eingang < spaltenAnzahl; eingang++){
+            spaltenNamen.add(tableModel.getColumnName(eingang));
+            System.out.println(spaltenNamen.get(eingang));
+        }
+
+        String columnName ="";
+
+        for(int i = 0; i < spaltenNamen.size(); i++) {
+
+//nach und nach alle spaltennamen in die letzte Spalte schreiben.
+            switch (randomGatter){
+                case 0:
+                    System.out.println("CASE automatisiert funktioniert");
+                    columnName += spaltenNamen.get(i) + "*";
+                        break;
+
+                case 1:
+                    System.out.println("CASE automatisiert funktioniert");
+                    columnName += spaltenNamen.get(i) + "+";
+                    break;
+
+
+                case 2:
+                    System.out.println("CASE automatisiert funktioniert");
+                    columnName += spaltenNamen.get(i) + "*_";
+                    break;
+
+                case 3:
+                    System.out.println("CASE automatisiert funktioniert");
+                    columnName += spaltenNamen.get(i) + "+_";
+                    break;
+            }
+
+          //  columnName += spaltenNamen.get(i) +
+          //    columnName += randomGatter == 0 ? b + " * " + a : randomGatter == 1 ?  b + " + " + a : randomGatter == 2 ? a + " *_ " + b : a + " +_ " + b;
+
+        tableModel.addColumn(columnName);
+    }
+
+        for (int i = 0; i < table.getRowCount(); i++) { //Durchgang durch alle Zeilen
+            //4 und 5 müssen auch weg.
+            Object x = table.getValueAt(i, 4);
+            Object y = table.getValueAt(i, 5);
+
+        switch (randomGatter) {
+            //AND
+            case 0:
+                System.out.println("CASE 0");
+                //
+                if (x.equals(1) && y.equals(1)) {
+                    tableModel.setValueAt("1", i, spaltenAnzahl);
+                    break;
+                    //direkt hier zur Tabelle hinzufügen
+                } else {
+                    tableModel.setValueAt("0", i, spaltenAnzahl);
+                    break;
+                }
+
+                //OR
+            case 1:
+                System.out.println("CASE 1");
+                //   tableModel.addColumn(eingang1 + " OR " + eingang2);
+                if (!(x.equals(0) && y.equals(0))) {
+                    tableModel.setValueAt("1", i, spaltenAnzahl);
+                    break;
+                } else {
+                    tableModel.setValueAt("0", i, spaltenAnzahl);
+                    break;
+                }
+
+                //NAND
+            case 2:
+                System.out.println("CASE 2");
+                //  tableModel.addColumn(eingang1 + " NAND " + eingang2);
+                if (!(x.equals(1) && y.equals(1))) {
+                    tableModel.setValueAt("1", i, spaltenAnzahl);
+                    break;
+                } else {
+                    tableModel.setValueAt("0", i, spaltenAnzahl);
+                    break;
+                }
+
+                //NOR
+            case 3:
+                System.out.println("CASE 3");
+                //    tableModel.addColumn(eingang1 + " OR " + eingang2);
+                if (!(x.equals(1) && y.equals(1))) {
+                    tableModel.setValueAt("1", i, spaltenAnzahl);
+                    break;
+                } else {
+                    tableModel.setValueAt("0", i, spaltenAnzahl);
+                    break;
+                }
+            default:
+                System.out.println("DEFAULT");
+        }
+    }
+
     }
 
     public void addRandomGatter() {
@@ -179,16 +289,17 @@ public class Panel extends JPanel {
         System.out.println("Spaltenanzahl " + spaltenAnzahl);
 
         if (schwierigkeit == SchwierigkeitsAuswahl.DIFFICULT) {
-                randomX = random.nextInt(4);
+              int randomX = random.nextInt(4);
+              int randomY;
                 do {
-                    randomY = random.nextInt(4);
+                   randomY = random.nextInt(4);
                 } while (randomY == randomX);
 
                 String eingang1 = randomX == 0 ? "A" : randomX == 1 ? "B" : randomX == 2 ? "C" : "D";
                 String eingang2 = randomY == 0 ? "A" : randomY == 1 ? "B" : randomY == 2 ? "C" : "D";
 
-                String columnName = randomGatter == 0 ? eingang1 + " AND " + eingang2 : randomGatter == 1 ?
-                        eingang1 + " OR " + eingang2 : randomGatter == 2 ? eingang1 + " NAND " + eingang2 : eingang1 + " NOR " + eingang2;
+                String columnName = randomGatter == 0 ? eingang1 + " * " + eingang2 : randomGatter == 1 ?
+                        eingang1 + " + " + eingang2 : randomGatter == 2 ? eingang1 + " *_ " + eingang2 : eingang1 + " +_ " + eingang2;
                 tableModel.addColumn(columnName); //Setzt den richtigen Spaltennamen, je nach dem welcher Case zufällig generiert wurde
 
                 for (int i = 0; i < table.getRowCount(); i++) { //Durchgang durch alle Zeilen
@@ -250,8 +361,8 @@ public class Panel extends JPanel {
                 }
             }
         else {
-            String columnName = randomGatter == 0 ? "A AND B AND C" : randomGatter == 1 ?
-                    "A OR B OR C" : randomGatter == 2 ? "A NAND B NAND C" : "A NOR B NOR C";
+            String columnName = randomGatter == 0 ? "A * B * C" : randomGatter == 1 ?
+                    "A + B + C" : randomGatter == 2 ? "A * B * C _" : "A + B + C_";
             tableModel.addColumn(columnName); //Setzt den richtigen Spaltennamen, je nach dem welcher Case zufällig generiert wurde
 
             for (int i = 0; i < table.getRowCount(); i++) { //Durchgang durch alle Zeilen

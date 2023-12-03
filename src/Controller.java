@@ -28,7 +28,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
           //  view.solutionButton.setVisible(true); --> NOCH NICHT LÖSCHEN
 
             int anzahlEingaenge = view.schwierigkeit == Panel.SchwierigkeitsAuswahl.EASY ? 3 : 4;
-
+//Leider noch nicht ganz erweiterbar.
             if(anzahlEingaenge == 3) {
                 view.createTruthTable(anzahlEingaenge, 2, 4);
                 view.addRandomGatter();
@@ -36,8 +36,11 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
 
             if(anzahlEingaenge == 4) {
                 view.createTruthTable(anzahlEingaenge, 2, 4);
-                for(int i = 0; i < 3; i++) {
+                for(int i = 0; i < 2; i++) {
                     view.addRandomGatter();
+                    if(i == 1){
+                        view.endgatter();
+                    }
                     }
                 }
             }
