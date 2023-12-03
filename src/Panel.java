@@ -328,7 +328,7 @@ public class Panel extends JPanel {
                         x = table.getValueAt(i, randomX);
                         y = table.getValueAt(i, randomY);
                     } else {
-                        for (int l = 4; l < spaltenAnzahl; l++) {
+                        for (int l = 4; l < table.getColumnCount(); l++) {
                             int spaltenNummer = tableModel.getColumnName(l).contains("A") ? 0 : tableModel.getColumnName(l).contains("B") ? 1 :
                                     tableModel.getColumnName(l).equals("C") ? 2 : 3;
                             if (l == 4)
