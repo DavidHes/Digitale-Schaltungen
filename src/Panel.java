@@ -321,8 +321,8 @@ public class Panel extends JPanel {
 
                 for (int i = 0; i < table.getRowCount(); i++) { //Durchgang durch alle Zeilen
                     //Wenn spaltenanzahl - eingänge = 0 ist, dann random. Wenn nicht, dann spalte 5 anschauen und die anderen nehmen
-                    Object x = "??";
-                    Object y = "??";
+                    Object x = "??"; //LÖSCHEN
+                    Object y = "??"; //LÖSCHEN DER INITIALISERUNG
                     System.out.println("HALLLLLL");
                     if (tableModel.getColumnCount() - eingange+1 == 0) {
                         x = table.getValueAt(i, randomX);
