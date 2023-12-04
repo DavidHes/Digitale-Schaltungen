@@ -163,7 +163,7 @@ public class Panel extends JPanel {
     }
 
     //Damit nehmen wir alle Ausgänge alle Gatter und packen sie in eins.
-    public void endgatter(){
+    public void addEndGatter(){
 
         Random random = new Random();
         int randomGatter = random.nextInt(4);
@@ -319,23 +319,31 @@ public class Panel extends JPanel {
 
                 tableModel.addColumn(columnName); //Setzt den richtigen Spaltennamen, je nach dem welcher Case zufällig generiert wurde
 
+            Object x = "X"; //LÖSCHEN
+            Object y = "Y";
+            System.out.println("Die Anzahl der Rows beträgt: " + tableModel.getRowCount());
+            for(int n = 0; n < 2; n++) {//evtl wieder löschen
                 for (int i = 0; i < table.getRowCount(); i++) { //Durchgang durch alle Zeilen
                     //Wenn spaltenanzahl - eingänge = 0 ist, dann random. Wenn nicht, dann spalte 5 anschauen und die anderen nehmen
-                    Object x = "??"; //LÖSCHEN
-                    Object y = "??"; //LÖSCHEN DER INITIALISERUNG
-                    System.out.println("HALLLLLL");
-                    if (tableModel.getColumnCount() - eingange+1 == 0) {
+                    //LÖSCHEN DER INITIALISERUNG
+                    // System.out.println("HALLLLLL");
+                    System.out.println("count: " + tableModel.getColumnCount() + " eingänge: " + eingange);
+                    System.out.println(tableModel.getColumnCount() - eingange + 1);
+                    if (n == 0) {//evtl wieder löschen bzw umändern zu spaltenzahl - eingänge-1
                         x = table.getValueAt(i, randomX);
                         y = table.getValueAt(i, randomY);
+                        System.out.println("if ist true");
                     } else {
                         for (int l = 4; l < table.getColumnCount(); l++) {
                             int spaltenNummer = tableModel.getColumnName(l).contains("A") ? 0 : tableModel.getColumnName(l).contains("B") ? 1 :
                                     tableModel.getColumnName(l).equals("C") ? 2 : 3;
+                            System.out.println("if ist false");
                             if (l == 4)
                                 x = table.getValueAt(i, spaltenNummer);
                             else y = table.getValueAt(i, spaltenNummer);
                         }
                     }
+                    System.out.println("FERTIG");
 
 
                     switch (randomGatter) {
@@ -392,6 +400,7 @@ public class Panel extends JPanel {
                     }
 
                 }
+            }
             }
         else {
             String columnName = randomGatter == 0 ? "A * B * C" : randomGatter == 1 ?

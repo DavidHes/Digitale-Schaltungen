@@ -39,7 +39,7 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
                 for(int i = 0; i < 2; i++) {
                    view.addRandomGatter();
                     if(i == 1){
-                        view.endgatter();
+                        view.addEndGatter();
                     }
                     }
                 }
