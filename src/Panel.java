@@ -150,7 +150,7 @@ public class Panel extends JPanel {
         table.setRowHeight(22);
 
         scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(120, 170, table.getColumnCount() * 400, table.getRowCount() * table.getRowHeight() + 20);
+        scrollPane.setBounds(120, 170, table.getColumnCount() * 200, table.getRowCount() * table.getRowHeight() + 20);
 
         add(scrollPane);
 
@@ -288,22 +288,74 @@ public class Panel extends JPanel {
         System.out.println("Spaltenanzahl " + spaltenAnzahl);
 
         if (schwierigkeit == SchwierigkeitsAuswahl.DIFFICULT) {
-              int randomX = random.nextInt(4);
-              int randomY;
+            int randomX = random.nextInt(4);
+            int randomY;
+            do {
+                randomY = random.nextInt(4);
+            } while (randomY == randomX);
+
+            String eingang1;
+            String eingang2;
+            if (tableModel.getColumnCount() - eingange == 0) { //Wenn Spalte 5 noch nicht existiert werden zwei Eingänge random ausgewählt
+                eingang1 = randomX == 0 ? "A" : randomX == 1 ? "B" : randomX == 2 ? "C" : "D";
+                eingang2 = randomY == 0 ? "A" : randomY == 1 ? "B" : randomY == 2 ? "C" : "D";
+            } else {
+                int randomBuchstabe1;
+                int randomBuchstabe2;
+                String[] Buchstaben = {"A", "B", "C", "D"};
                 do {
-                   randomY = random.nextInt(4);
-                } while (randomY == randomX);
+                    randomBuchstabe1 = random.nextInt(4);
+                    randomBuchstabe2 = random.nextInt(4);
+                    eingang1 = Buchstaben[randomBuchstabe1];
+                    eingang2 = Buchstaben[randomBuchstabe2];
+                } while (tableModel.getColumnName(4).contains(eingang1) || tableModel.getColumnName(4).contains(eingang2) || eingang1.equals(eingang2));
+            }
 
-                String eingang1 = randomX == 0 ? "A" : randomX == 1 ? "B" : randomX == 2 ? "C" : "D";
-                String eingang2 = randomY == 0 ? "A" : randomY == 1 ? "B" : randomY == 2 ? "C" : "D";
 
-                String columnName = randomGatter == 0 ? eingang1 + " * " + eingang2 : randomGatter == 1 ?
-                        eingang1 + " + " + eingang2 : randomGatter == 2 ? eingang1 + " *_ " + eingang2 : eingang1 + " +_ " + eingang2;
-                tableModel.addColumn(columnName); //Setzt den richtigen Spaltennamen, je nach dem welcher Case zufällig generiert wurde
+            String columnName = randomGatter == 0 ? eingang1 + " * " + eingang2 : randomGatter == 1 ?
+                    eingang1 + " + " + eingang2 : randomGatter == 2 ? eingang1 + " *_ " + eingang2 : eingang1 + " +_ " + eingang2;
 
+            tableModel.addColumn(columnName); //Setzt den richtigen Spaltennamen, je nach dem welcher Case zufällig generiert wurde
+
+            Object x = "??"; //LÖSCHEN
+            Object y = "??";
+
+            for(int j = 0; j < 2; j++) {
                 for (int i = 0; i < table.getRowCount(); i++) { //Durchgang durch alle Zeilen
-                    Object x = table.getValueAt(i, randomX);
-                    Object y = table.getValueAt(i, randomY);
+                    //Wenn spaltenanzahl - eingänge = 0 ist, dann random. Wenn nicht, dann spalte 5 anschauen und die anderen nehmen
+
+                    System.out.println("HALLLLLL");
+                    if (tableModel.getColumnCount() - eingange == 0) {
+                      //  for (int i = 0; i < table.getRowCount(); i++) {
+                            System.out.println("beginn1");
+                            x = table.getValueAt(i, randomX);
+                            System.out.println("x: " + x + "eigentlich: " + tableModel.getValueAt(i, randomX));
+                            y = table.getValueAt(i, randomY);
+                            System.out.println("y: " + y + "eigentlich: " + tableModel.getValueAt(i, randomY));
+                            System.out.println("ende1");
+                      //  }
+                    } else {
+                        System.out.println("beginn2");
+                        //for (int i = 0; i < table.getRowCount(); i++) {
+                        String[] eingaengearray = {"A", "B", "C", "D"};
+                        int zufallseingang = random.nextInt(4);
+                        for (int l = 4; l < table.getColumnCount(); l++) {
+                            int spaltenNummer1 = tableModel.getColumnName(l).contains("A") ? 0 : tableModel.getColumnName(l).contains("B") ? 1 :
+                                    tableModel.getColumnName(l).equals("C") ? 2 : 3;//FALSCH WIR BRAUCHEN ZWEI spaltennummern
+
+
+                                int spaltenNummer2 = tableModel.getColumnName(l).contains("A") ? 0 : tableModel.getColumnName(l).contains("B") ? 1 :
+                                        tableModel.getColumnName(l).equals("C") ? 2 : 3;
+
+
+                                System.out.println("ende2");
+                                if (l == 4)
+                                    x = table.getValueAt(i, spaltenNummer1);
+                                else y = table.getValueAt(i, spaltenNummer2);
+                            }
+
+                    }
+
 
                     switch (randomGatter) {
                         //AND
@@ -357,8 +409,10 @@ public class Panel extends JPanel {
                         default:
                             System.out.println("DEFAULT");
                     }
+
                 }
             }
+        }
         else {
             String columnName = randomGatter == 0 ? "A * B * C" : randomGatter == 1 ?
                     "A + B + C" : randomGatter == 2 ? "A * B * C _" : "A + B + C_";
@@ -409,11 +463,11 @@ public class Panel extends JPanel {
                             tableModel.setValueAt("0", i, spaltenAnzahl);
                             break;
                         }
+
                 }
             }
         }
     }
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
