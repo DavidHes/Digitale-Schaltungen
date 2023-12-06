@@ -212,8 +212,8 @@ public class Panel extends JPanel {
                     break;
             }
         }
-
-        tableModel.addColumn(columnName); //Hinter dir for-schleife geschoben, da sonst mit jedem schleifendurchgang neue spalten hinzugefügt werden
+        //substring weil sonst sich der gattertyp wieder ansetzen würde
+        tableModel.addColumn(columnName.substring(0, columnName.length() - 2)); //Hinter dir for-schleife geschoben, da sonst mit jedem schleifendurchgang neue spalten hinzugefügt werden
 
         for (int i = 0; i < table.getRowCount(); i++) { //Durchgang durch alle Zeilen
             //4 und 5 müssen auch weg.
