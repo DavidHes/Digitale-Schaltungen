@@ -10,7 +10,7 @@ public class Panel extends JPanel {
 
     protected JComboBox<String> difficultymenu, questionsmenu;
     protected JButton exitButton, solutionButton, generateButton;
-    protected JLabel difficultylabel, questionlabel, question;
+    protected JLabel difficultylabel, questionlabel, question, maplegend;
     String[] difficulties = {"Easy", "Average", "Herr Schaal"};
     String[] gatterarten = {"AND", "OR", "NOT"};
     String[] questions = {"Wahrheitstabelle", "Digitale Schaltung"};
@@ -46,6 +46,7 @@ public class Panel extends JPanel {
         questionlabel = new JLabel("Choose your Question");
         difficultylabel = new JLabel("Choose your Difficulty");
         question = new JLabel("Erstelle aus dieser Wahrheitstabelle eine digitale Schaltungen!");
+        maplegend = new JLabel(" NAND ⊼    AND *    OR +    NOR ⊽ ");
 
         questionlabel.setFont(new Font("SansSerif", Font.BOLD, 13));
         difficultylabel.setFont(new Font("SansSerif", Font.BOLD, 13));
@@ -191,23 +192,23 @@ public class Panel extends JPanel {
             switch (randomGatter){
                 case 0:
                     System.out.println("CASE0 automatisiert funktioniert");
-                    columnName += spaltenNamen.get(i) + "*";
+                    columnName += spaltenNamen.get(i) + " * ";
                         break;
 
                 case 1:
                     System.out.println("CASE1 automatisiert funktioniert");
-                    columnName += spaltenNamen.get(i) + "+";
+                    columnName += spaltenNamen.get(i) + " + ";
                     break;
 
-
+//nand
                 case 2:
                     System.out.println("CASE2 automatisiert funktioniert");
-                    columnName += spaltenNamen.get(i) + "*_";
+                    columnName += spaltenNamen.get(i) + " ⊼ ";
                     break;
-
+//nor
                 case 3:
                     System.out.println("CASE3 automatisiert funktioniert");
-                    columnName += spaltenNamen.get(i) + "+_";
+                    columnName += spaltenNamen.get(i) + " ⊽ ";
                     break;
             }
 
@@ -215,12 +216,13 @@ public class Panel extends JPanel {
           //    columnName += randomGatter == 0 ? b + " * " + a : randomGatter == 1 ?  b + " + " + a : randomGatter == 2 ? a + " *_ " + b : a + " +_ " + b;
 
         }
+
         tableModel.addColumn(columnName); //Hinter dir for-schleife geschoben, da sonst mit jedem schleifendurchgang neue spalten hinzugefügt werden
 
         for (int i = 0; i < table.getRowCount(); i++) { //Durchgang durch alle Zeilen
             //4 und 5 müssen auch weg.
-            Object x = table.getValueAt(i, 4);
-            Object y = table.getValueAt(i, 5);
+             Object x = table.getValueAt(i,4);
+             Object y = table.getValueAt(i,5);
 
         switch (randomGatter) {
             //AND
@@ -313,7 +315,7 @@ public class Panel extends JPanel {
 
 
             String columnName = randomGatter == 0 ? eingang1 + " * " + eingang2 : randomGatter == 1 ?
-                    eingang1 + " + " + eingang2 : randomGatter == 2 ? eingang1 + " *_ " + eingang2 : eingang1 + " +_ " + eingang2;
+                    eingang1 + " + " + eingang2 : randomGatter == 2 ? eingang1 + " ⊼ " + eingang2 : eingang1 + " ⊽ " + eingang2;
 
             tableModel.addColumn(columnName); //Setzt den richtigen Spaltennamen, je nach dem welcher Case zufällig generiert wurde
 
@@ -415,7 +417,7 @@ public class Panel extends JPanel {
         }
         else {
             String columnName = randomGatter == 0 ? "A * B * C" : randomGatter == 1 ?
-                    "A + B + C" : randomGatter == 2 ? "A * B * C _" : "A + B + C_";
+                    "A + B + C" : randomGatter == 2 ? "A ⊼ B ⊼ C" : "A ⊽ B ⊽ C";
             tableModel.addColumn(columnName); //Setzt den richtigen Spaltennamen, je nach dem welcher Case zufällig generiert wurde
 
             for (int i = 0; i < table.getRowCount(); i++) { //Durchgang durch alle Zeilen
