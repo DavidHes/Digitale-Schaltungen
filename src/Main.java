@@ -14,5 +14,8 @@ public class Main {
         frame.add(view);
         frame.setVisible(true);
 
+        //Testausgabe für überstrich
+        String text = "A\u203EB";
+        System.out.println(text);
     }
 }
