@@ -210,10 +210,6 @@ public class Panel extends JPanel {
                     columnName += spaltenNamen.get(i) + "+_";
                     break;
             }
-
-          //  columnName += spaltenNamen.get(i) +
-          //    columnName += randomGatter == 0 ? b + " * " + a : randomGatter == 1 ?  b + " + " + a : randomGatter == 2 ? a + " *_ " + b : a + " +_ " + b;
-
         }
         tableModel.addColumn(columnName); //Hinter dir for-schleife geschoben, da sonst mit jedem schleifendurchgang neue spalten hinzugefügt werden
 
@@ -225,9 +221,9 @@ public class Panel extends JPanel {
         switch (randomGatter) {
             //AND
             case 0:
-                System.out.println("CASE 0");
+                System.out.println("End CASE 0");
                 //
-                if (x.equals(1) && y.equals(1)) {
+                if (x.equals("1") && y.equals("1")) {
                     tableModel.setValueAt("1", i, spaltenAnzahl);
                     break;
                     //direkt hier zur Tabelle hinzufügen
@@ -238,9 +234,9 @@ public class Panel extends JPanel {
 
                 //OR
             case 1:
-                System.out.println("CASE 1");
+                System.out.println("End CASE 1");
                 //   tableModel.addColumn(eingang1 + " OR " + eingang2);
-                if (!(x.equals(0) && y.equals(0))) {
+                if (!(x.equals("0") && y.equals("0"))) {
                     tableModel.setValueAt("1", i, spaltenAnzahl);
                     break;
                 } else {
@@ -250,9 +246,9 @@ public class Panel extends JPanel {
 
                 //NAND
             case 2:
-                System.out.println("CASE 2");
+                System.out.println("End CASE 2");
                 //  tableModel.addColumn(eingang1 + " NAND " + eingang2);
-                if (!(x.equals(1) && y.equals(1))) {
+                if (!(x.equals("1") && y.equals("1"))) {
                     tableModel.setValueAt("1", i, spaltenAnzahl);
                     break;
                 } else {
@@ -262,9 +258,9 @@ public class Panel extends JPanel {
 
                 //NOR
             case 3:
-                System.out.println("CASE 3");
+                System.out.println("End CASE 3");
                 //    tableModel.addColumn(eingang1 + " OR " + eingang2);
-                if (!(x.equals(1) && y.equals(1))) {
+                if (!(x.equals("1") && y.equals("1"))) {
                     tableModel.setValueAt("1", i, spaltenAnzahl);
                     break;
                 } else {
@@ -311,51 +307,27 @@ public class Panel extends JPanel {
                 } while (tableModel.getColumnName(4).contains(eingang1) || tableModel.getColumnName(4).contains(eingang2) || eingang1.equals(eingang2));
             }
 
-
             String columnName = randomGatter == 0 ? eingang1 + " * " + eingang2 : randomGatter == 1 ?
                     eingang1 + " + " + eingang2 : randomGatter == 2 ? eingang1 + " *_ " + eingang2 : eingang1 + " +_ " + eingang2;
 
             tableModel.addColumn(columnName); //Setzt den richtigen Spaltennamen, je nach dem welcher Case zufällig generiert wurde
 
+            int spaltenNummer1 = eingang1.equals("A") ? 0 : eingang1.equals("B") ? 1 : eingang1.equals("C") ? 2 : 3;
+            int spaltenNummer2 = eingang2.equals("A") ? 0 : eingang2.equals("B") ? 1 : eingang2.equals("C") ? 2 : 3;
+
             Object x = "??"; //LÖSCHEN
             Object y = "??";
 
-            for(int j = 0; j < 2; j++) {
                 for (int i = 0; i < table.getRowCount(); i++) { //Durchgang durch alle Zeilen
                     //Wenn spaltenanzahl - eingänge = 0 ist, dann random. Wenn nicht, dann spalte 5 anschauen und die anderen nehmen
 
-                    System.out.println("HALLLLLL");
-                    if (tableModel.getColumnCount() - eingange == 0) {
-                      //  for (int i = 0; i < table.getRowCount(); i++) {
-                            System.out.println("beginn1");
-                            x = table.getValueAt(i, randomX);
-                            System.out.println("x: " + x + "eigentlich: " + tableModel.getValueAt(i, randomX));
-                            y = table.getValueAt(i, randomY);
-                            System.out.println("y: " + y + "eigentlich: " + tableModel.getValueAt(i, randomY));
-                            System.out.println("ende1");
-                      //  }
-                    } else {
-                        System.out.println("beginn2");
-                        //for (int i = 0; i < table.getRowCount(); i++) {
-                        String[] eingaengearray = {"A", "B", "C", "D"};
-                        int zufallseingang = random.nextInt(4);
-                        for (int l = 4; l < table.getColumnCount(); l++) {
-                            int spaltenNummer1 = tableModel.getColumnName(l).contains("A") ? 0 : tableModel.getColumnName(l).contains("B") ? 1 :
-                                    tableModel.getColumnName(l).equals("C") ? 2 : 3;//FALSCH WIR BRAUCHEN ZWEI spaltennummern
-
-
-                                int spaltenNummer2 = tableModel.getColumnName(l).contains("A") ? 0 : tableModel.getColumnName(l).contains("B") ? 1 :
-                                        tableModel.getColumnName(l).equals("C") ? 2 : 3;
-
-
-                                System.out.println("ende2");
-                                if (l == 4)
-                                    x = table.getValueAt(i, spaltenNummer1);
-                                else y = table.getValueAt(i, spaltenNummer2);
-                            }
-
+                    if (tableModel.getColumnCount() - eingange-1 == 0) {
+                        x = table.getValueAt(i, randomX);
+                        y = table.getValueAt(i, randomY);
+                    } else { //Wenn bereits eine Spalte existiert:
+                        x = table.getValueAt(i, spaltenNummer1);
+                        y = table.getValueAt(i, spaltenNummer2);
                     }
-
 
                     switch (randomGatter) {
                         //AND
@@ -409,8 +381,6 @@ public class Panel extends JPanel {
                         default:
                             System.out.println("DEFAULT");
                     }
-
-                }
             }
         }
         else {
@@ -483,14 +453,14 @@ public class Panel extends JPanel {
         g.fillRoundRect(100, 15, 700, 75, 20, 20);
 
     }
-/*
+
     public void paintSchaltung(List<ImageIcon> gateIcons) {
         // Vor dem Zeichnen der neuen Schaltung entferne die vorherige
         gateLabels.forEach(this::remove);
         gateLabels.clear();
 
         int x = 130;  //Startposition
-        int y = 230;
+        int y = 600;
         for (ImageIcon icon : gateIcons) {
             JLabel label = new JLabel(icon);
             label.setBounds(x, y, icon.getIconWidth(), icon.getIconHeight());
@@ -503,5 +473,5 @@ public class Panel extends JPanel {
         revalidate();
         repaint();
     }
-*/
+
 }
