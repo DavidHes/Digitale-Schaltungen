@@ -22,6 +22,11 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == view.generateButton) {
             System.out.println("Generate");
+            //to clear the drawings
+            view.spList.clear();
+            view.epList.clear();
+            view.repaint();
+
           //  List<ImageIcon> gateIcons = model.generateRandomSchaltung(3);
           //  view.paintSchaltung(gateIcons);
             //view.generateTruthTable(3);
@@ -40,10 +45,9 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
                     view.addRandomGatter();
                     if(i == 1){
                         view.endgatter();
-                    }
+                        }
                     }
                 }
-
             }
 
         view.paintSchaltung();
@@ -79,44 +83,39 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
             }
         }
     }
-
     @Override
     public void keyTyped(KeyEvent e) {
-
     }
-
     @Override
     public void keyPressed(KeyEvent e) {
-
     }
-
     @Override
     public void keyReleased(KeyEvent e) {
-
     }
-
     @Override
     public void mouseClicked(MouseEvent e) {
-
     }
-
     @Override
     public void mousePressed(MouseEvent e) {
-
+     //   System.out.println("Mouse Pressed");
+       // view.start = e.getPoint();
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
+      //  System.out.println("Mouse Released");
+     //   view.spList.add(view.start);
+      //  view.end = e.getPoint();
+     //   view.epList.add(view.end);
+      //  view.repaint();
     }
-
     @Override
     public void mouseEntered(MouseEvent e) {
-
     }
-
     @Override
     public void mouseExited(MouseEvent e) {
-
     }
+
+
 }
+
