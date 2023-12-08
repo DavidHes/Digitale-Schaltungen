@@ -4,6 +4,8 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.Random;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Panel extends JPanel {
 
@@ -11,7 +13,7 @@ public class Panel extends JPanel {
     protected JButton exitButton, solutionButton, generateButton;
     protected JLabel difficultylabel, questionlabel, question, maplegend;
     String[] difficulties = {"Easy", "Average", "Herr Schaal"};
-   // String[] gatterarten = {"AND", "OR", "NOT"};
+    // String[] gatterarten = {"AND", "OR", "NOT"};
     String[] questions = {"Wahrheitstabelle", "Digitale Schaltung"};
 
     public Image background = new ImageIcon("Background.png").getImage();
@@ -30,7 +32,11 @@ public class Panel extends JPanel {
     List<Integer> zwischengatter = new ArrayList<>();
 
     int endgatter;
-
+    //ArrayLists und Points um die Linien zu speichern.
+    protected ArrayList<Point> spList = new ArrayList<Point>();
+    protected ArrayList<Point> epList = new ArrayList<Point>();
+    protected Point start;
+    protected Point end;
 
     public enum SchwierigkeitsAuswahl {EASY, DIFFICULT}
 
@@ -54,9 +60,6 @@ public class Panel extends JPanel {
             System.out.println(selectedgatterName);
             gatter.add(new ImageIcon(selectedgatterName));
         }
-
-
-
 
         Image scaledExitImage = exitBild.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
         ImageIcon scaledExitIcon = new ImageIcon(scaledExitImage);
@@ -108,7 +111,9 @@ public class Panel extends JPanel {
 
         numbers = new Random();
 
-
+        //Listner, um zeichen zu können
+          this.addMouseMotionListener(new PointListener());
+          this.addMouseListener(new PointListener());
     }
 
     //einfach parameter übergeben, die die anzahl der eingänge vorgibt. Z.b int gatteranzahl = 2, oder int = 3
@@ -126,7 +131,6 @@ public class Panel extends JPanel {
 
         //Erstellen der NormalTabelle
         tableModel = new DefaultTableModel();
-
         String[] columnNames = new String[eingange]; //Anzahl der Spalten
 
         if (eingange > 0) {
@@ -138,7 +142,6 @@ public class Panel extends JPanel {
                     // columnNames[i] = "Platzhalter";
                     //Hier müssen dann die GatterSpaltenNamen erstellt werden bzw. die Namen derer
                 }
-
             }
         }
         // Hier alles erweiterbar --> man kann hier mit --> (int) Math.pow(2, eingange)
@@ -148,7 +151,6 @@ public class Panel extends JPanel {
             for (int j = 0; j < eingange; j++) { //Füllen aller Zeilen/Spalten mit Nullen
                 rowData[i][j] = 0;
             }
-
 
             // Füllen der restlichen Binärziffern
             String binärZahl = Integer.toBinaryString(i); //Umwandlung aller Zahlen von 0-anzahleingange
@@ -307,7 +309,7 @@ public class Panel extends JPanel {
         Random random = new Random();
         int randomGatter = random.nextInt(4);
         zwischengatter.add(randomGatter);
-       // gatter.add(randomGatter);
+        // gatter.add(randomGatter);
         System.out.println("RANDOMZAHL: " + randomGatter);
         int spaltenAnzahl = table.getColumnCount();
         System.out.println("Spaltenanzahl " + spaltenAnzahl);
@@ -487,6 +489,12 @@ public class Panel extends JPanel {
         g.setColor(Color.BLACK);
         g.fillRect(730, 220, 5, 500);
 
+// Das zeichnet die Linien
+        g.setColor(Color.BLACK);
+        for (int i = 0; i < spList.size(); i++) {
+            g.drawLine(spList.get(i).x, spList.get(i).y, epList.get(i).x, epList.get(i).y);
+        }
+
     }
 
     //public void paintSchaltung(List<ImageIcon> gateIcons) {
@@ -503,19 +511,19 @@ public class Panel extends JPanel {
 
         int xEingang = 800;  //Startposition Eingänge
         int xGatter = 900;  //Startposition Gatter
-        int xEndGatter= 1000;  //Startposition Endgatter
+        int xEndGatter = 1000;  //Startposition Endgatter
         int y = 300;
 
         for (int i = 0; i < eingange; i++) {
 
-                ImageIcon icon = gateIcons.get(i);
-                    JLabel label = new JLabel(icon);
-                    label.setBounds(xEingang, y, 50, 50);
-                    //gateLabels.add(label);
-                    add(label);
+            ImageIcon icon = gateIcons.get(i);
+            JLabel label = new JLabel(icon);
+            label.setBounds(xEingang, y, 50, 50);
+            //gateLabels.add(label);
+            add(label);
 
-                    y += 100;  //Position vertikal verändert nach jedem durchgang
-            }
+            y += 100;  //Position vertikal verändert nach jedem durchgang
+        }
 
         if (schwierigkeit == SchwierigkeitsAuswahl.DIFFICULT) {
 
@@ -537,7 +545,6 @@ public class Panel extends JPanel {
                         zwischenlabel.setBounds(xGatter, y, 50, 50);
                         add(zwischenlabel);
                         break;
-
 //nand
                     case 2:
                         zwischengattericon = gatter.get(zwischengatter.get(i));
@@ -564,48 +571,59 @@ public class Panel extends JPanel {
                     ImageIcon endgattericon = gatter.get(endgatter);
                     JLabel endlabel = new JLabel(endgattericon);
                     endlabel.setBounds(xEndGatter, y, 50, 50);
-                   // gatter.add(label);
+                    // gatter.add(label);
                     add(endlabel);
-
                     break;
 
-                    //OR
+                //OR
                 case 1:
                     endgattericon = gatter.get(endgatter);
                     endlabel = new JLabel(endgattericon);
                     endlabel.setBounds(xEndGatter, y, 50, 50);
                     //  gatter.add(label);
                     add(endlabel);
-
                     break;
 
-                    //NAND
+                //NAND
                 case 2:
                     endgattericon = gatter.get(endgatter);
-                     endlabel = new JLabel(endgattericon);
-                      endlabel.setBounds(xEndGatter, y, 50, 50);
-                      //  gatter.add(label);
-                          add(endlabel);
+                    endlabel = new JLabel(endgattericon);
+                    endlabel.setBounds(xEndGatter, y, 50, 50);
+                    //  gatter.add(label);
+                    add(endlabel);
+                    break;
 
-                        break;
-
-                    //NOR
+                //NOR
                 case 3:
                     endgattericon = gatter.get(endgatter);
-                      endlabel = new JLabel(endgattericon);
+                    endlabel = new JLabel(endgattericon);
                     endlabel.setBounds(xEndGatter, y, 50, 50);
-                        //  gatter.add(label);
-                         add(endlabel);
+                    //  gatter.add(label);
+                    add(endlabel);
+                    break;
 
-                        break;
-
-                    }
-
+            }
         }
 
-            revalidate();
-            repaint();
+        revalidate();
+        repaint();
+    }
 
+    //ActionListener für das Zeichnen
+    private class PointListener extends MouseAdapter {
+        public void mousePressed(MouseEvent e) {
+            System.out.println("Mouse Pressed");
+            start = e.getPoint();
+           // spList.add(start); das geht auch hier oben, das macht keinen Unterschied
+        }
+        public void mouseReleased(MouseEvent e) {
+            System.out.println("Mouse Released");
+            spList.add(start);
+            end = e.getPoint();
+            epList.add(end);
+            repaint();
+        }
+        public void mouseDragged(MouseEvent e) {
         }
 
 /*
@@ -624,5 +642,7 @@ public class Panel extends JPanel {
     }
 
  */
-
     }
+}
+
+
