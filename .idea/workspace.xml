@@ -4,9 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ebf7c81-125f-4252-9dcd-060c33722004" name="Changes" comment="änderung, dass es keine doppelten eingänge mehr gibt">
+    <list default="true" id="3ebf7c81-125f-4252-9dcd-060c33722004" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Eingang-A.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Eingang-B.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Eingang-C.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Eingang-D.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NAND-GATTER.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NOR-GATTER.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_11_23,_22_42_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_29_11_23__22_42__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Panel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Panel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -87,8 +97,8 @@
       <workItem from="1701107787824" duration="1999000" />
       <workItem from="1701161965436" duration="27490000" />
       <workItem from="1701344279687" duration="4636000" />
-      <workItem from="1701639964004" duration="6918000" />
-      <workItem from="1701702930282" duration="3069000" />
+      <workItem from="1701770322741" duration="711000" />
+      <workItem from="1701977357582" duration="15205000" />
     </task>
     <task id="LOCAL-00001" summary="majd war erneut hier">
       <created>1700375531598</created>
@@ -140,48 +150,13 @@
       <updated>1701297753104</updated>
     </task>
     <task id="LOCAL-00008" summary="Gatter werden zufällig erstellt inkl. neuer Spalten">
-      <created>1701384171141</created>
+      <created>1701882159268</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1701384171141</updated>
+      <updated>1701882159268</updated>
     </task>
-    <task id="LOCAL-00009" summary="endgatter verbessert">
-      <created>1701638465883</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1701638465884</updated>
-    </task>
-    <task id="LOCAL-00010" summary="endgatter verbessert">
-      <created>1701640329369</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1701640329369</updated>
-    </task>
-    <task id="LOCAL-00011" summary="endgatter verbessert">
-      <created>1701642176052</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1701642176052</updated>
-    </task>
-    <task id="LOCAL-00012" summary="änderung, dass es keine doppelten eingänge mehr gibt">
-      <created>1701646397714</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1701646397714</updated>
-    </task>
-    <task id="LOCAL-00013" summary="änderung, dass es keine doppelten eingänge mehr gibt">
-      <created>1701646787816</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1701646787816</updated>
-    </task>
-    <option name="localTasksCounter" value="14" />
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,8 +166,6 @@
     <MESSAGE value="majd war erneut hier" />
     <MESSAGE value="gatter creator" />
     <MESSAGE value="Gatter werden zufällig erstellt inkl. neuer Spalten" />
-    <MESSAGE value="endgatter verbessert" />
-    <MESSAGE value="änderung, dass es keine doppelten eingänge mehr gibt" />
-    <option name="LAST_COMMIT_MESSAGE" value="änderung, dass es keine doppelten eingänge mehr gibt" />
+    <option name="LAST_COMMIT_MESSAGE" value="Gatter werden zufällig erstellt inkl. neuer Spalten" />
   </component>
 </project>

@@ -22,8 +22,8 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == view.generateButton) {
             System.out.println("Generate");
-            List<ImageIcon> gateIcons = model.generateRandomSchaltung(3);
-           // view.paintSchaltung(gateIcons);
+          //  List<ImageIcon> gateIcons = model.generateRandomSchaltung(3);
+          //  view.paintSchaltung(gateIcons);
             //view.generateTruthTable(3);
           //  view.solutionButton.setVisible(true); --> NOCH NICHT LÖSCHEN
 
@@ -43,7 +43,11 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
                     }
                     }
                 }
+
             }
+
+        view.paintSchaltung();
+
             if (e.getSource() == view.difficultymenu) {
                 if(view.difficultymenu.getSelectedItem() == "Easy"){
                     System.out.println("easy");
@@ -67,7 +71,6 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
                 System.out.println("Wahrheitstabelle");
             }
         }
-
         else {
             if (e.getSource() == view.exitButton) {
                 System.exit(0);

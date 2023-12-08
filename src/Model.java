@@ -8,6 +8,7 @@ public class Model {
 
     List<ImageIcon> gateIcons;
 
+
     public List<ImageIcon> generateRandomSchaltung(int numGates) {
         Random rand = new Random();
         gateIcons = new ArrayList<>();
