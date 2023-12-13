@@ -48,9 +48,10 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
                         }
                     }
                 }
+            view.paintSchaltung();
             }
 
-        view.paintSchaltung();
+       // view.paintSchaltung();//Wofür ist der Aufruf?
 
             if (e.getSource() == view.difficultymenu) {
                 if(view.difficultymenu.getSelectedItem() == "Easy"){

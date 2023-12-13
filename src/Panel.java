@@ -18,7 +18,7 @@ public class Panel extends JPanel {
 
     public Image background = new ImageIcon("Background.png").getImage();
     Image exitBild = new ImageIcon("ExitBild.png").getImage();
-    private List<JLabel> gateLabels = new ArrayList<>();
+   // private List<JLabel> gateLabels = new ArrayList<>(); nicht mehr notwendig
     JTable table;
     DefaultTableModel tableModel;
     JScrollPane scrollPane;
@@ -37,6 +37,8 @@ public class Panel extends JPanel {
     protected ArrayList<Point> epList = new ArrayList<Point>();
     protected Point start;
     protected Point end;
+    private JLabel zwischenlabel;
+   private JLabel endlabel;
 
     public enum SchwierigkeitsAuswahl {EASY, DIFFICULT}
 
@@ -55,7 +57,7 @@ public class Panel extends JPanel {
         }
 
         for (int i = 0; i < 4; i++) {
-            String[] gatternames = {"AND-GATTER.png", "OR-GATTER.png", "NAND-GATTER.png", "NOR-GATTER.png"};
+            String[] gatternames = {"AND-GATTER.jpg", "OR-GATTER.jpg", "NAND-GATTER.jpg", "NOR-GATTER.jpg"};
             String selectedgatterName = gatternames[i];
             System.out.println(selectedgatterName);
             gatter.add(new ImageIcon(selectedgatterName));
@@ -499,19 +501,29 @@ public class Panel extends JPanel {
 
     //public void paintSchaltung(List<ImageIcon> gateIcons) {
     // Vor dem Zeichnen der neuen Schaltung entferne die vorherige
-    //   gateLabels.forEach(this::remove);
+    //   gateLabels.forEach(this::remove); nicht notwendig
     //   gateLabels.clear();
 
     public void paintSchaltung() {
         // Vor dem Zeichnen der neuen Schaltung entferne die vorherige
 
-        gateLabels.forEach(this::remove);
-        gateLabels.clear();
-        zwischengatter.clear();
+      //  gateLabels.forEach(this::remove);
+      //  gateLabels.clear();
+        //zwischengatter.clear(); //Warum wird hier die Liste geleert? Dadurch ist sie ja immer leer? Hab sie nach unten gesetzt
+
+        //muss anders gelöst weren
+        if (zwischenlabel != null) {
+            remove(zwischenlabel);
+        }
+
+        if (endlabel != null) {
+            remove(endlabel);
+        }
+
 
         int xEingang = 800;  //Startposition Eingänge
-        int xGatter = 900;  //Startposition Gatter
-        int xEndGatter = 1000;  //Startposition Endgatter
+        int xGatter = 975;  //Startposition Gatter
+        int xEndGatter = 1150;  //Startposition Endgatter
         int y = 300;
 
         for (int i = 0; i < eingange; i++) {
@@ -522,10 +534,13 @@ public class Panel extends JPanel {
             //gateLabels.add(label);
             add(label);
 
+            //y funktioniert dann aber nur für die Eingänge und nicht mehr für die Zwischen- und Endgatter
             y += 100;  //Position vertikal verändert nach jedem durchgang
         }
 
         if (schwierigkeit == SchwierigkeitsAuswahl.DIFFICULT) {
+            int yZG = 300;
+            System.out.println("Zwischengattergröße: " + zwischengatter.size());
 
             for (int i = 0; i < zwischengatter.size(); i++) {
 
@@ -533,77 +548,86 @@ public class Panel extends JPanel {
                 switch (zwischengatter.get(i)) {
                     case 0:
                         ImageIcon zwischengattericon = gatter.get(zwischengatter.get(i));
-                        JLabel zwischenlabel = new JLabel(zwischengattericon);
-                        zwischenlabel.setBounds(xGatter, y, 50, 50);
+                        zwischenlabel = new JLabel(zwischengattericon);
+                        zwischenlabel.setBounds(xGatter, yZG, 100, 100);
                         add(zwischenlabel);
-
                         break;
 
                     case 1:
                         zwischengattericon = gatter.get(zwischengatter.get(i));
                         zwischenlabel = new JLabel(zwischengattericon);
-                        zwischenlabel.setBounds(xGatter, y, 50, 50);
+                        zwischenlabel.setBounds(xGatter, yZG, 100, 100);
                         add(zwischenlabel);
                         break;
 //nand
                     case 2:
                         zwischengattericon = gatter.get(zwischengatter.get(i));
                         zwischenlabel = new JLabel(zwischengattericon);
-                        zwischenlabel.setBounds(xGatter, y, 50, 50);
+                        zwischenlabel.setBounds(xGatter, yZG, 100, 100);
                         add(zwischenlabel);
                         break;
 //nor
                     case 3:
                         zwischengattericon = gatter.get(zwischengatter.get(i));
                         zwischenlabel = new JLabel(zwischengattericon);
-                        zwischenlabel.setBounds(xGatter, y, 50, 50);
+                        zwischenlabel.setBounds(xGatter, yZG, 100, 100);
                         add(zwischenlabel);
                         break;
                 }
+                yZG += 100; //neu
             }
+            zwischengatter.clear(); //hier von oben nach unten gesetzt
         }
 
-        for (int i = 0; i < 1; i++) {
+        //for (int i = 0; i < 1; i++) { //wofür die for schleife?
 
             switch (endgatter) {
                 //AND
                 case 0:
+                    System.out.println("XY Case 0");
                     ImageIcon endgattericon = gatter.get(endgatter);
-                    JLabel endlabel = new JLabel(endgattericon);
-                    endlabel.setBounds(xEndGatter, y, 50, 50);
+                    endlabel = new JLabel(endgattericon);
+                    endlabel.setBounds(xEndGatter, 300, 100, 100);
                     // gatter.add(label);
+                    System.out.println("Endgatter: " + endgattericon);
                     add(endlabel);
                     break;
 
                 //OR
                 case 1:
+                    System.out.println("XY Case 1");
                     endgattericon = gatter.get(endgatter);
                     endlabel = new JLabel(endgattericon);
-                    endlabel.setBounds(xEndGatter, y, 50, 50);
+                    endlabel.setBounds(xEndGatter, 300, 100, 100);
                     //  gatter.add(label);
+                    System.out.println("Endgatter: " + endgattericon);
                     add(endlabel);
                     break;
 
                 //NAND
                 case 2:
+                    System.out.println("XY Case 2");
                     endgattericon = gatter.get(endgatter);
                     endlabel = new JLabel(endgattericon);
-                    endlabel.setBounds(xEndGatter, y, 50, 50);
+                    endlabel.setBounds(xEndGatter, 300, 100, 100);
                     //  gatter.add(label);
+                    System.out.println("Endgatter: " + endgattericon);
                     add(endlabel);
                     break;
 
                 //NOR
                 case 3:
+                    System.out.println("XY Case 3");
                     endgattericon = gatter.get(endgatter);
                     endlabel = new JLabel(endgattericon);
-                    endlabel.setBounds(xEndGatter, y, 50, 50);
+                    endlabel.setBounds(xEndGatter, 300, 100, 100);
                     //  gatter.add(label);
+                    System.out.println("Endgatter: " + endgattericon);
                     add(endlabel);
                     break;
 
             }
-        }
+        //}
 
         revalidate();
         repaint();
