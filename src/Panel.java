@@ -47,6 +47,8 @@ public class Panel extends JPanel {
     public SchwierigkeitsAuswahl schwierigkeit = SchwierigkeitsAuswahl.EASY;
     public TypAuswahl typ = TypAuswahl.WAHRHEITSTABELLE;
 
+    private List<JLabel> createdLabels = new ArrayList<>(); //dafür da, um alle zwischenlabels und endlabels zu haben um sie auch vor jedem methodenaufruf von paintschaltung auch wirklich löschen zu können
+
     public Panel() {
 
         for (int i = 0; i < 4; i++) {
@@ -511,14 +513,11 @@ public class Panel extends JPanel {
       //  gateLabels.clear();
         //zwischengatter.clear(); //Warum wird hier die Liste geleert? Dadurch ist sie ja immer leer? Hab sie nach unten gesetzt
 
-        //muss anders gelöst weren
-        if (zwischenlabel != null) {
-            remove(zwischenlabel);
+        for (JLabel label : createdLabels) {
+            remove(label);
         }
+        createdLabels.clear();
 
-        if (endlabel != null) {
-            remove(endlabel);
-        }
 
 
         int xEingang = 800;  //Startposition Eingänge
@@ -533,6 +532,7 @@ public class Panel extends JPanel {
             label.setBounds(xEingang, y, 50, 50);
             //gateLabels.add(label);
             add(label);
+            createdLabels.add(label);
 
             //y funktioniert dann aber nur für die Eingänge und nicht mehr für die Zwischen- und Endgatter
             y += 100;  //Position vertikal verändert nach jedem durchgang
@@ -551,6 +551,7 @@ public class Panel extends JPanel {
                         zwischenlabel = new JLabel(zwischengattericon);
                         zwischenlabel.setBounds(xGatter, yZG, 100, 100);
                         add(zwischenlabel);
+                        createdLabels.add(zwischenlabel);
                         break;
 
                     case 1:
@@ -558,6 +559,7 @@ public class Panel extends JPanel {
                         zwischenlabel = new JLabel(zwischengattericon);
                         zwischenlabel.setBounds(xGatter, yZG, 100, 100);
                         add(zwischenlabel);
+                        createdLabels.add(zwischenlabel);
                         break;
 //nand
                     case 2:
@@ -565,6 +567,7 @@ public class Panel extends JPanel {
                         zwischenlabel = new JLabel(zwischengattericon);
                         zwischenlabel.setBounds(xGatter, yZG, 100, 100);
                         add(zwischenlabel);
+                        createdLabels.add(zwischenlabel);
                         break;
 //nor
                     case 3:
@@ -572,12 +575,13 @@ public class Panel extends JPanel {
                         zwischenlabel = new JLabel(zwischengattericon);
                         zwischenlabel.setBounds(xGatter, yZG, 100, 100);
                         add(zwischenlabel);
+                        createdLabels.add(zwischenlabel);
                         break;
                 }
                 yZG += 100; //neu
             }
-            zwischengatter.clear(); //hier von oben nach unten gesetzt
         }
+        zwischengatter.clear();//hier von oben nach unten gesetzt
 
         //for (int i = 0; i < 1; i++) { //wofür die for schleife?
 
@@ -591,6 +595,7 @@ public class Panel extends JPanel {
                     // gatter.add(label);
                     System.out.println("Endgatter: " + endgattericon);
                     add(endlabel);
+                    createdLabels.add(endlabel);
                     break;
 
                 //OR
@@ -602,6 +607,7 @@ public class Panel extends JPanel {
                     //  gatter.add(label);
                     System.out.println("Endgatter: " + endgattericon);
                     add(endlabel);
+                    createdLabels.add(endlabel);
                     break;
 
                 //NAND
@@ -613,6 +619,7 @@ public class Panel extends JPanel {
                     //  gatter.add(label);
                     System.out.println("Endgatter: " + endgattericon);
                     add(endlabel);
+                    createdLabels.add(endlabel);
                     break;
 
                 //NOR
@@ -624,6 +631,7 @@ public class Panel extends JPanel {
                     //  gatter.add(label);
                     System.out.println("Endgatter: " + endgattericon);
                     add(endlabel);
+                    createdLabels.add(endlabel);
                     break;
 
             }

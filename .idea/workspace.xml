@@ -10,15 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ebf7c81-125f-4252-9dcd-060c33722004" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Digitale_Schaltungen2_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AND-Gatter.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NAND-Gatter.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NOR-Gatter.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OR-Gatter.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Panel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Panel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +96,9 @@
       <workItem from="1701770322741" duration="711000" />
       <workItem from="1702377011451" duration="969000" />
       <workItem from="1702402591549" duration="3046000" />
-      <workItem from="1702479345547" duration="5706000" />
+      <workItem from="1702479345547" duration="5772000" />
+      <workItem from="1702494947956" duration="594000" />
+      <workItem from="1702568074629" duration="2501000" />
     </task>
     <task id="LOCAL-00001" summary="majd war erneut hier">
       <created>1700375531598</created>
@@ -162,7 +156,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701882159268</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Bilder funktionieren, jedoch nicht das fehlerfreie löschen der bilder vor jedem methodenaufruf">
+      <created>1702487462920</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1702487462920</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -172,6 +173,7 @@
     <MESSAGE value="majd war erneut hier" />
     <MESSAGE value="gatter creator" />
     <MESSAGE value="Gatter werden zufällig erstellt inkl. neuer Spalten" />
-    <option name="LAST_COMMIT_MESSAGE" value="Gatter werden zufällig erstellt inkl. neuer Spalten" />
+    <MESSAGE value="Bilder funktionieren, jedoch nicht das fehlerfreie löschen der bilder vor jedem methodenaufruf" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bilder funktionieren, jedoch nicht das fehlerfreie löschen der bilder vor jedem methodenaufruf" />
   </component>
 </project>
