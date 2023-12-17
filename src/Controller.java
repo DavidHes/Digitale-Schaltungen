@@ -1,46 +1,35 @@
-import javax.swing.*;
 import java.awt.event.*;
-import java.util.List;
 
-public class Controller implements ActionListener, MouseListener, KeyListener {
+public class Controller implements ActionListener {
 
-    private Model model;
-    private Panel view;
+    private View view;
 
-    public Controller(Model model, Panel view) {
-        this.model = model;
+    public Controller(View view) {
         this.view = view;
 
         view.generateButton.addActionListener(this);
         view.exitButton.addActionListener(this);
         view.difficultymenu.addActionListener(this);
-        view.solutionButton.addActionListener(this);
-        view.questionsmenu.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == view.generateButton) {
-            System.out.println("Generate");
-            //to clear the drawings
             view.spList.clear();
             view.epList.clear();
             view.repaint();
 
-          //  List<ImageIcon> gateIcons = model.generateRandomSchaltung(3);
-          //  view.paintSchaltung(gateIcons);
-            //view.generateTruthTable(3);
-          //  view.solutionButton.setVisible(true); --> NOCH NICHT LÖSCHEN
-
-            int anzahlEingaenge = view.schwierigkeit == Panel.SchwierigkeitsAuswahl.EASY ? 3 : 4;
+            int anzahlEingaenge = view.schwierigkeit == View.SchwierigkeitsAuswahl.EASY ? 3 : 4;
 //Leider noch nicht ganz erweiterbar.
-            if(anzahlEingaenge == 3) {
-                view.createTruthTable(anzahlEingaenge, 2, 4);
+          //  if(anzahlEingaenge == 3) {
+            if(view.schwierigkeit == View.SchwierigkeitsAuswahl.EASY) {
+                view.createTruthTable(anzahlEingaenge, 4);
                 view.addRandomGatter();
             }
 
-            if(anzahlEingaenge == 4) {
-                view.createTruthTable(anzahlEingaenge, 2, 4);
+           // if(anzahlEingaenge == 4) {
+            if(view.schwierigkeit == View.SchwierigkeitsAuswahl.DIFFICULT) {
+                view.createTruthTable(anzahlEingaenge, 4);
                 for(int i = 0; i < 2; i++) {
                     view.addRandomGatter();
                     if(i == 1){
@@ -48,27 +37,27 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
                         }
                     }
                 }
-            view.paintSchaltung();
+            view.drawSchaltung();
             }
 
        // view.paintSchaltung();//Wofür ist der Aufruf?
 
             if (e.getSource() == view.difficultymenu) {
                 if(view.difficultymenu.getSelectedItem() == "Easy"){
-                    System.out.println("easy");
-                    view.schwierigkeit = Panel.SchwierigkeitsAuswahl.EASY;
+                  //  System.out.println("easy");
+                    view.schwierigkeit = View.SchwierigkeitsAuswahl.EASY;
                 }
-                if(view.difficultymenu.getSelectedItem() == "Average"){
-                    System.out.println("average");
-                    view.schwierigkeit = Panel.SchwierigkeitsAuswahl.DIFFICULT;
+                if(view.difficultymenu.getSelectedItem() == "Difficult"){
+                  //  System.out.println("average");
+                    view.schwierigkeit = View.SchwierigkeitsAuswahl.DIFFICULT;
                 }
-                if(view.difficultymenu.getSelectedItem() == "Herr Schaal"){
+             /*   if(view.difficultymenu.getSelectedItem() == "Herr Schaal"){
                     System.out.println("schaal");
                     view.schwierigkeit = Panel.SchwierigkeitsAuswahl.DIFFICULT;
-                }
+                }*/
             }
 
-        if (e.getSource() == view.questionsmenu) {
+  /*      if (e.getSource() == view.questionsmenu) {
             if(view.questionsmenu.getSelectedItem() == "Digitale Schaltung"){
                 System.out.println("Digitale Schaltung");
             }
@@ -76,15 +65,15 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
                 System.out.println("Wahrheitstabelle");
             }
         }
-        else {
+        else {*/
             if (e.getSource() == view.exitButton) {
                 System.exit(0);
-                System.out.println("Exit Funktioniert");
+              //  System.out.println("Exit Funktioniert");
 
-            }
+           // }
         }
     }
-    @Override
+   /* @Override
     public void keyTyped(KeyEvent e) {
     }
     @Override
@@ -117,6 +106,6 @@ public class Controller implements ActionListener, MouseListener, KeyListener {
     public void mouseExited(MouseEvent e) {
     }
 
-
+*/
 }
 
