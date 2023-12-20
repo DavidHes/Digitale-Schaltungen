@@ -10,12 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ebf7c81-125f-4252-9dcd-060c33722004" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Panel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,6 +100,9 @@
       <workItem from="1702494947956" duration="594000" />
       <workItem from="1702568074629" duration="2997000" />
       <workItem from="1702831391931" duration="9167000" />
+      <workItem from="1702934837721" duration="1343000" />
+      <workItem from="1702995097863" duration="364000" />
+      <workItem from="1703070869821" duration="260000" />
     </task>
     <task id="LOCAL-00001" summary="majd war erneut hier">
       <created>1700375531598</created>
