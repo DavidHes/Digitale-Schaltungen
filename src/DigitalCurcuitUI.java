@@ -9,32 +9,32 @@ import java.awt.event.MouseEvent;
 
 public class DigitalCurcuitUI extends JPanel {
 
-    protected JComboBox<String> difficultymenu;
-    protected JButton exitButton, generateButton;
-    protected JLabel difficultylabel, question, maplegend;
-    String[] difficulties = {"Einfach", "Schwierig"};
+    protected JComboBox<String> schwierigkeitsmenu;
+    protected JButton exitButton, erstellenButton;
+    protected JLabel schwierigkeitslabel, aufgabenstellung;
+    String[] schwierigkeiten = {"Einfach", "Schwierig"};
     String[] questions = {"Wahrheitstabelle", "Digitale Schaltung"};
 
-    Image background = new ImageIcon("Background.png").getImage();
+    Image hintergrundsbild = new ImageIcon("Background.png").getImage();
     Image exitBild = new ImageIcon("ExitBild.png").getImage();
-    JTable table;
-    DefaultTableModel tableModel;
-    JScrollPane scrollPane;
+    JTable tabelle;
+    DefaultTableModel tabellenModel;
+    JScrollPane scrollFeld;
    // Random numbers;
   //  int min = 0;
    // int max = 1;
    // int zeilenanzahl;
     int eingange;
-    List<ImageIcon> gateIcons = new ArrayList<>();
+    List<ImageIcon> gatterIcons = new ArrayList<>();
     List<ImageIcon> gatter = new ArrayList<>();
     List<Integer> zwischengatter = new ArrayList<>();
 
     int endgatter;
     //ArrayLists und Points um die Linien zu speichern.
-    protected ArrayList<Point> spList = new ArrayList<Point>();
-    protected ArrayList<Point> epList = new ArrayList<Point>();
-    protected Point startPoint;
-    protected Point endPoint;
+    protected ArrayList<Point> spListe = new ArrayList<Point>();
+    protected ArrayList<Point> epListe = new ArrayList<Point>();
+    protected Point startPunkt;
+    protected Point endPunkt;
     private JLabel zwischenlabel;
     private JLabel endlabel;
 
@@ -44,7 +44,7 @@ public class DigitalCurcuitUI extends JPanel {
     public SchwierigkeitsAuswahl schwierigkeit = SchwierigkeitsAuswahl.EASY;
  //   public TypAuswahl typ = TypAuswahl.WAHRHEITSTABELLE;
 
-    private List<JLabel> createdLabels = new ArrayList<>(); //dafür da, um alle zwischenlabels und endlabels zu haben um sie auch vor jedem methodenaufruf von paintschaltung auch wirklich löschen zu können
+    private List<JLabel> erstelltenLabels = new ArrayList<>(); //dafür da, um alle zwischenlabels und endlabels zu haben um sie auch vor jedem methodenaufruf von paintschaltung auch wirklich löschen zu können
 
     public DigitalCurcuitUI() {
 
@@ -52,7 +52,7 @@ public class DigitalCurcuitUI extends JPanel {
             String[] EingangNames = {"Eingang-A.png", "Eingang-B.png", "Eingang-C.png", "Eingang-D.png"};
             String selectedEingangName = EingangNames[i];
            // System.out.println(selectedEingangName);
-            gateIcons.add(new ImageIcon(selectedEingangName));
+            gatterIcons.add(new ImageIcon(selectedEingangName));
         }
 
         for (int i = 0; i < 4; i++) {
@@ -71,40 +71,40 @@ public class DigitalCurcuitUI extends JPanel {
 
         setLayout(null);
 
-        difficultylabel = new JLabel("Wähle die Schwierigkeit");
-        question = new JLabel("Vervollständige auf Basis der Wahrheitstabelle die digitale Schaltung!");
+        schwierigkeitslabel = new JLabel("Wähle die Schwierigkeit");
+        aufgabenstellung = new JLabel("Vervollständige auf Basis der Wahrheitstabelle die digitale Schaltung!");
 
         JTextArea legende = new JTextArea("LEGENDE\n\n  NAND ⊼\n  AND *\n  OR +\n  NOR ⊽ ");
         legende.setBounds(120, 750, 200, 150);
         legende.setFont(new Font("SansSerif", Font.BOLD, 13));
         legende.setEditable(false);
 
-        difficultylabel.setFont(new Font("SansSerif", Font.BOLD, 11));
-        question.setFont(new Font("SansSerif", Font.BOLD, 18));
-        question.setForeground(Color.BLACK);
+        schwierigkeitslabel.setFont(new Font("SansSerif", Font.BOLD, 11));
+        aufgabenstellung.setFont(new Font("SansSerif", Font.BOLD, 18));
+        aufgabenstellung.setForeground(Color.BLACK);
         //questionlabel.setForeground(Color.BLACK);
-        difficultylabel.setForeground(Color.BLACK);
+        schwierigkeitslabel.setForeground(Color.BLACK);
 
-        generateButton = new JButton("Erstellen");
+        erstellenButton = new JButton("Erstellen");
       //  solutionButton = new JButton("Solution");
-        difficultymenu = new JComboBox<>(difficulties);
+        schwierigkeitsmenu = new JComboBox<>(schwierigkeiten);
        // questionsmenu = new JComboBox<>(questions);
 
       //  questionlabel.setBounds(110, 13, 150, 30);
-        question.setBounds(480, 140, 600, 30);
-        difficultylabel.setBounds(580, 11, 150, 30);
-        generateButton.setBounds(780, 33, 150, 50);
-        difficultymenu.setBounds(580, 33, 150, 50);
+        aufgabenstellung.setBounds(480, 140, 600, 30);
+        schwierigkeitslabel.setBounds(580, 11, 150, 30);
+        erstellenButton.setBounds(780, 33, 150, 50);
+        schwierigkeitsmenu.setBounds(580, 33, 150, 50);
         //maplegend.setBounds(120, 675, 200, 50);
       //  questionsmenu.setBounds(110, 32, 160, 50);
       //  solutionButton.setBounds(700, 300, 80, 50);
         exitButton.setBounds(1350, 10, 50, 50);
 
-        add(generateButton);
-        add(difficultymenu);
+        add(erstellenButton);
+        add(schwierigkeitsmenu);
         add(exitButton);
-        add(question);
-        add(difficultylabel);
+        add(aufgabenstellung);
+        add(schwierigkeitslabel);
         add(legende);
 
         //questionlabel.setVisible(false);
@@ -123,13 +123,13 @@ public class DigitalCurcuitUI extends JPanel {
     public void createTruthTable(int eingange, int gatterAnzahl) { //nur ein gatter aber dafür alle drei Eingänge drin, einziger unterschied sind, dass es drei kombis sind (not, and, or)
         // Entfernt scrollpane und dazugehörige tabelle, damit es zu beginn keine mehrfachen tabellen gibt
         this.eingange = eingange;
-        if (scrollPane != null) {
-            this.remove(scrollPane);
+        if (scrollFeld != null) {
+            this.remove(scrollFeld);
         }
         revalidate();
         repaint();
 
-        tableModel = new DefaultTableModel();
+        tabellenModel = new DefaultTableModel();
         String[] columnNames = new String[eingange]; //Anzahl der Spalten
 
         if (eingange > 0) {
@@ -157,31 +157,31 @@ public class DigitalCurcuitUI extends JPanel {
             }
 
         }
-        tableModel.setDataVector(rowData, columnNames);
-        table = new JTable(tableModel);
+        tabellenModel.setDataVector(rowData, columnNames);
+        tabelle = new JTable(tabellenModel);
 
         //  table = new JTable(rowData, columnNames);
-        table.setVisible(true);
-        this.add(table);
-        table.setShowGrid(true);
-        table.setGridColor(Color.BLACK);
-        table.setRowHeight(22);
+        tabelle.setVisible(true);
+        this.add(tabelle);
+        tabelle.setShowGrid(true);
+        tabelle.setGridColor(Color.BLACK);
+        tabelle.setRowHeight(22);
 
         //Position X der Tabelle anhand dem Schiwerigkeitsgrade
 
-        scrollPane = new JScrollPane(table);
+        scrollFeld = new JScrollPane(tabelle);
         if (schwierigkeit == SchwierigkeitsAuswahl.DIFFICULT) {
-            scrollPane.setBounds(125, 250, table.getColumnCount() * 150, table.getRowCount() * table.getRowHeight() + 20);
+            scrollFeld.setBounds(125, 250, tabelle.getColumnCount() * 150, tabelle.getRowCount() * tabelle.getRowHeight() + 20);
         } else{
-            scrollPane.setBounds(205, 300, table.getColumnCount() * 150, table.getRowCount() * table.getRowHeight() + 20);
+            scrollFeld.setBounds(205, 300, tabelle.getColumnCount() * 150, tabelle.getRowCount() * tabelle.getRowHeight() + 20);
         }
 
-        add(scrollPane);
+        add(scrollFeld);
 
-        table.getTableHeader().setReorderingAllowed(false); // not allow re-ordering of columns
-        table.getTableHeader().setResizingAllowed(false);
-        table.setEnabled(false);
-        table.setBackground(Color.LIGHT_GRAY);
+        tabelle.getTableHeader().setReorderingAllowed(false); // not allow re-ordering of columns
+        tabelle.getTableHeader().setResizingAllowed(false);
+        tabelle.setEnabled(false);
+        tabelle.setBackground(Color.LIGHT_GRAY);
         //Ende
     }
 
@@ -189,7 +189,7 @@ public class DigitalCurcuitUI extends JPanel {
         Random random = new Random();
         int randomGatter = random.nextInt(4);
         zwischengatter.add(randomGatter);
-        int spaltenAnzahl = table.getColumnCount();
+        int spaltenAnzahl = tabelle.getColumnCount();
 
         if (schwierigkeit == SchwierigkeitsAuswahl.DIFFICULT) {
             int randomX = random.nextInt(4);
@@ -200,7 +200,7 @@ public class DigitalCurcuitUI extends JPanel {
 
             String eingang1;
             String eingang2;
-            if (tableModel.getColumnCount() - eingange == 0) { //Wenn Spalte 5 noch nicht existiert werden zwei Eingänge random ausgewählt
+            if (tabellenModel.getColumnCount() - eingange == 0) { //Wenn Spalte 5 noch nicht existiert werden zwei Eingänge random ausgewählt
                 eingang1 = randomX == 0 ? "A" : randomX == 1 ? "B" : randomX == 2 ? "C" : "D";
                 eingang2 = randomY == 0 ? "A" : randomY == 1 ? "B" : randomY == 2 ? "C" : "D";
             } else {
@@ -212,29 +212,29 @@ public class DigitalCurcuitUI extends JPanel {
                     randomBuchstabe2 = random.nextInt(4);
                     eingang1 = Buchstaben[randomBuchstabe1];
                     eingang2 = Buchstaben[randomBuchstabe2];
-                } while (tableModel.getColumnName(4).contains(eingang1) || tableModel.getColumnName(4).contains(eingang2) || eingang1.equals(eingang2));
+                } while (tabellenModel.getColumnName(4).contains(eingang1) || tabellenModel.getColumnName(4).contains(eingang2) || eingang1.equals(eingang2));
             }
 
-            String columnName = randomGatter == 0 ? eingang1 + " * " + eingang2 : randomGatter == 1 ?
+            String spaltenName = randomGatter == 0 ? eingang1 + " * " + eingang2 : randomGatter == 1 ?
                     eingang1 + " + " + eingang2 : randomGatter == 2 ? eingang1 + " ⊼ " + eingang2 : eingang1 + " ⊽ " + eingang2;
 
-            tableModel.addColumn(columnName); //Setzt den richtigen Spaltennamen, je nach dem welcher Case zufällig generiert wurde
+            tabellenModel.addColumn(spaltenName); //Setzt den richtigen Spaltennamen, je nach dem welcher Case zufällig generiert wurde
 
             int spaltenNummer1 = eingang1.equals("A") ? 0 : eingang1.equals("B") ? 1 : eingang1.equals("C") ? 2 : 3;
             int spaltenNummer2 = eingang2.equals("A") ? 0 : eingang2.equals("B") ? 1 : eingang2.equals("C") ? 2 : 3;
 
-            Object x; //LÖSCHEN
-            Object y;
+            Object x ; //LÖSCHEN
+            Object y ;
 
-            for (int i = 0; i < table.getRowCount(); i++) { //Durchgang durch alle Zeilen
+            for (int i = 0; i < tabelle.getRowCount(); i++) { //Durchgang durch alle Zeilen
                 //Wenn spaltenanzahl - eingänge = 0 ist, dann random. Wenn nicht, dann spalte 5 anschauen und die anderen nehmen
 
-                if (tableModel.getColumnCount() - eingange - 1 == 0) {
-                    x = table.getValueAt(i, randomX);
-                    y = table.getValueAt(i, randomY);
+                if (tabellenModel.getColumnCount() - eingange - 1 == 0) {
+                    x = tabelle.getValueAt(i, randomX);
+                    y = tabelle.getValueAt(i, randomY);
                 } else { //Wenn bereits eine Spalte existiert:
-                    x = table.getValueAt(i, spaltenNummer1);
-                    y = table.getValueAt(i, spaltenNummer2);
+                    x = tabelle.getValueAt(i, spaltenNummer1);
+                    y = tabelle.getValueAt(i, spaltenNummer2);
                 }
 
                 switch (randomGatter) {
@@ -243,11 +243,11 @@ public class DigitalCurcuitUI extends JPanel {
                       //  System.out.println("CASE 0");
                         //
                         if (x.equals(1) && y.equals(1)) {
-                            tableModel.setValueAt("1", i, spaltenAnzahl);
+                            tabellenModel.setValueAt("1", i, spaltenAnzahl);
                             break;
                             //direkt hier zur Tabelle hinzufügen
                         } else {
-                            tableModel.setValueAt("0", i, spaltenAnzahl);
+                            tabellenModel.setValueAt("0", i, spaltenAnzahl);
                             break;
                         }
 
@@ -256,10 +256,10 @@ public class DigitalCurcuitUI extends JPanel {
                       //  System.out.println("CASE 1");
                         //   tableModel.addColumn(eingang1 + " OR " + eingang2);
                         if (!(x.equals(0) && y.equals(0))) {
-                            tableModel.setValueAt("1", i, spaltenAnzahl);
+                            tabellenModel.setValueAt("1", i, spaltenAnzahl);
                             break;
                         } else {
-                            tableModel.setValueAt("0", i, spaltenAnzahl);
+                            tabellenModel.setValueAt("0", i, spaltenAnzahl);
                             break;
                         }
 
@@ -268,10 +268,10 @@ public class DigitalCurcuitUI extends JPanel {
                     //    System.out.println("CASE 2");
                         //  tableModel.addColumn(eingang1 + " NAND " + eingang2);
                         if (!(x.equals(1) && y.equals(1))) {
-                            tableModel.setValueAt("1", i, spaltenAnzahl);
+                            tabellenModel.setValueAt("1", i, spaltenAnzahl);
                             break;
                         } else {
-                            tableModel.setValueAt("0", i, spaltenAnzahl);
+                            tabellenModel.setValueAt("0", i, spaltenAnzahl);
                             break;
                         }
 
@@ -280,10 +280,10 @@ public class DigitalCurcuitUI extends JPanel {
                     //    System.out.println("CASE 3");
                         //    tableModel.addColumn(eingang1 + " OR " + eingang2);
                         if (!(x.equals(1) && y.equals(1))) {
-                            tableModel.setValueAt("1", i, spaltenAnzahl);
+                            tabellenModel.setValueAt("1", i, spaltenAnzahl);
                             break;
                         } else {
-                            tableModel.setValueAt("0", i, spaltenAnzahl);
+                            tabellenModel.setValueAt("0", i, spaltenAnzahl);
                             break;
                         }
                     default:
@@ -295,51 +295,51 @@ public class DigitalCurcuitUI extends JPanel {
                     "A + B + C" : randomGatter == 2 ? "A ⊼ B ⊼ C" : "A ⊽ B ⊽ C";
 
             endgatter = randomGatter;
-            tableModel.addColumn(columnName); //Setzt den richtigen Spaltennamen, je nach dem welcher Case zufällig generiert wurde
+            tabellenModel.addColumn(columnName); //Setzt den richtigen Spaltennamen, je nach dem welcher Case zufällig generiert wurde
 
-            for (int i = 0; i < table.getRowCount(); i++) { //Durchgang durch alle Zeilen
-                Object a = table.getValueAt(i, 0);
-                Object b = table.getValueAt(i, 1);
-                Object c = table.getValueAt(i, 2);
+            for (int i = 0; i < tabelle.getRowCount(); i++) { //Durchgang durch alle Zeilen
+                Object a = tabelle.getValueAt(i, 0);
+                Object b = tabelle.getValueAt(i, 1);
+                Object c = tabelle.getValueAt(i, 2);
 
                 switch (randomGatter) {
                     //AND
                     case 0:
                         if (a.equals(1) && b.equals(1) && c.equals(1)) {
-                            tableModel.setValueAt("1", i, spaltenAnzahl);
+                            tabellenModel.setValueAt("1", i, spaltenAnzahl);
                             break;
                         } else {
-                            tableModel.setValueAt("0", i, spaltenAnzahl);
+                            tabellenModel.setValueAt("0", i, spaltenAnzahl);
                             break;
                         }
 
                         //OR
                     case 1:
                         if (!(a.equals(0) && b.equals(0) && c.equals(0))) {
-                            tableModel.setValueAt("1", i, spaltenAnzahl);
+                            tabellenModel.setValueAt("1", i, spaltenAnzahl);
                             break;
                         } else {
-                            tableModel.setValueAt("0", i, spaltenAnzahl);
+                            tabellenModel.setValueAt("0", i, spaltenAnzahl);
                             break;
                         }
 
                         //NAND
                     case 2:
                         if (!(a.equals(1) && b.equals(1) && c.equals(1))) {
-                            tableModel.setValueAt("1", i, spaltenAnzahl);
+                            tabellenModel.setValueAt("1", i, spaltenAnzahl);
                             break;
                         } else {
-                            tableModel.setValueAt("0", i, spaltenAnzahl);
+                            tabellenModel.setValueAt("0", i, spaltenAnzahl);
                             break;
                         }
 
                         //NOR
                     case 3:
                         if (!(a.equals(1) && b.equals(1) && c.equals(1))) {
-                            tableModel.setValueAt("1", i, spaltenAnzahl);
+                            tabellenModel.setValueAt("1", i, spaltenAnzahl);
                             break;
                         } else {
-                            tableModel.setValueAt("0", i, spaltenAnzahl);
+                            tabellenModel.setValueAt("0", i, spaltenAnzahl);
                             break;
                         }
                     default:
@@ -355,35 +355,35 @@ public class DigitalCurcuitUI extends JPanel {
         Random random = new Random();
         int randomGatter = random.nextInt(4);
         endgatter = randomGatter;
-        int spaltenAnzahl = table.getColumnCount();
+        int spaltenAnzahl = tabelle.getColumnCount();
 
         ArrayList<String> spaltenNamen = new ArrayList<>();
 
         for (int eingang = 0; eingang < spaltenAnzahl; eingang++) {
-            spaltenNamen.add(tableModel.getColumnName(eingang));
+            spaltenNamen.add(tabellenModel.getColumnName(eingang));
         }
 
-        String columnName = "";
+        String spaltenName = "";
 
         for (int i = 4; i < spaltenNamen.size(); i++) {
             switch (randomGatter) {
                 case 0:
-                    columnName += spaltenNamen.get(i) + " * ";
+                    spaltenName += spaltenNamen.get(i) + " * ";
                     break;
 
                 case 1:
-                    columnName += spaltenNamen.get(i) + " + ";
+                    spaltenName += spaltenNamen.get(i) + " + ";
                     break;
 
 //nand
                 case 2:
                     // System.out.println("CASE2 automatisiert funktioniert");
-                    columnName += spaltenNamen.get(i) + " ⊼ ";
+                    spaltenName += spaltenNamen.get(i) + " ⊼ ";
                     break;
 //nor
                 case 3:
                     //  System.out.println("CASE3 automatisiert funktioniert");
-                    columnName += spaltenNamen.get(i) + " ⊽ ";
+                    spaltenName += spaltenNamen.get(i) + " ⊽ ";
                     break;
 
                 default:
@@ -391,30 +391,30 @@ public class DigitalCurcuitUI extends JPanel {
             }
         }
         //substring weil sonst sich der gattertyp wieder ansetzen würde
-        tableModel.addColumn(columnName.substring(0, columnName.length() - 2)); //Hinter dir for-schleife geschoben, da sonst mit jedem schleifendurchgang neue spalten hinzugefügt werden
+        tabellenModel.addColumn(spaltenName.substring(0, spaltenName.length() - 2)); //Hinter dir for-schleife geschoben, da sonst mit jedem schleifendurchgang neue spalten hinzugefügt werden
 
-        for (int i = 0; i < table.getRowCount(); i++) {
-            Object x = table.getValueAt(i, 4);
-            Object y = table.getValueAt(i, 5);
+        for (int i = 0; i < tabelle.getRowCount(); i++) {
+            Object x = tabelle.getValueAt(i, 4);
+            Object y = tabelle.getValueAt(i, 5);
 
             switch (randomGatter) {
                 //AND
                 case 0:
                     if (x.equals("1") && y.equals("1")) {
-                        tableModel.setValueAt("1", i, spaltenAnzahl);
+                        tabellenModel.setValueAt("1", i, spaltenAnzahl);
                         break;
                     } else {
-                        tableModel.setValueAt("0", i, spaltenAnzahl);
+                        tabellenModel.setValueAt("0", i, spaltenAnzahl);
                         break;
                     }
 
                     //OR
                 case 1:
                     if (!(x.equals("0") && y.equals("0"))) {
-                        tableModel.setValueAt("1", i, spaltenAnzahl);
+                        tabellenModel.setValueAt("1", i, spaltenAnzahl);
                         break;
                     } else {
-                        tableModel.setValueAt("0", i, spaltenAnzahl);
+                        tabellenModel.setValueAt("0", i, spaltenAnzahl);
                         break;
                     }
 
@@ -423,10 +423,10 @@ public class DigitalCurcuitUI extends JPanel {
                     //  System.out.println("End CASE 2");
                     //  tableModel.addColumn(eingang1 + " NAND " + eingang2);
                     if (!(x.equals("1") && y.equals("1"))) {
-                        tableModel.setValueAt("1", i, spaltenAnzahl);
+                        tabellenModel.setValueAt("1", i, spaltenAnzahl);
                         break;
                     } else {
-                        tableModel.setValueAt("0", i, spaltenAnzahl);
+                        tabellenModel.setValueAt("0", i, spaltenAnzahl);
                         break;
                     }
 
@@ -435,10 +435,10 @@ public class DigitalCurcuitUI extends JPanel {
                     //    System.out.println("End CASE 3");
                     //    tableModel.addColumn(eingang1 + " OR " + eingang2);
                     if (!(x.equals("1") && y.equals("1"))) {
-                        tableModel.setValueAt("1", i, spaltenAnzahl);
+                        tabellenModel.setValueAt("1", i, spaltenAnzahl);
                         break;
                     } else {
-                        tableModel.setValueAt("0", i, spaltenAnzahl);
+                        tabellenModel.setValueAt("0", i, spaltenAnzahl);
                         break;
                     }
                 default:
@@ -454,10 +454,10 @@ public class DigitalCurcuitUI extends JPanel {
     //   gateLabels.clear();
 
     public void drawSchaltung() {
-        for (JLabel label : createdLabels) {
+        for (JLabel label : erstelltenLabels) {
             remove(label);
         }
-        createdLabels.clear();
+        erstelltenLabels.clear();
 
         int xEingang = 800;  //Startposition Eingänge
         int xGatter = 975;  //Startposition Gatter
@@ -466,11 +466,11 @@ public class DigitalCurcuitUI extends JPanel {
 
         for (int i = 0; i < eingange; i++) {
 
-            ImageIcon icon = gateIcons.get(i);
-            JLabel label = new JLabel(icon);
-            label.setBounds(xEingang, y, 50, 50);
-            add(label);
-            createdLabels.add(label);
+            ImageIcon icon = gatterIcons.get(i);
+            JLabel einganglabel = new JLabel(icon);
+            einganglabel.setBounds(xEingang, y, 50, 50);
+            add(einganglabel);
+            erstelltenLabels.add(einganglabel);
 
             y += 100;
         }
@@ -485,7 +485,7 @@ public class DigitalCurcuitUI extends JPanel {
                         zwischenlabel = new JLabel(zwischengattericon);
                         zwischenlabel.setBounds(xGatter, yZG, 100, 100);
                         add(zwischenlabel);
-                        createdLabels.add(zwischenlabel);
+                        erstelltenLabels.add(zwischenlabel);
                         break;
 
                     case 1:
@@ -493,7 +493,7 @@ public class DigitalCurcuitUI extends JPanel {
                         zwischenlabel = new JLabel(zwischengattericon);
                         zwischenlabel.setBounds(xGatter, yZG, 100, 100);
                         add(zwischenlabel);
-                        createdLabels.add(zwischenlabel);
+                        erstelltenLabels.add(zwischenlabel);
                         break;
 //nand
                     case 2:
@@ -501,7 +501,7 @@ public class DigitalCurcuitUI extends JPanel {
                         zwischenlabel = new JLabel(zwischengattericon);
                         zwischenlabel.setBounds(xGatter, yZG, 100, 100);
                         add(zwischenlabel);
-                        createdLabels.add(zwischenlabel);
+                        erstelltenLabels.add(zwischenlabel);
                         break;
 //nor
                     case 3:
@@ -509,7 +509,7 @@ public class DigitalCurcuitUI extends JPanel {
                         zwischenlabel = new JLabel(zwischengattericon);
                         zwischenlabel.setBounds(xGatter, yZG, 100, 100);
                         add(zwischenlabel);
-                        createdLabels.add(zwischenlabel);
+                        erstelltenLabels.add(zwischenlabel);
                         break;
                 }
                 yZG += 100; //neu
@@ -524,7 +524,7 @@ public class DigitalCurcuitUI extends JPanel {
                 endlabel = new JLabel(endgattericon);
                 endlabel.setBounds(xEndGatter, 400, 100, 100);
                 add(endlabel);
-                createdLabels.add(endlabel);
+                erstelltenLabels.add(endlabel);
                 break;
 
             //OR
@@ -533,7 +533,7 @@ public class DigitalCurcuitUI extends JPanel {
                 endlabel = new JLabel(endgattericon);
                 endlabel.setBounds(xEndGatter, 400, 100, 100);
                 add(endlabel);
-                createdLabels.add(endlabel);
+                erstelltenLabels.add(endlabel);
                 break;
 
             //NAND
@@ -545,7 +545,7 @@ public class DigitalCurcuitUI extends JPanel {
                 //  gatter.add(label);
               //  System.out.println("Endgatter: " + endgattericon);
                 add(endlabel);
-                createdLabels.add(endlabel);
+                erstelltenLabels.add(endlabel);
                 break;
 
             //NOR
@@ -557,7 +557,7 @@ public class DigitalCurcuitUI extends JPanel {
                 //  gatter.add(label);
               //  System.out.println("Endgatter: " + endgattericon);
                 add(endlabel);
-                createdLabels.add(endlabel);
+                erstelltenLabels.add(endlabel);
                 break;
 
             default:
@@ -573,7 +573,7 @@ public class DigitalCurcuitUI extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(hintergrundsbild, 0, 0, getWidth(), getHeight(), this);
         g.setColor(Color.BLACK);
         g.drawRoundRect(100, 120, 1200, 750, 20, 20);
         g.setColor(Color.WHITE);
@@ -595,8 +595,8 @@ public class DigitalCurcuitUI extends JPanel {
 
 // Das zeichnet die Linien
         g.setColor(Color.BLACK);
-        for (int i = 0; i < spList.size(); i++) {
-            g.drawLine(spList.get(i).x, spList.get(i).y, epList.get(i).x, epList.get(i).y);
+        for (int i = 0; i < spListe.size(); i++) {
+            g.drawLine(spListe.get(i).x, spListe.get(i).y, epListe.get(i).x, epListe.get(i).y);
         }
 
     }
@@ -605,15 +605,15 @@ public class DigitalCurcuitUI extends JPanel {
     private class PointListener extends MouseAdapter {
         public void mousePressed(MouseEvent e) {
            // System.out.println("Mouse Pressed");
-            startPoint = e.getPoint();
+            startPunkt = e.getPoint();
             // spList.add(start); das geht auch hier oben, das macht keinen Unterschied
         }
 
         public void mouseReleased(MouseEvent e) {
            // System.out.println("Mouse Released");
-            spList.add(startPoint);
-            endPoint = e.getPoint();
-            epList.add(endPoint);
+            spListe.add(startPunkt);
+            endPunkt = e.getPoint();
+            epListe.add(endPunkt);
             repaint();
         }
 

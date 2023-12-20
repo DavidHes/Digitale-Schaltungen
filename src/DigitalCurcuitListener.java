@@ -7,16 +7,16 @@ public class DigitalCurcuitListener implements ActionListener {
     public DigitalCurcuitListener(DigitalCurcuitUI view) {
         this.view = view;
 
-        view.generateButton.addActionListener(this);
+        view.erstellenButton.addActionListener(this);
         view.exitButton.addActionListener(this);
-        view.difficultymenu.addActionListener(this);
+        view.schwierigkeitsmenu.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == view.generateButton) {
-            view.spList.clear();
-            view.epList.clear();
+        if (e.getSource() == view.erstellenButton) {
+            view.spListe.clear();
+            view.epListe.clear();
             view.repaint();
 
             int anzahlEingaenge = view.schwierigkeit == DigitalCurcuitUI.SchwierigkeitsAuswahl.EASY ? 3 : 4;
@@ -42,12 +42,12 @@ public class DigitalCurcuitListener implements ActionListener {
 
        // view.paintSchaltung();//Wofür ist der Aufruf?
 
-            if (e.getSource() == view.difficultymenu) {
-                if(view.difficultymenu.getSelectedItem() == "Einfach"){
+            if (e.getSource() == view.schwierigkeitsmenu) {
+                if(view.schwierigkeitsmenu.getSelectedItem() == "Einfach"){
                   //  System.out.println("easy");
                     view.schwierigkeit = DigitalCurcuitUI.SchwierigkeitsAuswahl.EASY;
                 }
-                if(view.difficultymenu.getSelectedItem() == "Schwierig"){
+                if(view.schwierigkeitsmenu.getSelectedItem() == "Schwierig"){
                   //  System.out.println("average");
                     view.schwierigkeit = DigitalCurcuitUI.SchwierigkeitsAuswahl.DIFFICULT;
                 }
