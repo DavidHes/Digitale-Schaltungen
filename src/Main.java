@@ -3,11 +3,10 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
 
-        Model model = new Model();
-        Panel view = new Panel();
-        Controller controller = new Controller(model, view);
+        View view = new View();
+        Controller controller = new Controller(view);
 
-        JFrame frame = new JFrame("RBN Klausur-Fragen Generator");
+        JFrame frame = new JFrame("RBN Klausur-Fragen-Generator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1500, 1200);
         frame.setResizable(true);
