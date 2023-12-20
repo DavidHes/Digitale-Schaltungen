@@ -172,7 +172,6 @@ public class View extends JPanel {
 
                 //eigentlich müsste hier lediglich addRandomGatter aufgerufen werden
             }
-
          */
         }
         tableModel.setDataVector(rowData, columnNames);
@@ -185,8 +184,14 @@ public class View extends JPanel {
         table.setGridColor(Color.BLACK);
         table.setRowHeight(22);
 
+        //Position X der Tabelle anhand dem Schiwerigkeitsgrade
+
         scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(120, 250, table.getColumnCount() * 150, table.getRowCount() * table.getRowHeight() + 20);
+        if (schwierigkeit == SchwierigkeitsAuswahl.DIFFICULT) {
+            scrollPane.setBounds(125, 250, table.getColumnCount() * 150, table.getRowCount() * table.getRowHeight() + 20);
+        }  else{
+            scrollPane.setBounds(205, 300, table.getColumnCount() * 150, table.getRowCount() * table.getRowHeight() + 20);
+            }
 
         add(scrollPane);
 
@@ -631,17 +636,23 @@ public class View extends JPanel {
         super.paintComponent(g);
         g.drawImage(background, 0, 0, getWidth(), getHeight(), this);
         g.setColor(Color.BLACK);
-        g.drawRoundRect(100, 120, 1200, 950, 20, 20);
+        g.drawRoundRect(100, 120, 1200, 750, 20, 20);
         g.setColor(Color.WHITE);
-        g.fillRoundRect(100, 120, 1200, 950, 20, 20);
+        g.fillRoundRect(100, 120, 1200, 750, 20, 20);
 
         g.setColor(Color.BLACK);
         g.drawRoundRect(100, 15, 1200, 75, 20, 20);
         g.setColor(Color.WHITE);
         g.fillRoundRect(100, 15, 1200, 75, 20, 20);
 
+        //neu gemacht --> david braucht das noch
         g.setColor(Color.BLACK);
-        g.fillRect(750, 220, 5, 500);
+        g.fillRect(750, 220, 5, 435);
+
+        //Umrandung ums Exit-Button --> david braucht das noch
+        g.setColor(Color.WHITE);
+        g.fillRoundRect(1350, 5, 60, 60, 20, 20);
+
 
 // Das zeichnet die Linien
         g.setColor(Color.BLACK);
