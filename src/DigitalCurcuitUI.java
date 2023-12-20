@@ -7,18 +7,16 @@ import java.util.Random;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class View extends JPanel {
+public class DigitalCurcuitUI extends JPanel {
 
     protected JComboBox<String> difficultymenu;
     protected JButton exitButton, generateButton;
     protected JLabel difficultylabel, question, maplegend;
-    String[] difficulties = {"Easy", "Difficult"};
-    // String[] gatterarten = {"AND", "OR", "NOT"};
+    String[] difficulties = {"Einfach", "Schwierig"};
     String[] questions = {"Wahrheitstabelle", "Digitale Schaltung"};
 
     Image background = new ImageIcon("Background.png").getImage();
     Image exitBild = new ImageIcon("ExitBild.png").getImage();
-    // private List<JLabel> gateLabels = new ArrayList<>(); nicht mehr notwendig
     JTable table;
     DefaultTableModel tableModel;
     JScrollPane scrollPane;
@@ -35,8 +33,8 @@ public class View extends JPanel {
     //ArrayLists und Points um die Linien zu speichern.
     protected ArrayList<Point> spList = new ArrayList<Point>();
     protected ArrayList<Point> epList = new ArrayList<Point>();
-    protected Point start;
-    protected Point end;
+    protected Point startPoint;
+    protected Point endPoint;
     private JLabel zwischenlabel;
     private JLabel endlabel;
 
@@ -48,7 +46,7 @@ public class View extends JPanel {
 
     private List<JLabel> createdLabels = new ArrayList<>(); //dafür da, um alle zwischenlabels und endlabels zu haben um sie auch vor jedem methodenaufruf von paintschaltung auch wirklich löschen zu können
 
-    public View() {
+    public DigitalCurcuitUI() {
 
         for (int i = 0; i < 4; i++) {
             String[] EingangNames = {"Eingang-A.png", "Eingang-B.png", "Eingang-C.png", "Eingang-D.png"};
@@ -73,19 +71,21 @@ public class View extends JPanel {
 
         setLayout(null);
 
-       // questionlabel = new JLabel("Choose your Question");
-        difficultylabel = new JLabel("Choose your difficulty");
+        difficultylabel = new JLabel("Wähle die Schwierigkeit");
         question = new JLabel("Vervollständige auf Basis der Wahrheitstabelle die digitale Schaltung!");
-        maplegend = new JLabel(" NAND ⊼    AND *    OR +    NOR ⊽ ");
 
-       // questionlabel.setFont(new Font("SansSerif", Font.BOLD, 13));
+        JTextArea legende = new JTextArea("LEGENDE\n\n  NAND ⊼\n  AND *\n  OR +\n  NOR ⊽ ");
+        legende.setBounds(120, 750, 200, 150);
+        legende.setFont(new Font("SansSerif", Font.BOLD, 13));
+        legende.setEditable(false);
+
         difficultylabel.setFont(new Font("SansSerif", Font.BOLD, 11));
-        question.setFont(new Font("SansSerif", Font.BOLD, 15));
+        question.setFont(new Font("SansSerif", Font.BOLD, 18));
         question.setForeground(Color.BLACK);
         //questionlabel.setForeground(Color.BLACK);
         difficultylabel.setForeground(Color.BLACK);
 
-        generateButton = new JButton("Generate");
+        generateButton = new JButton("Erstellen");
       //  solutionButton = new JButton("Solution");
         difficultymenu = new JComboBox<>(difficulties);
        // questionsmenu = new JComboBox<>(questions);
@@ -95,20 +95,17 @@ public class View extends JPanel {
         difficultylabel.setBounds(580, 11, 150, 30);
         generateButton.setBounds(780, 33, 150, 50);
         difficultymenu.setBounds(580, 33, 150, 50);
-        maplegend.setBounds(120, 675, 200, 50);
+        //maplegend.setBounds(120, 675, 200, 50);
       //  questionsmenu.setBounds(110, 32, 160, 50);
       //  solutionButton.setBounds(700, 300, 80, 50);
         exitButton.setBounds(1350, 10, 50, 50);
 
         add(generateButton);
         add(difficultymenu);
-      //  add(questionsmenu);
         add(exitButton);
-      //  add(solutionButton);
-       // add(questionlabel);
         add(question);
         add(difficultylabel);
-        add(maplegend);
+        add(legende);
 
         //questionlabel.setVisible(false);
       //  questionsmenu.setVisible(false);
@@ -132,9 +129,6 @@ public class View extends JPanel {
         revalidate();
         repaint();
 
-        //Ende der Entfernung
-
-        //Erstellen der NormalTabelle
         tableModel = new DefaultTableModel();
         String[] columnNames = new String[eingange]; //Anzahl der Spalten
 
@@ -143,11 +137,6 @@ public class View extends JPanel {
                 if (i < eingange) {
                     char buchstabe = (char) ('A' + i);
                     columnNames[i] = String.valueOf(buchstabe);
-              /*  } else {
-                    // columnNames[i] = "Platzhalter";
-                    //Hier müssen dann die GatterSpaltenNamen erstellt werden bzw. die Namen derer
-                }
-                              */
                 }
             }
         }
@@ -166,13 +155,7 @@ public class View extends JPanel {
                 rowData[i][eingange - binärZahl.length() + j] = Character.getNumericValue(binärZahl.charAt(j)); //auch hier wieder: eingange - binärZahl.length() + j ist notwenig, da eingeange nicht immer auch der binärZahl.länge entsprechen
 
             }
-        /*    //Hier wird durch alle Zeilen durchgegangen und der gatterinhalt erstellt
-            for (int k = 0; k < gatterAnzahl; k++) {
-                //rowData[i][eingange+k] = "Platzhalter";
 
-                //eigentlich müsste hier lediglich addRandomGatter aufgerufen werden
-            }
-         */
         }
         tableModel.setDataVector(rowData, columnNames);
         table = new JTable(tableModel);
@@ -189,9 +172,9 @@ public class View extends JPanel {
         scrollPane = new JScrollPane(table);
         if (schwierigkeit == SchwierigkeitsAuswahl.DIFFICULT) {
             scrollPane.setBounds(125, 250, table.getColumnCount() * 150, table.getRowCount() * table.getRowHeight() + 20);
-        }  else{
+        } else{
             scrollPane.setBounds(205, 300, table.getColumnCount() * 150, table.getRowCount() * table.getRowHeight() + 20);
-            }
+        }
 
         add(scrollPane);
 
@@ -203,15 +186,10 @@ public class View extends JPanel {
     }
 
     public void addRandomGatter() {
-        //Beginn der GatterErstellung
-
         Random random = new Random();
         int randomGatter = random.nextInt(4);
         zwischengatter.add(randomGatter);
-        // gatter.add(randomGatter);
-       // System.out.println("RANDOMZAHL: " + randomGatter);
         int spaltenAnzahl = table.getColumnCount();
-       // System.out.println("Spaltenanzahl " + spaltenAnzahl);
 
         if (schwierigkeit == SchwierigkeitsAuswahl.DIFFICULT) {
             int randomX = random.nextInt(4);
@@ -245,8 +223,8 @@ public class View extends JPanel {
             int spaltenNummer1 = eingang1.equals("A") ? 0 : eingang1.equals("B") ? 1 : eingang1.equals("C") ? 2 : 3;
             int spaltenNummer2 = eingang2.equals("A") ? 0 : eingang2.equals("B") ? 1 : eingang2.equals("C") ? 2 : 3;
 
-            Object x = "??"; //LÖSCHEN
-            Object y = "??";
+            Object x; //LÖSCHEN
+            Object y;
 
             for (int i = 0; i < table.getRowCount(); i++) { //Durchgang durch alle Zeilen
                 //Wenn spaltenanzahl - eingänge = 0 ist, dann random. Wenn nicht, dann spalte 5 anschauen und die anderen nehmen
@@ -372,41 +350,28 @@ public class View extends JPanel {
     }
 
     //Damit nehmen wir alle Ausgänge alle Gatter und packen sie in eins.
-    public void endgatter() {
+    public void addEndGatter() {
 
         Random random = new Random();
         int randomGatter = random.nextInt(4);
         endgatter = randomGatter;
         int spaltenAnzahl = table.getColumnCount();
-        // String[] spaltenNamen = new String[tableModel.getColumnCount()];
 
         ArrayList<String> spaltenNamen = new ArrayList<>();
 
-        //FEHLER
-
-        //anhand der eingänge erstellen wir eine liste mit allen namen der spalten. alle die nach den Eingängen kamen
-        //damit wir mit diesen Spalten den endgatter erstellen können.
-        //for(int eingang = 3; eingang < spaltenAnzahl; eingang++){
         for (int eingang = 0; eingang < spaltenAnzahl; eingang++) {
-            //     System.out.println("Ausgabetest1");
             spaltenNamen.add(tableModel.getColumnName(eingang));
-            //  System.out.println(spaltenNamen.get(eingang));
-            //  System.out.println("Ausgabetest2");
         }
 
         String columnName = "";
 
         for (int i = 4; i < spaltenNamen.size(); i++) {
-
-//nach und nach alle spaltennamen in die letzte Spalte schreiben.
             switch (randomGatter) {
                 case 0:
-                    //    System.out.println("CASE0 automatisiert funktioniert");
                     columnName += spaltenNamen.get(i) + " * ";
                     break;
 
                 case 1:
-                    //   System.out.println("CASE1 automatisiert funktioniert");
                     columnName += spaltenNamen.get(i) + " + ";
                     break;
 
@@ -428,20 +393,16 @@ public class View extends JPanel {
         //substring weil sonst sich der gattertyp wieder ansetzen würde
         tableModel.addColumn(columnName.substring(0, columnName.length() - 2)); //Hinter dir for-schleife geschoben, da sonst mit jedem schleifendurchgang neue spalten hinzugefügt werden
 
-        for (int i = 0; i < table.getRowCount(); i++) { //Durchgang durch alle Zeilen
-            //4 und 5 müssen auch weg.
+        for (int i = 0; i < table.getRowCount(); i++) {
             Object x = table.getValueAt(i, 4);
             Object y = table.getValueAt(i, 5);
 
             switch (randomGatter) {
                 //AND
                 case 0:
-                    // System.out.println("End CASE 0");
-                    //
                     if (x.equals("1") && y.equals("1")) {
                         tableModel.setValueAt("1", i, spaltenAnzahl);
                         break;
-                        //direkt hier zur Tabelle hinzufügen
                     } else {
                         tableModel.setValueAt("0", i, spaltenAnzahl);
                         break;
@@ -449,8 +410,6 @@ public class View extends JPanel {
 
                     //OR
                 case 1:
-                    //  System.out.println("End CASE 1");
-                    //   tableModel.addColumn(eingang1 + " OR " + eingang2);
                     if (!(x.equals("0") && y.equals("0"))) {
                         tableModel.setValueAt("1", i, spaltenAnzahl);
                         break;
@@ -495,17 +454,10 @@ public class View extends JPanel {
     //   gateLabels.clear();
 
     public void drawSchaltung() {
-        // Vor dem Zeichnen der neuen Schaltung entferne die vorherige
-
-        //  gateLabels.forEach(this::remove);
-        //  gateLabels.clear();
-        //zwischengatter.clear(); //Warum wird hier die Liste geleert? Dadurch ist sie ja immer leer? Hab sie nach unten gesetzt
-
         for (JLabel label : createdLabels) {
             remove(label);
         }
         createdLabels.clear();
-
 
         int xEingang = 800;  //Startposition Eingänge
         int xGatter = 975;  //Startposition Gatter
@@ -517,21 +469,16 @@ public class View extends JPanel {
             ImageIcon icon = gateIcons.get(i);
             JLabel label = new JLabel(icon);
             label.setBounds(xEingang, y, 50, 50);
-            //gateLabels.add(label);
             add(label);
             createdLabels.add(label);
 
-            //y funktioniert dann aber nur für die Eingänge und nicht mehr für die Zwischen- und Endgatter
-            y += 100;  //Position vertikal verändert nach jedem durchgang
+            y += 100;
         }
 
         if (schwierigkeit == SchwierigkeitsAuswahl.DIFFICULT) {
             int yZG = 300;
-           // System.out.println("Zwischengattergröße: " + zwischengatter.size());
 
             for (int i = 0; i < zwischengatter.size(); i++) {
-
-//nach und nach alle spaltennamen in die letzte Spalte schreiben.
                 switch (zwischengatter.get(i)) {
                     case 0:
                         ImageIcon zwischengattericon = gatter.get(zwischengatter.get(i));
@@ -568,31 +515,23 @@ public class View extends JPanel {
                 yZG += 100; //neu
             }
         }
-        zwischengatter.clear();//hier von oben nach unten gesetzt
-
-        //for (int i = 0; i < 1; i++) { //wofür die for schleife?
+        zwischengatter.clear();
 
         switch (endgatter) {
             //AND
             case 0:
-              //  System.out.println("XY Case 0");
                 ImageIcon endgattericon = gatter.get(endgatter);
                 endlabel = new JLabel(endgattericon);
                 endlabel.setBounds(xEndGatter, 400, 100, 100);
-                // gatter.add(label);
-              //  System.out.println("Endgatter: " + endgattericon);
                 add(endlabel);
                 createdLabels.add(endlabel);
                 break;
 
             //OR
             case 1:
-               // System.out.println("XY Case 1");
                 endgattericon = gatter.get(endgatter);
                 endlabel = new JLabel(endgattericon);
                 endlabel.setBounds(xEndGatter, 400, 100, 100);
-                //  gatter.add(label);
-              //  System.out.println("Endgatter: " + endgattericon);
                 add(endlabel);
                 createdLabels.add(endlabel);
                 break;
@@ -666,15 +605,15 @@ public class View extends JPanel {
     private class PointListener extends MouseAdapter {
         public void mousePressed(MouseEvent e) {
            // System.out.println("Mouse Pressed");
-            start = e.getPoint();
+            startPoint = e.getPoint();
             // spList.add(start); das geht auch hier oben, das macht keinen Unterschied
         }
 
         public void mouseReleased(MouseEvent e) {
            // System.out.println("Mouse Released");
-            spList.add(start);
-            end = e.getPoint();
-            epList.add(end);
+            spList.add(startPoint);
+            endPoint = e.getPoint();
+            epList.add(endPoint);
             repaint();
         }
 

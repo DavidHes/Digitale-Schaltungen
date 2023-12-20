@@ -1,10 +1,10 @@
 import java.awt.event.*;
 
-public class Controller implements ActionListener {
+public class DigitalCurcuitListener implements ActionListener {
 
-    private View view;
+    private DigitalCurcuitUI view;
 
-    public Controller(View view) {
+    public DigitalCurcuitListener(DigitalCurcuitUI view) {
         this.view = view;
 
         view.generateButton.addActionListener(this);
@@ -19,21 +19,21 @@ public class Controller implements ActionListener {
             view.epList.clear();
             view.repaint();
 
-            int anzahlEingaenge = view.schwierigkeit == View.SchwierigkeitsAuswahl.EASY ? 3 : 4;
+            int anzahlEingaenge = view.schwierigkeit == DigitalCurcuitUI.SchwierigkeitsAuswahl.EASY ? 3 : 4;
 //Leider noch nicht ganz erweiterbar.
           //  if(anzahlEingaenge == 3) {
-            if(view.schwierigkeit == View.SchwierigkeitsAuswahl.EASY) {
+            if(view.schwierigkeit == DigitalCurcuitUI.SchwierigkeitsAuswahl.EASY) {
                 view.createTruthTable(anzahlEingaenge, 4);
                 view.addRandomGatter();
             }
 
            // if(anzahlEingaenge == 4) {
-            if(view.schwierigkeit == View.SchwierigkeitsAuswahl.DIFFICULT) {
+            if(view.schwierigkeit == DigitalCurcuitUI.SchwierigkeitsAuswahl.DIFFICULT) {
                 view.createTruthTable(anzahlEingaenge, 4);
                 for(int i = 0; i < 2; i++) {
                     view.addRandomGatter();
                     if(i == 1){
-                        view.endgatter();
+                        view.addEndGatter();
                         }
                     }
                 }
@@ -43,13 +43,13 @@ public class Controller implements ActionListener {
        // view.paintSchaltung();//Wofür ist der Aufruf?
 
             if (e.getSource() == view.difficultymenu) {
-                if(view.difficultymenu.getSelectedItem() == "Easy"){
+                if(view.difficultymenu.getSelectedItem() == "Einfach"){
                   //  System.out.println("easy");
-                    view.schwierigkeit = View.SchwierigkeitsAuswahl.EASY;
+                    view.schwierigkeit = DigitalCurcuitUI.SchwierigkeitsAuswahl.EASY;
                 }
-                if(view.difficultymenu.getSelectedItem() == "Difficult"){
+                if(view.difficultymenu.getSelectedItem() == "Schwierig"){
                   //  System.out.println("average");
-                    view.schwierigkeit = View.SchwierigkeitsAuswahl.DIFFICULT;
+                    view.schwierigkeit = DigitalCurcuitUI.SchwierigkeitsAuswahl.DIFFICULT;
                 }
              /*   if(view.difficultymenu.getSelectedItem() == "Herr Schaal"){
                     System.out.println("schaal");
