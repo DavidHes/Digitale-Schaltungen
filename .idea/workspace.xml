@@ -9,18 +9,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3ebf7c81-125f-4252-9dcd-060c33722004" name="Changes" comment="neue klassennamen etc">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="3ebf7c81-125f-4252-9dcd-060c33722004" name="Changes" comment="drawSchaltung neu&#10;ExitBild neu">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_12_23,_10_22_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_14_12_23__10_22__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AND-GATTER.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AND-Gatter.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NAND-GATTER.png" beforeDir="false" afterPath="$PROJECT_DIR$/NAND-GATTER.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NAND-Gatter.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOR-GATTER.png" beforeDir="false" afterPath="$PROJECT_DIR$/NOR-GATTER.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOR-Gatter.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PFEIL.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DigitaleSchaltungen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Eingang-A.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Eingang-B.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Eingang-C.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Eingang-D.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DigitalCurcuitListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DigitalCurcuitListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DigitalCurcuitMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DigitalCurcuitMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DigitalCurcuitUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DigitalCurcuitUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -115,7 +113,8 @@
       <workItem from="1702995097863" duration="364000" />
       <workItem from="1703070869821" duration="260000" />
       <workItem from="1703117130191" duration="2557000" />
-      <workItem from="1703147191563" duration="6532000" />
+      <workItem from="1703147191563" duration="9157000" />
+      <workItem from="1703177217037" duration="20265000" />
     </task>
     <task id="LOCAL-00001" summary="majd war erneut hier">
       <created>1700375531598</created>
@@ -187,7 +186,14 @@
       <option name="project" value="LOCAL" />
       <updated>1702593306914</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="drawSchaltung neu&#10;ExitBild neu">
+      <created>1703153829179</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1703153829179</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -199,6 +205,7 @@
     <MESSAGE value="Gatter werden zufällig erstellt inkl. neuer Spalten" />
     <MESSAGE value="Bilder funktionieren, jedoch nicht das fehlerfreie löschen der bilder vor jedem methodenaufruf" />
     <MESSAGE value="Es sollte nun alles funktionieren. Ab jetzt muss nur der Code auf Sauberkeit geprüft werden." />
-    <option name="LAST_COMMIT_MESSAGE" value="Es sollte nun alles funktionieren. Ab jetzt muss nur der Code auf Sauberkeit geprüft werden." />
+    <MESSAGE value="drawSchaltung neu&#10;ExitBild neu" />
+    <option name="LAST_COMMIT_MESSAGE" value="drawSchaltung neu&#10;ExitBild neu" />
   </component>
 </project>

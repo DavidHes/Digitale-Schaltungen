@@ -12,6 +12,12 @@ public class DigitalCurcuitListener implements ActionListener {
         view.schwierigkeitsmenu.addActionListener(this);
     }
 
+    /**
+     * Diese Methode behandelt Aktionen, die durch Benutzerinteraktionen ausgelöst wurden.
+     * Dazu zählt das Klicken von Buttons oder das Auswählen von Optionen im Schwierigkeitsmenü.
+     *
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == view.erstellenButton) {
@@ -22,17 +28,17 @@ public class DigitalCurcuitListener implements ActionListener {
             int anzahlEingaenge = view.schwierigkeit == DigitalCurcuitUI.SchwierigkeitsAuswahl.EASY ? 3 : 4;
 
             if(view.schwierigkeit == DigitalCurcuitUI.SchwierigkeitsAuswahl.EASY) {
-                view.createTruthTable(anzahlEingaenge, 4);
+                view.createTruthTable(anzahlEingaenge);
                 view.addRandomGatter();
             }
 
             if(view.schwierigkeit == DigitalCurcuitUI.SchwierigkeitsAuswahl.DIFFICULT) {
-                view.createTruthTable(anzahlEingaenge, 4);
+                view.createTruthTable(anzahlEingaenge);
                 for(int i = 0; i < 2; i++) {
                     view.addRandomGatter();
                     if(i == 1){
                         view.addEndGatter();
-                        }
+                       }
                     }
                 }
             view.drawSchaltung();
