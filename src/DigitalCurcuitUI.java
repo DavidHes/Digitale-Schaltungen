@@ -180,7 +180,8 @@ public class DigitalCurcuitUI extends JPanel {
                     randomBuchstabe2 = random.nextInt(eingange);
                     eingang1 = Buchstaben[randomBuchstabe1];
                     eingang2 = Buchstaben[randomBuchstabe2];
-                } while (tabellenModel.getColumnName(4).contains(eingang1) || tabellenModel.getColumnName(4).contains(eingang2) || eingang1.equals(eingang2));
+                } while (tabellenModel.getColumnName(4).contains(eingang1) ||
+                        tabellenModel.getColumnName(4).contains(eingang2) || eingang1.equals(eingang2));
             }
 
             String spaltenName = randomGatter == 0 ? eingang1 + " * " + eingang2 : randomGatter == 1 ?
@@ -204,42 +205,33 @@ public class DigitalCurcuitUI extends JPanel {
                     y = tabelle.getValueAt(i, spaltenNummer2);
                 }
 
+                String ergebnis = "0";
+
                 switch (randomGatter) {
                     case 0:
                         if (x.equals(1) && y.equals(1)) {
-                            tabellenModel.setValueAt("1", i, spaltenAnzahl);
-                            break;
-                        } else {
-                            tabellenModel.setValueAt("0", i, spaltenAnzahl);
-                            break;
+                            ergebnis = "1";
                         }
+                        break;
                     case 1:
                         if (!(x.equals(0) && y.equals(0))) {
-                            tabellenModel.setValueAt("1", i, spaltenAnzahl);
-                            break;
-                        } else {
-                            tabellenModel.setValueAt("0", i, spaltenAnzahl);
-                            break;
+                            ergebnis = "1";
                         }
+                        break;
                     case 2:
                         if (!(x.equals(1) && y.equals(1))) {
-                            tabellenModel.setValueAt("1", i, spaltenAnzahl);
-                            break;
-                        } else {
-                            tabellenModel.setValueAt("0", i, spaltenAnzahl);
-                            break;
+                            ergebnis = "1";
                         }
+                        break;
                     case 3:
                         if (!(x.equals(1) && y.equals(1))) {
-                            tabellenModel.setValueAt("1", i, spaltenAnzahl);
-                            break;
-                        } else {
-                            tabellenModel.setValueAt("0", i, spaltenAnzahl);
-                            break;
+                            ergebnis = "1";
                         }
+                        break;
                     default:
                         System.out.println("Fehler bei der Generierung des Gatters!");
                 }
+                tabellenModel.setValueAt(ergebnis, i, spaltenAnzahl);
             }
         } else {
             String columnName = randomGatter == 0 ? "A * B * C" : randomGatter == 1 ?

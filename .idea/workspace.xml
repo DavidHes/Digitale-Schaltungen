@@ -10,6 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ebf7c81-125f-4252-9dcd-060c33722004" name="Changes" comment="FINAL fertig (hoffentlich)">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DigitalCurcuitUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DigitalCurcuitUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +106,7 @@
       <workItem from="1703070869821" duration="260000" />
       <workItem from="1703117130191" duration="2557000" />
       <workItem from="1703147191563" duration="9157000" />
-      <workItem from="1703177217037" duration="21919000" />
+      <workItem from="1703177217037" duration="22578000" />
     </task>
     <task id="LOCAL-00001" summary="majd war erneut hier">
       <created>1700375531598</created>
@@ -205,7 +206,14 @@
       <option name="project" value="LOCAL" />
       <updated>1703202092154</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="FINAL fertig (hoffentlich)">
+      <created>1703202268633</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1703202268633</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
