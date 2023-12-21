@@ -4,7 +4,7 @@ public class DigitalCurcuitMain {
     public static void main(String[] args) {
 
         DigitalCurcuitUI view = new DigitalCurcuitUI();
-        DigitalCurcuitListener controller = new DigitalCurcuitListener(view);
+        DigitalCurcuitListener listener = new DigitalCurcuitListener(view);
 
         JFrame frame = new JFrame("RBN Klausur-Fragen-Generator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -13,8 +13,5 @@ public class DigitalCurcuitMain {
         frame.add(view);
         frame.setVisible(true);
 
-        //Testausgabe für überstrich
-        String text = "A\u203E+\u203EB";
-        System.out.println(text);
     }
 }
