@@ -62,7 +62,7 @@ public class DigitalCurcuitUI extends JPanel {
         legende.setEditable(false);
 
         schwierigkeitslabel.setFont(new Font("SansSerif", Font.BOLD, 11));
-        aufgabenstellung.setFont(new Font("SansSerif", Font.BOLD, 18));
+        aufgabenstellung.setFont(new Font("SansSerif", Font.BOLD, 16));
         aufgabenstellung.setForeground(Color.BLACK);
         schwierigkeitslabel.setForeground(Color.BLACK);
 
