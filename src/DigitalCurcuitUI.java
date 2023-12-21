@@ -44,7 +44,7 @@ public class DigitalCurcuitUI extends JPanel {
             gatter.add(new ImageIcon(selectedgatterName));
         }
 
-        Image scaledExitImage = exitBild.getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+        Image scaledExitImage = exitBild.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
         ImageIcon scaledExitIcon = new ImageIcon(scaledExitImage);
         exitButton = new JButton(scaledExitIcon);
         exitButton.setBorderPainted(false);
