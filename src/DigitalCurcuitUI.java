@@ -29,7 +29,6 @@ public class DigitalCurcuitUI extends JPanel {
     protected ArrayList<Point> epListe = new ArrayList<Point>();
     protected Point startPunkt;
     protected Point endPunkt;
-    //private JLabel zwischenlabel;
     private JLabel endlabel;
 
     public enum SchwierigkeitsAuswahl {EASY, DIFFICULT}
@@ -88,7 +87,7 @@ public class DigitalCurcuitUI extends JPanel {
 
     /**
      * Mithilfe dieser Methode wird die Tabelle mit den Eingängen und dessen Binärzahlen erstellt.
-     * <p>
+     *
      * Im ersten Schritt werden je nach Anzahl der Eingänge, die Eingänge von A beginnend, erstellt.
      * Daraufhin werden alle Zeilen mit Nullen gefüllt und anschließend mit den passenden Binärzahlen gefüllt.
      *
