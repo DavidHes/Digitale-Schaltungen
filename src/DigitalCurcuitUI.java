@@ -152,6 +152,10 @@ public class DigitalCurcuitUI extends JPanel {
      * In dieser Methode werden mit jedem Methodenaufruf neue Logikgatter der Wahrheitstabelle hinzugefügt.
      * Das Programm ist im Schwierigkeitsgrad "Schwierig" nur für zwei Zwischengatter ausgelegt.
      * Das Programm ist jedoch auch hier, wie besprochen, beliebig erweiterbar!
+     *
+     * Wenn die Schwierigkeit "Einfach" ist, dann wird in dieser Methode bereits der "Endgatter" erstellt
+     * und nicht in der Methode addEndGater! Dies liegt daran, dass es nur einen Logikgatter in diesem Schwierigkeits-
+     * modus gibt und er hier sowohl thematisch als auch funktional besser hinpasst.
      */
     public void addRandomGatter() {
         Random random = new Random();
@@ -322,7 +326,6 @@ public class DigitalCurcuitUI extends JPanel {
                     System.out.println("Fehler bei der Generierung des Gatters!");
             }
         }
-
         tabellenModel.addColumn(spaltenName.substring(0, spaltenName.length() - 2));
 
         for (int i = 0; i < tabelle.getRowCount(); i++) {
