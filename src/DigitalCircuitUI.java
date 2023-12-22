@@ -1,6 +1,5 @@
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -8,7 +7,7 @@ import java.util.Random;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class DigitalCurcuitUI extends JPanel {
+public class DigitalCircuitUI extends JPanel {
 
     protected JComboBox<String> schwierigkeitsmenu;
     protected JButton exitButton, erstellenButton;
@@ -36,7 +35,7 @@ public class DigitalCurcuitUI extends JPanel {
 
     private List<JLabel> erstelltenLabels = new ArrayList<>();
 
-    public DigitalCurcuitUI() {
+    public DigitalCircuitUI() {
         for (int i = 0; i < 4; i++) {
             String[] gatternames = {"AND-GATTER.png", "OR-GATTER.png", "NAND-GATTER.png", "NOR-GATTER.png"};
             String selectedgatterName = gatternames[i];

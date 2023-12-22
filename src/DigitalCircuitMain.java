@@ -1,10 +1,10 @@
 import javax.swing.*;
 
-public class DigitalCurcuitMain {
+public class DigitalCircuitMain {
     public static void main(String[] args) {
 
-        DigitalCurcuitUI view = new DigitalCurcuitUI();
-        DigitalCurcuitListener listener = new DigitalCurcuitListener(view);
+        DigitalCircuitUI view = new DigitalCircuitUI();
+        DigitalCircuitListener listener = new DigitalCircuitListener(view);
 
         JFrame frame = new JFrame("RBN Klausur-Fragen-Generator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

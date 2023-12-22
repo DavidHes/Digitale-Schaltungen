@@ -1,10 +1,10 @@
 import java.awt.event.*;
 
-public class DigitalCurcuitListener implements ActionListener {
+public class DigitalCircuitListener implements ActionListener {
 
-    private DigitalCurcuitUI view;
+    private DigitalCircuitUI view;
 
-    public DigitalCurcuitListener(DigitalCurcuitUI view) {
+    public DigitalCircuitListener(DigitalCircuitUI view) {
         this.view = view;
 
         view.erstellenButton.addActionListener(this);
@@ -25,14 +25,14 @@ public class DigitalCurcuitListener implements ActionListener {
             view.epListe.clear();
             view.repaint();
 
-            int anzahlEingaenge = view.schwierigkeit == DigitalCurcuitUI.SchwierigkeitsAuswahl.EASY ? 3 : 4;
+            int anzahlEingaenge = view.schwierigkeit == DigitalCircuitUI.SchwierigkeitsAuswahl.EASY ? 3 : 4;
 
-            if(view.schwierigkeit == DigitalCurcuitUI.SchwierigkeitsAuswahl.EASY) {
+            if(view.schwierigkeit == DigitalCircuitUI.SchwierigkeitsAuswahl.EASY) {
                 view.createTruthTable(anzahlEingaenge);
                 view.addRandomGatter();
             }
 
-            if(view.schwierigkeit == DigitalCurcuitUI.SchwierigkeitsAuswahl.DIFFICULT) {
+            if(view.schwierigkeit == DigitalCircuitUI.SchwierigkeitsAuswahl.DIFFICULT) {
                 view.createTruthTable(anzahlEingaenge);
                 for(int i = 0; i < 2; i++) {
                     view.addRandomGatter();
@@ -46,10 +46,10 @@ public class DigitalCurcuitListener implements ActionListener {
 
             if (e.getSource() == view.schwierigkeitsmenu) {
                 if(view.schwierigkeitsmenu.getSelectedItem() == "Einfach"){
-                    view.schwierigkeit = DigitalCurcuitUI.SchwierigkeitsAuswahl.EASY;
+                    view.schwierigkeit = DigitalCircuitUI.SchwierigkeitsAuswahl.EASY;
                 }
                 if(view.schwierigkeitsmenu.getSelectedItem() == "Schwierig"){
-                    view.schwierigkeit = DigitalCurcuitUI.SchwierigkeitsAuswahl.DIFFICULT;
+                    view.schwierigkeit = DigitalCircuitUI.SchwierigkeitsAuswahl.DIFFICULT;
                 }
             }
             if (e.getSource() == view.exitButton) {

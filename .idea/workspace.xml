@@ -11,7 +11,10 @@
   <component name="ChangeListManager">
     <list default="true" id="3ebf7c81-125f-4252-9dcd-060c33722004" name="Changes" comment="FINAL fertig (hoffentlich)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DigitalCurcuitUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DigitalCurcuitUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DigitalCurcuitListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DigitalCircuitListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DigitalCurcuitMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DigitalCircuitMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DigitalCurcuitUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DigitalCircuitUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,9 +64,9 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="DigitalCurcuitMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="DigitalCurcuitMain" />
+  <component name="RunManager" selected="Application.DigitalCircuitMain">
+    <configuration name="DigitalCircuitMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="DigitalCircuitMain" />
       <module name="Digitale Schaltungen2" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -78,8 +81,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.DigitalCurcuitMain" />
-        <item itemvalue="Application.DigitalCurcuitMain" />
+        <item itemvalue="Application.DigitalCircuitMain" />
+        <item itemvalue="Application.DigitalCircuitMain" />
       </list>
     </recent_temporary>
   </component>
@@ -109,7 +112,7 @@
       <workItem from="1703070869821" duration="260000" />
       <workItem from="1703117130191" duration="2557000" />
       <workItem from="1703147191563" duration="9157000" />
-      <workItem from="1703177217037" duration="24835000" />
+      <workItem from="1703177217037" duration="26380000" />
     </task>
     <task id="LOCAL-00001" summary="majd war erneut hier">
       <created>1700375531598</created>
@@ -223,7 +226,14 @@
       <option name="project" value="LOCAL" />
       <updated>1703202918933</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="FINAL fertig (hoffentlich)">
+      <created>1703205500893</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1703205500893</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
