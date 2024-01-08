@@ -158,7 +158,7 @@ public class DigitalCircuitUI extends JPanel {
      */
     public void addRandomGatter() {
         Random random = new Random();
-        int randomGatter = random.nextInt(eingange);
+        int randomGatter = random.nextInt(4);
         zwischengatter.add(randomGatter);
         int spaltenAnzahl = tabelle.getColumnCount();
 
@@ -195,17 +195,17 @@ public class DigitalCircuitUI extends JPanel {
             int spaltenNummer1 = eingang1.equals("A") ? 0 : eingang1.equals("B") ? 1 : eingang1.equals("C") ? 2 : 3;
             int spaltenNummer2 = eingang2.equals("A") ? 0 : eingang2.equals("B") ? 1 : eingang2.equals("C") ? 2 : 3;
 
-            Object x;
-            Object y;
+            Integer x;
+            Integer y;
 
             for (int i = 0; i < tabelle.getRowCount(); i++) {
 
                 if (tabellenModel.getColumnCount() - eingange - 1 == 0) {
-                    x = tabelle.getValueAt(i, randomX);
-                    y = tabelle.getValueAt(i, randomY);
+                    x = (Integer) tabelle.getValueAt(i, randomX);
+                    y = (Integer) tabelle.getValueAt(i, randomY);
                 } else {
-                    x = tabelle.getValueAt(i, spaltenNummer1);
-                    y = tabelle.getValueAt(i, spaltenNummer2);
+                    x = (Integer) tabelle.getValueAt(i, spaltenNummer1);
+                    y = (Integer) tabelle.getValueAt(i, spaltenNummer2);
                 }
 
                 String ergebnis = "0";
@@ -227,7 +227,7 @@ public class DigitalCircuitUI extends JPanel {
                         }
                         break;
                     case 3:
-                        if (!(x.equals(1) && y.equals(1))) {
+                        if (x.equals(0) && y.equals(0)) {
                             ergebnis = "1";
                         }
                         break;
@@ -237,10 +237,12 @@ public class DigitalCircuitUI extends JPanel {
                 tabellenModel.setValueAt(ergebnis, i, spaltenAnzahl);
             }
         } else {
+          //  int randomEasyGatter = random.nextInt(4);
+            endgatter = randomGatter;
+
             String columnName = randomGatter == 0 ? "A * B * C" : randomGatter == 1 ?
                     "A + B + C" : randomGatter == 2 ? "A ⊼ B ⊼ C" : "A ⊽ B ⊽ C";
 
-            endgatter = randomGatter;
             tabellenModel.addColumn(columnName);
 
             for (int i = 0; i < tabelle.getRowCount(); i++) {
@@ -270,7 +272,7 @@ public class DigitalCircuitUI extends JPanel {
                         break;
 
                     case 3:
-                        if (!(a.equals(1) && b.equals(1) && c.equals(1))) {
+                        if (a.equals(0) && b.equals(0) && c.equals(0)) {
                             ergebnis = "1";
                         }
                         break;
@@ -352,7 +354,7 @@ public class DigitalCircuitUI extends JPanel {
                     break;
 
                 case 3:
-                    if (!(x.equals("1") && y.equals("1"))) {
+                    if (x.equals("0") && y.equals("0")) {
                         ergebnis = "1";
                     }
                     break;
